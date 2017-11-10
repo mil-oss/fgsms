@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="722fd1da-3140-43c6-b6df-2eaa5b3934c4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64499/Service1Sign.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="f29b7638-328a-4388-a07b-f54a03492816" SourceId="1" SourceUrl="http://localhost:64499/Service1Sign.svc?wsdl" />
+    <MetadataFile FileName="Service1Sign.xsd" MetadataType="Schema" ID="a564d775-1dc3-425c-a6fc-e9e2ce118541" SourceId="1" SourceUrl="http://localhost:64499/Service1Sign.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1Sign.disco" MetadataType="Disco" ID="957ea6a9-a03f-4e29-a876-2f6e908587ba" SourceId="1" SourceUrl="http://localhost:64499/Service1Sign.svc?disco" />
+    <MetadataFile FileName="Service1Sign1.xsd" MetadataType="Schema" ID="b0af8a63-f389-4c3a-b27f-ba2c0ec36c93" SourceId="1" SourceUrl="http://localhost:64499/Service1Sign.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

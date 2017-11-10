@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: postgres-ds.xml 71535 2008-04-01 07:05:03Z adrian@jboss.org $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for Postgres                                      -->
+<!-- ==================================================================== -->
+
+
+<!-- 
+See this website for securing the password
+http://community.jboss.org/wiki/EncryptingDataSourcePasswords
+
+cliff notes
+to encrypt
+jboss4 java -cp lib/jboss-common.jar;lib/jboss-jmx.jar;server/default/lib/jbosssx.jar;server/default/lib/jboss-jca.jar org.jboss.resource.security.SecureIdentityLoginModule password
+jboss5 java -cp client/jboss-logging-spi.jar;common/lib/jbosssx.jar org.jboss.resource.security.SecureIdentityLoginModule password
+jboss6 java -cp client/jboss-logging-spi.jar;common/lib/jbosssx.jar org.jboss.resource.security.SecureIdentityLoginModule password
+
+then replace the username/password section below with this
+ <security-domain>EncryptedDBPassword</security-domain>
+
+ 
+ then edit login-config.xml and add
+ 
+    <application-policy name="EncryptedDBPassword">
+        <authentication>
+            <login-module code="org.jboss.resource.security.SecureIdentityLoginModule" flag="required">
+                <module-option name="username">fgsms</module-option>
+                <module-option name="password">5dfc52b51bd35553df8592078de921bc</module-option>
+                <module-option name="managedConnectionFactoryName">jboss.jca:name=PostgresDS,service=LocalTxCM</module-option>
+            </login-module>
+        </authentication>
+    </application-policy>
+
+
+
+default PAssword1234!!!!  == 47eb5bc3ad42e908f7913c778619ee05df8592078de921bc
+-->
+
+
+
+
+<datasources>
+  <no-tx-datasource>
+    <jndi-name>fgsmsConfig</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:5432/fgsms_config</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+     <user-name>fgsms</user-name>
+    <password>PAssword1234!!!!</password>
+     
+	  <min-pool-size>5</min-pool-size>
+		<max-pool-size>50</max-pool-size>
+      <metadata>
+         <type-mapping>PostgreSQL 9.0</type-mapping>
+      </metadata>
+  </no-tx-datasource>
+
+  
+   <no-tx-datasource>
+    <jndi-name>fgsmsPerformance</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:5432/fgsms_performance</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>fgsms</user-name>
+    <password>PAssword1234!!!!</password>
+	  <min-pool-size>5</min-pool-size>
+		<max-pool-size>50</max-pool-size>
+      
+      <metadata>
+         <type-mapping>PostgreSQL 9.0</type-mapping>
+      </metadata>
+  </no-tx-datasource>
+  
+  <!-- This is for failover urls for database connections. typically used with mirroring-->
+   <no-tx-datasource>
+    <jndi-name>fgsmsConfigSecondary</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:5432/fgsms_config</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+     <user-name>fgsms</user-name>
+    <password>PAssword1234!!!!</password>
+     
+	  <min-pool-size>0</min-pool-size>
+		<max-pool-size>50</max-pool-size>
+      <metadata>
+         <type-mapping>PostgreSQL 9.0</type-mapping>
+      </metadata>
+  </no-tx-datasource>
+
+  
+   <no-tx-datasource>
+    <jndi-name>fgsmsPerformanceSecondary</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:5432/fgsms_performance</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>fgsms</user-name>
+    <password>PAssword1234!!!!</password>
+	  <min-pool-size>0</min-pool-size>
+		<max-pool-size>50</max-pool-size>
+      
+      <metadata>
+         <type-mapping>PostgreSQL 9.0</type-mapping>
+      </metadata>
+  </no-tx-datasource>
+  
+</datasources>

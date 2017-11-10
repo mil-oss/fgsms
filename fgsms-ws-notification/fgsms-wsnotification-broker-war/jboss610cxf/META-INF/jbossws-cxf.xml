@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+    xmlns='http://www.springframework.org/schema/beans'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:beans='http://www.springframework.org/schema/beans'
+    xmlns:jaxws='http://cxf.apache.org/jaxws'
+    xsi:schemaLocation='http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://cxf.apache.org/jaxws
+  http://cxf.apache.org/schemas/jaxws.xsd'>
+    <bean id="fgsmshandler" class="org.miloss.fgsms.agents.JAXWSGenericAgent" />
+
+  <!-- one or more jaxws:endpoint EJB3 declarations -->
+    <jaxws:endpoint id='DAS' address="http://localhost:8180/FGSMSServices/DAS"
+                    implementor='org.miloss.fgsms.services.DAS4j.DAS4jBean'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+    
+    <jaxws:endpoint id='PCS' address="http://localhost:8180/FGSMSServices/PCS"
+                    implementor='org.miloss.fgsms4j.services.pcs.PCS4jBean'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+    
+    <jaxws:endpoint id='DCS' address="http://localhost:8180/FGSMSServices/DCS"
+                      implementor='org.miloss.fgsms4j.services.DCS4jBean'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+
+
+    
+    <jaxws:endpoint id='SS' address="http://localhost:8180/FGSMSServices/SS"
+                      implementor='org.miloss.fgsms.services.s4j.StatusService'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+    
+    <jaxws:endpoint id='RS' address="http://localhost:8180/FGSMSServices/RS"
+                        implementor='org.miloss.fgsms.services.rs4j.Reporting'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+
+
+    <jaxws:endpoint id='ARS' address="http://localhost:8180/FGSMSServices/ARS"
+                       implementor='org.miloss.fgsms.services.ars.AutomatedReportingServiceImpl'>
+        <jaxws:handlers>
+            <ref bean="fgsmshandler"/>
+        </jaxws:handlers>
+        <jaxws:invoker>
+            <bean class='org.jboss.wsf.stack.cxf.InvokerEJB3'/>
+        </jaxws:invoker>
+    </jaxws:endpoint>
+    
+ 
+    
+</beans>

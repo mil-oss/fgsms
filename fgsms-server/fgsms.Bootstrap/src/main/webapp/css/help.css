@@ -1,0 +1,11 @@
+﻿  body
+        {
+            background-color: White;
+            font-family: Calibri, Verdana, Arial, Helvetica, sans-serif;
+            font-size: small;
+            margin: 0px 0px 10px 0px;
+        }
+        h1,h2,h3
+        {
+        	margin: 0px 0px 10px 0px;
+        }

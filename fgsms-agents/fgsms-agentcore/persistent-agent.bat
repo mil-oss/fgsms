@@ -1,0 +1,1 @@
+java -Dorg.miloss.fgsms.agentConfigFileOverride=fgsms-agent.properties -jar fgsms.AgentCore.jar

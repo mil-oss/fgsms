@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-parent</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <artifactId>fgsms-dist</artifactId>
+    <name>fgsms Distribution</name>
+    <packaging>pom</packaging>
+    <dependencies>
+        <!-- todo all everything as a dependency to force proper build order -->
+        
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-agentcore</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-apache-cxf-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-apache-cxf-agent-osgi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-axis1xagent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-osagent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-qpid-pyagent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-cli</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common-interfaces</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-database-export</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-discovery-dns</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-discovery-uddi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-jaxws-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-jboss-esb-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-jbossws-jaxws-agent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-server</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-server-crash-alerter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-servlet-filter-agent</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-tomcat-jdbc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+         
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>fgsms-release</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.mil-oss</groupId>
+                    <artifactId>fgsms-netagent</artifactId>
+                    <version>${project.version}</version>
+                    <type>pom</type>
+                </dependency>
+            </dependencies>
+             <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <configuration>
+                            <skipSource>true</skipSource>
+
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.6</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.7</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-wars</id>
+                                <phase>package<!-- or any other valid maven phase -->
+                                </phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <stripVersion>true</stripVersion>
+                                    <includeGroupIds>org.miloss.fgsms</includeGroupIds>
+                                    <includeArtifactIds>fgsms.Services,fgsms.Bootstrap</includeArtifactIds>
+                                    <!--,juddi-gui-war-->
+                                    <outputDirectory>
+                                        ${project.build.directory}
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <id>test</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <property name="compile_classpath" refid="maven.compile.classpath" />
+                                        <property name="runtime_classpath" refid="maven.runtime.classpath" />
+                                        <property name="test_classpath" refid="maven.test.classpath" />
+                                        <property name="plugin_classpath" refid="maven.plugin.classpath" />
+                                        <property name="project.version" value="${project.version}" />
+
+                                        <ant antfile="${basedir}/build.xml">
+                                            <target name="package-distribution" />
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                   <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.2-beta-3</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/assembly.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>tomcat6cxf</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <configuration>
+                            <skipSource>true</skipSource>
+
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.6</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.7</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-wars</id>
+                                <phase>package<!-- or any other valid maven phase -->
+                                </phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <stripVersion>true</stripVersion>
+                                    <includeGroupIds>org.miloss.fgsms</includeGroupIds>
+                                    <includeArtifactIds>fgsms.Services,fgsms.Bootstrap</includeArtifactIds>
+                                    <!--,juddi-gui-war-->
+                                    <outputDirectory>
+                                        ${project.build.directory}
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <id>test</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <property name="compile_classpath" refid="maven.compile.classpath" />
+                                        <property name="runtime_classpath" refid="maven.runtime.classpath" />
+                                        <property name="test_classpath" refid="maven.test.classpath" />
+                                        <property name="plugin_classpath" refid="maven.plugin.classpath" />
+                                        <property name="project.version" value="${project.version}" />
+
+                                        <ant antfile="${basedir}/build.xml">
+                                            <target name="package-distribution" />
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.2-beta-3</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/assembly.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

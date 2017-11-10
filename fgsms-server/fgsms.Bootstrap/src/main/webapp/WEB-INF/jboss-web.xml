@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    
+     
+   
+  <!-- use this for CAC/PKI mode ONLY. for username/password comment out
+    <security-domain>java:/jaas/fgsmsServicesCACPKI</security-domain>  -->
+    
+   
+  
+    <context-root>/fgsmsBootstrap</context-root>
+</jboss-web>

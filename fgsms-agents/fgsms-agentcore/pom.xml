@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+	  <groupId>org.mil-oss</groupId>
+	  <artifactId>fgsms-agents</artifactId>
+	  <version>7.0.0</version>
+     </parent>
+	<properties>
+		<cxf.version>2.7.11</cxf.version>
+	</properties>
+
+
+	<artifactId>fgsms-agentcore</artifactId>
+     <packaging>bundle</packaging>
+     <name>fgsms Agent Core</name>
+     <description>The agent core provides all of the asynchronious messaging and policy management</description>
+     <dependencies>
+
+	  <dependency>
+	       <groupId>junit</groupId>
+	       <artifactId>junit</artifactId>
+	       <scope>test</scope>
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.mil-oss</groupId>
+	       <artifactId>fgsms-common</artifactId>
+	       <version>${project.parent.version}</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.mil-oss</groupId>
+	       <artifactId>fgsms-common-interfaces</artifactId>
+	       <version>${project.parent.version}</version>
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-rt-transports-http</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-rt-frontend-simple</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-rt-frontend-jaxws</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-bundle</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-tools-common</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.apache.cxf</groupId>
+	       <artifactId>cxf-api</artifactId>
+	       <scope>provided</scope>
+		  <version>${cxf.version}</version>
+	  </dependency>
+          
+           <dependency>
+            <groupId>commons-daemon</groupId>
+            <artifactId>commons-daemon</artifactId>
+            <type>zip</type>
+            <classifier>bin-windows</classifier>
+            <scope>provided</scope>
+        </dependency>
+	  
+     </dependencies>
+     <build>
+		
+	  <plugins>
+	       <plugin>
+		    <artifactId>maven-assembly-plugin</artifactId>
+		    <configuration>
+					
+			 <descriptorRefs>
+			      <descriptorRef>jar-with-dependencies</descriptorRef>
+			 </descriptorRefs>
+		    </configuration>
+		    <executions>
+			 <execution>
+			      <id>make-assembly</id>
+			      <!-- this is used for inheritance merges -->
+			      <phase>package</phase>
+			      <!-- bind to the packaging phase -->
+			      <goals>
+				   <goal>single</goal>
+			      </goals>
+			 </execution>
+		    </executions>
+	       </plugin>
+               
+               <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <unzip src="target/dependency/commons-daemon-1.0.15-bin-windows.zip" dest="target/daemon">
+                                </unzip>
+                                <copy todir="target/">
+                                    <fileset dir="target/daemon">
+                                        <include name="*.exe" />
+                                    </fileset>
+                                </copy>
+                                <copy toFile="target/prunsrvx64.exe" file="target/daemon/amd64/prunsrv.exe" />
+                                <copy toFile="target/prunsrvIA64.exe" file="target/daemon/ia64/prunsrv.exe" />
+                                <copy todir="target/">
+                                    <fileset dir=".">
+                                        <include name="*.cmd" />
+                                    </fileset>
+                                </copy>  
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+	  </plugins>
+
+     </build>
+</project>

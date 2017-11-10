@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+   
+   
+   <!-- BEGIN use this for CAC/PKI authentication only. comment out if using username/password -->
+    <filter>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <filter-class>org.miloss.fgsms.auth.CACPKI_LoginFilter</filter-class>
+        <init-param>
+            <description>pipe symbole delimited, spacing is not critical </description>
+            <param-name>AuthorizedDelegates</param-name>
+            <param-value>CN=fgsms, OU=USA, OU=PKI, OU=DOD, O=U.S. Government, C=US</param-value>
+        </init-param>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+        <filter-mapping>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping> -->
+   <!-- END use this for CAC/PKI authentication only. comment out if using username/password -->
+   
+   <servlet>
+        <servlet-name>PCS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.pcs.impl.PCS4jBean</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DCS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.dcs.impl.DCS4jBean</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.rs.impl.Reporting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DAS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.das.impl.DAS4jBean</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.status.impl.StatusServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ARS</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.ars.impl.AutomatedReportingServiceImpl</servlet-class>
+    </servlet>
+  
+    <servlet>
+        <servlet-name>ReportFetch</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.reporting.ReportFetch</servlet-class>
+    </servlet>
+
+        
+    <servlet-mapping>
+        <servlet-name>DAS</servlet-name>
+        <url-pattern>/DAS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PCS</servlet-name>
+        <url-pattern>/PCS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DCS</servlet-name>
+        <url-pattern>/DCS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RS</servlet-name>
+        <url-pattern>/RS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SS</servlet-name>
+        <url-pattern>/SS</url-pattern>
+    </servlet-mapping>
+   
+       <servlet-mapping>
+        <servlet-name>ARS</servlet-name>
+        <url-pattern>/ARS</url-pattern>
+    </servlet-mapping>
+   
+    <servlet-mapping>
+        <servlet-name>ReportFetch</servlet-name>
+        <url-pattern>/ReportFetch</url-pattern>
+    </servlet-mapping>
+    
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All resources</web-resource-name>
+         
+            <url-pattern>/DCS</url-pattern>
+            <url-pattern>/SS</url-pattern>
+            <url-pattern>/RS</url-pattern>
+            <url-pattern>/PCS</url-pattern>
+            <url-pattern>/DAS</url-pattern>
+             <url-pattern>/ARS</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>everyone</role-name>
+        </auth-constraint>
+        
+        <!-- require SSL -->
+          <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint> 
+    </security-constraint>
+    
+    
+     <login-config>
+        <auth-method>CLIENT-CERT</auth-method>
+        <realm-name>FGSMS Services</realm-name>
+    </login-config>
+
+    
+    
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    
+    <security-role>
+        <description/>
+        <role-name>everyone</role-name>
+    </security-role>
+   
+   
+</web-app>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="056923b2-94c1-4e33-85f0-e51bc842f6e0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:41492/HelloWorldESMWCF2.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="HelloWorldESMWCF2.disco" MetadataType="Disco" ID="330e46f8-b617-4ed0-b728-653b3b43715f" SourceId="1" SourceUrl="http://localhost:41492/HelloWorldESMWCF2.svc?disco" />
+    <MetadataFile FileName="HelloWorldESMWCF2.xsd" MetadataType="Schema" ID="1ca270ed-a9d1-4971-a45b-1601d25bbc09" SourceId="1" SourceUrl="http://localhost:41492/HelloWorldESMWCF2.svc?xsd=xsd0" />
+    <MetadataFile FileName="HelloWorldESMWCF21.xsd" MetadataType="Schema" ID="d2c88a1a-2ec1-4530-a3bc-9742eed89e1b" SourceId="1" SourceUrl="http://localhost:41492/HelloWorldESMWCF2.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="1ca1a60d-c74a-41d2-9153-93dd56643d71" SourceId="1" SourceUrl="http://localhost:41492/HelloWorldESMWCF2.svc?wsdl" />
+    <MetadataFile FileName="HelloWorldESMWCF22.xsd" MetadataType="Schema" ID="ef25d43c-d7c2-4124-aea1-db101906a531" SourceId="1" SourceUrl="http://localhost:41492/HelloWorldESMWCF2.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

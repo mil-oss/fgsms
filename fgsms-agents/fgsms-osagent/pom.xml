@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-agents</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <artifactId>fgsms-osagent</artifactId>
+    <packaging>jar</packaging>
+    <name>fgsms Operating System Agent</name>
+    <description>Operating system level agent for processes and the whole operating system</description>
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common-interfaces</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-agentcore</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.hyperic</groupId>
+            <artifactId>sigar</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hyperic</groupId>
+            <artifactId>sigar-dist</artifactId>
+            <type>zip</type>
+        </dependency>
+        
+         <dependency>
+            <groupId>commons-daemon</groupId>
+            <artifactId>commons-daemon</artifactId>
+            <type>zip</type>
+            <classifier>bin-windows</classifier>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+
+                <!-- Unzip hyperic native binaries -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-cfg-test-resources</id>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/test-resources</outputDirectory>
+                            <includeArtifacIds>sigar-dist</includeArtifacIds>
+                            <includeGroupIds>org.hyperic</includeGroupIds>
+                            <excludeTransitive>true</excludeTransitive>
+                            <excludeTypes>pom</excludeTypes>
+                            <scope>test</scope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/test-resources/hyperic-sigar-1.6.5/sigar-bin/lib</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                    <workingDirectory>target</workingDirectory>
+                    <argLine>
+                        -Djava.library.path=${project.build.directory}/test-resources/hyperic-sigar-1.6.5/sigar-bin/lib
+                    </argLine>
+
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.miloss.fgsms.osagent.OSAgent</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                     <finalName>fgsms.OSAgent</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+                       <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <version>2.1.4</version>
+                        <executions>
+                         <execution>
+                              <id>generate-rpm</id>
+                              <goals>
+                               <goal>rpm</goal>
+                              </goals>
+                         </execution>
+                        </executions>
+                        <configuration>
+                         <license>Mozilla</license>
+                         <distribution>FGSMS</distribution>
+                         <group>System Environment/Daemons</group>
+
+                         <mappings>
+                              <mapping>
+                               <directory>/opt/fgsms/</directory>
+                               <filemode>440</filemode>
+                               <username>root</username>
+                               <groupname>wheel</groupname>
+
+                               <sources>
+                                <source>
+                                     <location>target/fgsms.OSAgent-7.0.0-SNAPSHOT-jar-with-dependencies.jar</location>
+
+                                </source>
+                               </sources>
+                              </mapping>
+
+                              <mapping>
+                               <directory>/opt/fgsms/</directory>
+                               <filemode>750</filemode>
+                               <username>root</username>
+                               <groupname>wheel</groupname>
+                               <sources>
+                                <source>
+                                     <location>../fgsms-agentcore/src/main/resources/org/miloss/fgsms/agentcore/fgsms-agent.properties</location>
+                                </source>
+                               </sources>
+                              </mapping>
+                              <mapping>
+                               <directory>/etc/init.d/</directory>
+                               <filemode>750</filemode>
+                               <username>root</username>
+                               <groupname>wheel</groupname>
+                               <sources>
+                                <source>
+                                     <location>src/main/scripts/fgsms</location>
+                                </source>
+                               </sources>
+                              </mapping>
+
+
+                         </mappings>
+                         <requires>
+                              <require>java &gt; 1.6</require>
+                         </requires>
+
+                         <preinstallScriptlet>
+                              <script>echo "installing now"</script>
+                         </preinstallScriptlet>
+                         <postinstallScriptlet>
+                              <scriptFile>src/main/scripts/postinstall.sh</scriptFile>
+                              <fileEncoding>utf-8</fileEncoding>
+                         </postinstallScriptlet>
+
+                        </configuration>
+                       </plugin>
+            -->
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <unzip src="target/dependency/commons-daemon-1.0.15-bin-windows.zip" dest="target/daemon">
+                                </unzip>
+                                <copy todir="target/">
+                                    <fileset dir="target/daemon">
+                                        <include name="*.exe" />
+                                    </fileset>
+                                </copy>
+                                <copy toFile="target/prunsrvx64.exe" file="target/daemon/amd64/prunsrv.exe" />
+                                <copy toFile="target/prunsrvIA64.exe" file="target/daemon/ia64/prunsrv.exe" />
+                                <copy todir="target/">
+                                    <fileset dir=".">
+                                        <include name="*.cmd" />
+                                    </fileset>
+                                </copy>  
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

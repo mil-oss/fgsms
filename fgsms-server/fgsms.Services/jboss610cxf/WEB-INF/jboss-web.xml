@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web >
+          <!-- use this  for username/password   do not forget to change the settings in web.xml    -->
+    <security-domain>java:/jaas/FGSMSServices</security-domain> 
+  
+    
+    <!-- use this for CAC/PKI logins do not forget to change the settings in web.xml
+    <security-domain>java:/jaas/FGSMSServicesCACPKI</security-domain>  -->
+    
+    
+    <class-loading java2ClassLoadingCompliance="true">
+        <!-- true == use jboss's default class loader
+            false == use the j2ee style class loader, i.e. turn off class loading inheritance -->
+        
+    </class-loading>
+    <context-root>/FGSMSServices</context-root>
+    
+</jboss-web>

@@ -1,0 +1,106 @@
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ US Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+--><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.examples.com/wsdl/HelloService" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="HelloService" targetNamespace="http://www.examples.com/wsdl/HelloService">
+    <types>
+        <xs:schema elementFormDefault="qualified" attributeFormDefault="qualified" targetNamespace="http://www.examples.com/wsdl/HelloService" xmlns:tns="http://www.examples.com/wsdl/HelloService">
+            <xs:element name="SayHello">
+                <xs:annotation>
+                    <xs:documentation>request message</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="tns:SayHelloReq" name="SayHelloReq">
+                            <xs:annotation>
+                                <xs:documentation>request message</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SayHelloResponse">
+                <xs:annotation>
+                    <xs:documentation>response</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence >
+                        <xs:element  type="tns:SayHelloRes" name="SayHelloRes" >
+                            <xs:annotation>
+                                <xs:documentation>response</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="SayHelloReq">
+                <xs:annotation>
+                    <xs:documentation>request message</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="yourname" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>your name goes here</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SayHelloRes">
+                <xs:annotation>
+                    <xs:documentation>response message</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="greeting" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>the greeting</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </types>
+    <message name="SayHelloRequestMsg">
+        <part name="parameter" element="tns:SayHello"/>
+    </message>
+    <message name="SayHelloResponseMsg">
+        <part name="parameter" element="tns:SayHelloResponse"/>
+    </message>
+    <portType name="Hello_PortType">
+        <operation name="sayHello">
+            <input message="tns:SayHelloRequestMsg"/>
+            <output message="tns:SayHelloResponseMsg"/>
+        </operation>
+    </portType>
+    <binding name="Hello_Binding" type="tns:Hello_PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="sayHello">
+            <soap:operation soapAction="sayHello" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="Hello_Service">
+        <documentation>WSDL File for HelloService</documentation>
+        <port name="Hello_Port" binding="tns:Hello_Binding">
+            <soap:address location="http://www.examples.com/SayHello/"/>
+        </port>
+    </service>
+</definitions>

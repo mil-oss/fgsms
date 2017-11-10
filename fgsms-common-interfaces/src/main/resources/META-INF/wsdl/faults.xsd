@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults" targetNamespace="urn:org:miloss:fgsms:services:interfaces:faults" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+Living document - defines all potential faults used within fgsms.
+9-22-2011, added a new enumeration AgentsDisabledError to support agent disabling
+
+</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="AccessDeniedException">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;summary&gt;
+            Occurs when a user does not have the required permission to perform a given action.
+            &lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="AccessDeniedException" type="tns:AccessDeniedException" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper for the exception</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ServiceUnavailableException">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;summary&gt;
+            Occurs when an underlying dependency fails or is unavailable.
+            &lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="tns:ServiceUnavailableFaultCodes">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>&lt;summary&gt;
+            The fault code
+            &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServiceUnavailableException" type="tns:ServiceUnavailableException" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper for the exception</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="ServiceUnavailableFaultCodes">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;summary&gt;
+            ServiceUnavailableFaultCodes, describes an error status
+            &lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DataBasePermissionError">
+				<xs:annotation>
+					<xs:documentation>&lt;summary&gt;
+             Happens when the supplied credentials cannot perform some kind of query in the database
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UserPermissionError">
+				<xs:annotation>
+					<xs:documentation>&lt;summary&gt;
+             Happens when the supplied user credentials does not have access to the requested resource or action.
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DataBaseUnavailable">
+				<xs:annotation>
+					<xs:documentation>&lt;summary&gt;
+             Happens when the database is either offline or access to the database was denied for the
+             specified credentials
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Misconfiguration">
+				<xs:annotation>
+					<xs:documentation>&lt;summary&gt;
+             Happens when the connection string is not present in the configuration file.
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnexpectedError">
+				<xs:annotation>
+					<xs:documentation>&lt;summary&gt;
+            A generic error message indicating an unhandled exception or fault.
+            &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AgentsDisabledError">
+				<xs:annotation>
+					<xs:documentation>Indicates that an agent has sent peformance data however the global settings have stated that all agent traffic should be disabled.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ServiceUnavailableFaultCodes" type="tns:ServiceUnavailableFaultCodes" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper for the fault codes</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

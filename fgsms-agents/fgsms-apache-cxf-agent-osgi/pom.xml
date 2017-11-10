@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-agents</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <artifactId>fgsms-apache-cxf-agent-osgi</artifactId>
+    <packaging>bundle</packaging>
+    <name>fgsms Apache CXF Agent OSGI</name>
+    <description>Agent for CXF based services (SOAP and REST)</description>
+
+    <properties>
+        <cxf.version>2.7.11</cxf.version>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-apache-cxf-agent</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common-interfaces</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-agentcore</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-discovery-dns</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-discovery-uddi</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>1.0</version>
+  
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.juddi</groupId>
+            <artifactId>juddi-client</artifactId>
+        </dependency>
+          
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jaxws_2.2_spec</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>fgsms-wsnotification-spec</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    
+                    <instructions>
+                        <Export-Package>org.miloss.fgsms.agents;
+                            uses:="org.apache.cxf.service,org.apache.cxf.transport,org.apache.cxf.binding,org.apache.cxf.binding.soap,org.apache.cxf.jaxb,org.apache.cxf,org.apache.cxf.headers,javax.servlet.http,org.apache.cxf.interceptor,
+                            org.apache.cxf.databinding,org.apache.cxf.message,org.apache.cxf.phase"
+                        </Export-Package>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                        <Import-Package>
+                           javax.servlet.http;version="[2.5,3)",
+                           javax.xml.bind,
+                            javax.xml.namespace,
+                            org.apache.cxf;version="[2.5,3)",
+                            org.apache.cxf.headers;version="[2.5,3)",
+                            org.apache.cxf.databinding;version="[2.5,3)",
+                            org.apache.cxf.endpoint;version="[2.5,3)",
+                            org.apache.cxf.interceptor;version="[2.5,3)",
+                            org.apache.cxf.message;version="[2.5,3)",
+                            org.apache.cxf.phase;version="[2.5,3)",
+                            org.apache.cxf.service.model;version="[2.5,3)",
+                            org.apache.cxf.jaxb;version="[2.5,3)",
+                            org.apache.cxf.binding.soap;version="[2.5,3)",
+                            org.apache.cxf.binding;version="[2.5,3)",
+                            org.apache.cxf.transport;version="[2.5,3)",
+                            org.apache.cxf.service;version="[2.5,3)",
+                            org.slf4j;version="[1.6,2)"
+                        </Import-Package>
+                    </instructions>
+                    
+                </configuration>
+            </plugin>
+            
+        </plugins>
+
+    </build>
+
+</project>

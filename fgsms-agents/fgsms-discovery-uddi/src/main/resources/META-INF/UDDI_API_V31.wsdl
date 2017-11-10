@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:uddi-org:api_v3generated/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="UDDI_API_V3" targetNamespace="urn:uddi-org:api_v3generated/">
+	<import namespace="urn:uddi-org:api_v3" location="UDDI_API_V3.wsdl"/>
+		<import namespace="urn:uddi-org:api_v2" location="UDDI_API_V2.wsdl"/>
+	<import namespace="urn:uddi-org:inquiry" location="UDDI_API_v1.wsdl"/>
+	<types/>
+</definitions>
+ 

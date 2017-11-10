@@ -1,0 +1,17 @@
+﻿<Feature  Title="FGSMS" 
+          Id="67EF4F80-7D8A-4C2B-B102-910A005C3A5E" 
+          Description="These web parts enable basic visualization to the FGSMS Status Service." 
+          Version="1.0.0.0" 
+          Scope="Site" 
+          Hidden="FALSE" 
+          DefaultResourceFile="core"
+          ActivateOnDefault="TRUE"
+          Creator="CERDEC"
+          AlwaysForceInstall="TRUE"
+          xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ElementManifests>
+    <ElementManifest Location="elementManifest.xml" />
+    <ElementFile Location='org.miloss.fgsms.CurrentStatusWebPart.webpart' />
+    
+  </ElementManifests>
+</Feature>

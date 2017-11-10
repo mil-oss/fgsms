@@ -1,0 +1,247 @@
+<project name="fgsms-pojo" default="copy-from-core" basedir=".">
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+	
+    <target name="copy-main">
+        <echo>delete: ${basedir}/src/test/</echo>
+        <delete dir="${basedir}/src/test/"  />
+        <echo>delete: ${basedir}/src/main/</echo>
+        <delete dir="${basedir}/src/main/"  />
+        <mkdir dir="${basedir}/src/main/"/>
+        <echo>copy: ${fgsms.core.dir}/src/main</echo>
+        <copy todir="${basedir}/src/main">
+            <fileset dir="${fgsms.core.dir}/src/main">
+                <include name="**/*"/>
+                <exclude name="**/ObjectFactory.java"/>
+				
+                <exclude name="**/RemoteAgentCallbackService.java"/>
+                <exclude name="**/AutomatedReportingService_Service.java"/>
+                <exclude name="**/DataAccessService_Service.java"/>
+                <exclude name="**/DataCollectorService.java"/>
+                <exclude name="**/PolicyConfigurationService.java"/>
+                <exclude name="**/ReportingService_Service.java"/>
+                <exclude name="**/StatusServiceService.java"/>
+
+
+                <exclude name="**/org/miloss/fgsms/plugins/sla/**/*.java"/>
+				
+                <include name="**/org/oasis_open/docs/wsdm/muws2_2/CategoryType.java"/>
+                <include name="**/org/oasis_open/docs/wsdm/muws2_2/SituationCategoryType.java"/>
+                
+                
+                <exclude name="**/org/oasis_open/docs/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsn/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsrf/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/mows_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws1_2/*.java"/>
+                
+                <exclude name="**/org/oasis_open/docs/wsn/brw_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsn/br_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsn/b_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsn/client/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsn/t_1/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsrf/bf_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsrf/rp_2/*.java"/>
+                <exclude name="**/org/oasis_open/docs/wsrf/r_2/*.java"/>
+                
+
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/AbortInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/AvailabilitySituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/CapabilitySituation.java"/>
+
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ConfigureSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ConnectCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ConnectInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ConnectSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/CreateCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/CreateInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/CreateSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/CreationNotification.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DebugReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DestroyCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DestroyInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DestroySituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DestructionNotification.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/DialectableExpressionType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/EventCorrelationPropertiesType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/HeartbeatReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/LangString.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/LogReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/MsgCatalogInformationType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ObjectFactory.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/OtherSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/out.txt"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/package-info.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/PauseInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/PerformanceReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/QueryRelationshipsByType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/QueryRelationshipsByTypeResponse.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ReconnectInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RelationshipCreatedNotification.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RelationshipDeletedNotification.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RelationshipParticipantType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RelationshipType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RelationshipTypeType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/ReportSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RequestCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RequestInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RequestSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/RestartInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/SecurityReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/Self.java"/>
+
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/SituationType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StartCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StartInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StartSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StateTransitionType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StateType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StatusReport.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StopCompleted.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StopInitiated.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/StopSituation.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/SubstitutableMsgType.java"/>
+                <exclude name="**/org/oasis_open/docs/wsdm/muws2_2/TraceReport.java"/>
+                
+                
+
+
+<!-- 
+    
+
+                <exclude name="**/org/miloss/fgsms/services/interfaces/reporting/**/*.java"/>
+                <exclude name="**/org/miloss/fgsms/services/interfaces/dataaccessservice/**/*.java"/>
+                <exclude name="**/org/miloss/fgsms/services/interfaces/automatedreportingservice/**/*.java"/>
+               <exclude name="**/org/miloss/fgsms/services/interfaces/agentcallbackservice/**/*.java"/>-->
+                
+                
+            </fileset>
+        </copy>
+    </target>
+	
+   
+    
+    <target name="copy-from-core" depends="copy-main"/>
+        
+    <target name="commentOutXmlAnnotations" description="Run">
+            
+        <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@Xml[A-Za-z0-9]+(\([^)]+\))?|import javax\.xml\.bind\.annotation\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+          <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@Xml[A-Za-z0-9]+(\([^)]+\))?|import javax\.jws\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+          <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@Xml[A-Za-z0-9]+(\([^)]+\))?|import javax\.xml\.ws\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+        <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@Web[A-Za-z0-9]+(\([^)]+\))?|import javax\.xml\.bind\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+         <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@RequestWrapper(\([^)]+\))?|import javax\.xml\.bind\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+                 <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@ResponseWrapper(\([^)]+\))?|import javax\.xml\.bind\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+        
+        <replaceregexp byline="false" flags="g">
+            <regexp pattern="(@SOAPBinding(\([^)]+\))?|import javax\.xml\.bind\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+		<replaceregexp byline="false" flags="g">
+            <regexp pattern="(@RequestWrapper(\([^)]+\))?|import javax\.xml\.bind\.[A-Za-z0-9.]+;)[ \t]*(\r?\n)"/>
+            <substitution expression="/*\1*/\3" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        <!--
+                  <replaceregexp byline="false" flags="g">
+            <regexp pattern="JAXBElement\&lt;|[A-Za-z0-9]+|\&gt;"/>
+            <substitution expression=" \1 " />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+        
+             <replaceregexp byline="false" flags="g">
+            <regexp pattern="\&gt;"/>
+            <substitution expression="" />
+            <fileset dir=".">
+                <include name="**/*.java"></include>
+            </fileset>
+        </replaceregexp>
+      -->
+        
+    </target>
+    
+   
+    
+    
+  
+    <!-- import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
+import javax.xml.ws.ResponseWrapper;
+    @WebService
+     @WebMethod(operationName = "AddData", action = "urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddData")
+    @WebResult(name = "AddDataResult", targetNamespace = "urn:org:miloss:fgsms:services:interfaces:dataCollector")
+    @RequestWrapper(localName = "AddData", targetNamespace = "urn:org:miloss:fgsms:services:interfaces:dataCollector", className = "org.miloss.fgsms.services.interfaces.datacollector.AddData")
+    @ResponseWrapper(localName = "AddDataResponse", targetNamespace = "urn:org:miloss:fgsms:services:interfaces:dataCollector", className = "org.miloss.fgsms.services.interfaces.datacollector.AddDataResponse")
+      @WebParam(name = "req", targetNamespace = "urn:org:miloss:fgsms:services:interfaces:dataCollector")
+      import javax.xml.ws.WebFault;
+
+    -->
+    <!-- org.w3c.dom.Element -->
+    <!-- @XmlAnyElement() -->
+</project>

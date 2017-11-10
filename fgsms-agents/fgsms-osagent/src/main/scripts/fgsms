@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+#       /etc/rc.d/init.d/fgsms
+#
+#
+# fgsms starts and stops the fgsms OS Agent
+#
+# define where fgsms folder containing the OS agent
+
+FGSMS_HOME=/opt/fgsms
+ 
+# make sure java is in your path
+JAVAPTH=${JAVAPTH:-"/usr/local/jdk/bin"}
+
+
+
+start() {
+    echo -n "Starting Fine Grain Service Monitoring System OS Agent "
+	java -Dorg.miloss.fgsms.agentConfigFileOverride=$fgsms_HOME/fgsms-agent.properties -jar $fgsms_HOME/fgsms.OSAgent.jar > $fgsms_HOME/osagent.log 2>&1 &
+}
+
+stop() {
+
+    PROC_ID=`ps xa | grep 'fgsms.OSAgent' | grep java | grep -v grep | awk -F= 'BEGIN {FS=" "}; {print $1 }'`
+    if [[ -n "$PROC_ID" ]]; then
+        kill $PROC_ID
+    fi
+}
+
+
+status() {
+    PROC_ID=`ps xa | grep 'fgsms.OSAgent' | grep java | grep -v grep | awk -F= 'BEGIN {FS=" "}; {print $1 }'`
+    if [[ -n "$PROC_ID" ]]; then
+        echo -e 'fgsms OSAgent is running with process id: [\033[1;32m' $PROC_ID '\033[0m]'
+        RETVAL=0
+    else
+        echo -e 'fgsms OS Agent  is \033[1;31m'stopped'\033[0m'
+        RETVAL=1
+    fi
+}
+
+
+
+
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status ns-slapd
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage:  {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $?

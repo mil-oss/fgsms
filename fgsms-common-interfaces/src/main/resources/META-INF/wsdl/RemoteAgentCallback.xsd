@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:class="urn:us:gov:ic:ism:v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:agentCallbackService" xmlns:pcs="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" targetNamespace="urn:org:miloss:fgsms:services:interfaces:agentCallbackService" elementFormDefault="qualified"
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+  jaxb:extensionBindingPrefixes="xjc"
+  jaxb:version="1.0"  
+  >
+
+
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:element name="ExecuteTasks">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="authorizationcode" type="xs:string"/>
+				<xs:element name="id" type="xs:string"/>
+				<xs:element name="working_dir" type="xs:string"/>
+				<xs:element name="command" type="xs:string"/>
+				<xs:element name="waitforexit" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExecuteTasksResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Accepted" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

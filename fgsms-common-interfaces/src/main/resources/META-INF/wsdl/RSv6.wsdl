@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:reportingService" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:opstat="urn:org:miloss:fgsms:services:interfaces:opstatus" name="ReportingService" targetNamespace="urn:org:miloss:fgsms:services:interfaces:reportingService">
+	<wsdl:documentation>fgsms Reporting Service. Generators Zipped HTML reports of fgsms data. UNCLASSIFIED
+Used with fgsms RC3 and up	
+
+v6
+Add new report types to match the newer data that available
+v7 2-26-2013
+added opstat binding
+	</wsdl:documentation>
+	<wsdl:import namespace="urn:org:miloss:fgsms:services:interfaces:opstatus" location="operatingstatusA.wsdl"/>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults">
+			<xs:import schemaLocation="faults.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:faults"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:reportingService">
+			<xs:import schemaLocation="RSv6.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:reportingService"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="reportingService_ExportDataToHTML_InputMessage">
+		<wsdl:part name="parameters" element="tns:ExportDataToHTML"/>
+	</wsdl:message>
+	<wsdl:message name="reportingService_ExportDataToHTML_OutputMessage">
+		<wsdl:part name="parameters" element="tns:ExportDataToHTMLResponse"/>
+	</wsdl:message>
+	<wsdl:message name="reportingService_ExportDataToCSV_InputMessage">
+		<wsdl:part name="parameters" element="tns:ExportDataToCSV"/>
+	</wsdl:message>
+	<wsdl:message name="reportingService_ExportDataToCSV_OutputMessage">
+		<wsdl:part name="parameters" element="tns:ExportDataToCSVResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceUnavailableException">
+		<wsdl:part name="detail" element="faults:ServiceUnavailableException"/>
+	</wsdl:message>
+	<wsdl:message name="AccessDeniedException">
+		<wsdl:part name="detail" element="faults:AccessDeniedException"/>
+	</wsdl:message>
+	<wsdl:portType name="reportingService">
+		<wsdl:documentation>Reporting Service Port Type</wsdl:documentation>
+		<wsdl:operation name="ExportDataToHTML">
+			<wsdl:documentation>Creates an HTML report with charts for the selected services, time range, and report types in a zip file.</wsdl:documentation>
+			<wsdl:input message="tns:reportingService_ExportDataToHTML_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToHTML"/>
+			<wsdl:output message="tns:reportingService_ExportDataToHTML_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToHTMLResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/AccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ExportDataToCSV">
+			<wsdl:documentation>
+		Exports transactions logs for a given set of services, requires audit level permissions or higher for each service requested service
+		</wsdl:documentation>
+			<wsdl:input message="tns:reportingService_ExportDataToCSV_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToCSV"/>
+			<wsdl:output message="tns:reportingService_ExportDataToCSV_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToCSVResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/AccessDeniedExceptionFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="reportingService" type="tns:reportingService">
+		<wsdl:documentation>Reporting Service Binding</wsdl:documentation>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ExportDataToHTML">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToHTML" style="document" soapActionRequired=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ExportDataToCSV">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:reportingService/reportingService/ExportDataToCSV" style="document" soapActionRequired=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ReportingService">
+		<wsdl:documentation>Reporting Service </wsdl:documentation>
+		<wsdl:port name="reportingServicePort" binding="tns:reportingService">
+			<wsdl:documentation>Reporting Service Port</wsdl:documentation>
+			<soap:address location="http://localhost:57978/ReportingService.svc"/>
+		</wsdl:port>
+		<wsdl:port name="opStatusServiceBinding" binding="opstat:opStatusServiceBinding">
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

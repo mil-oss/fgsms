@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:org:miloss:fgsms:plugins:sla:alertservice" targetNamespace="urn:org:miloss:fgsms:plugins:sla:alertservice">
+	<wsdl:types>
+		<xs:schema targetNamespace="urn:org:miloss:fgsms:plugins:sla:alertservice" elementFormDefault="qualified">
+			<xs:complexType name="RecieveServiceAlert">
+				<xs:sequence>
+					<xs:element name="timestamp" type="xs:dateTime"/>
+					<xs:element name="message" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="RecieveServiceAlert" type="tns:RecieveServiceAlert"></xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="AlertMessageRequest_inputmessage">
+		<wsdl:part name="parameters" element="tns:RecieveServiceAlert"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="AlertRecieverPortType">
+		<wsdl:operation name="RecieveServiceAlert">
+			<wsdl:input message="tns:AlertMessageRequest_inputmessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AlertRecieverBinding" type="tns:AlertRecieverPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="RecieveServiceAlert">
+			<soap:operation soapAction="urn:RecieveServiceAlert"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AlertRecieverService">
+		<wsdl:port name="AlertRecieverPort" binding="tns:AlertRecieverBinding">
+			<soap:address location="No Target Adress"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

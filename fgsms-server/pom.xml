@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-parent</artifactId>
+        <version>7.0.0</version>
+    </parent>
+	
+    <groupId>org.mil-oss</groupId>
+    <artifactId>fgsms-server</artifactId>
+    <packaging>pom</packaging>
+    <name>fgsms Server</name>
+    <description>All things that run server side</description>
+	
+    <modules>
+        
+        <module>fgsms-database-resources</module>
+        <module>fgsms-sla-processor</module>
+        <module>fgsms-common-test-utils</module>
+
+
+        <module>fgsms-reporting-service</module>
+        <module>fgsms-report-generator</module>      
+        <module>fgsms-automated-reporting-service</module>
+        <module>fgsms-data-access-service</module>
+        
+        <module>fgsms-data-collector-service</module>
+        <module>fgsms-data-pruner</module>
+        <module>fgsms-dependency-scanner</module>
+        
+        <module>fgsms-policy-configuration-service</module>
+        <module>fgsms-status-service</module>
+        
+        
+        <module>fgsms-hornetq-jms-agent</module>
+        <module>fgsms-qpid-jmx-agent</module>
+        <module>fgsms-uddi-publisher</module>
+        <module>fgsms-stats</module>
+        <module>fgsms-smx-agent</module>
+
+        <module>fgsms-status-bueller</module>
+        
+        <!-- war -->
+        <module>fgsms.Services</module>
+        <module>fgsms-ui-common</module>
+        <module>fgsms.Bootstrap</module>
+        <!-- servers -->
+        <module>fgsms-tomcat-jdbc</module>
+        <module>fgsms-tomcat</module>
+        
+        <!-- tools -->
+             
+        <module>fgsms-server-crash-alerter</module>
+        <module>fgsms-database-export</module>
+        <module>fgsms-recryptor</module>
+    </modules>
+
+	
+</project>

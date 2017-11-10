@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:uddi-org:api_v3" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:api_v3_binding="urn:uddi-org:api_v3_binding" name="UDDI_API_V3" targetNamespace="urn:uddi-org:api_v3" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <documentation xmlns:api_v3_binding="urn:uddi-org:api_v3_binding" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:uddi-org:api_v3">
+        Copyright 2001-2005 Systinet Corp. All rights reserved.
+        Use is subject to license terms.
+
+        WSDL SOAP/HTTP binding for UDDI V3 Security, Publication and Inquiry APIs.
+    </documentation>
+  <import namespace="urn:uddi-org:api_v3_binding" location="uddi_api_v3_binding.wsdl" />
+  <types />
+  <service name="UDDI_Inquiry_SoapService">
+    <port name="UDDI_Inquiry_PortType" binding="api_v3_binding:UDDI_Inquiry_SoapBinding">
+      <soap:address location="http://localhost:8080/uddi/inquiry" />
+    </port>
+  </service>
+  <service name="UDDI_Publication_SoapService">
+    <port name="UDDI_Publication_PortType" binding="api_v3_binding:UDDI_Publication_SoapBinding">
+      <soap:address location="urn:unknown-location-uri" />
+    </port>
+  </service>
+  <service name="UDDI_Security_SoapService">
+    <port name="UDDI_Security_PortType" binding="api_v3_binding:UDDI_Security_SoapBinding">
+      <soap:address location="urn:unknown-location-uri" />
+    </port>
+  </service>
+</definitions>

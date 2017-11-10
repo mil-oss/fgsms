@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pcs="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:class="urn:us:gov:ic:ism:v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:dataCollector" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="urn:org:miloss:fgsms:services:interfaces:dataCollector" elementFormDefault="qualified" attributeFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" schemaLocation="PCS8.xsd"/>
+	<xs:element name="AddMachineAndProcessData">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddMachineAndProcessDataRequestMsg" type="tns:AddMachineAndProcessDataRequestMsg">
+					<xs:annotation>
+						<xs:documentation>request message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddMachineAndProcessDataResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddMachineAndProcessDataResponseMsg" type="tns:AddMachineAndProcessDataResponseMsg">
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddMachineAndProcessDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the hostname of this machine</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agentType" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the classname of the agent that recorded this message</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domainname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the domain of this machine</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachineData" type="common:MachinePerformanceData" nillable="true">
+				<xs:annotation>
+					<xs:documentation>performance informaton this machine as whole and for any proceses running on it</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProcessData" type="common:ProcessPerformanceData" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>performance informaton this machine as whole and for any proceses running on it</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SensorData" type="common:NameValuePairSet" nillable="true">
+				<xs:annotation>
+					<xs:documentation>sensor data, any name value pair representible data can be stored here</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddMachineAndProcessDataResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response message</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachinePolicy" type="pcs:MachinePolicy">
+				<xs:annotation>
+					<xs:documentation>the policy for the machine reporting data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProcessPolicy" type="pcs:ProcessPolicy" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>the policies for specific processes/services running on this machine, if any are defined</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentActions" type="common:AgentAction" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>administer defined actions for this machine, if any are defined</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReportingFrequency" type="xs:duration">
+				<xs:annotation>
+					<xs:documentation>period of time from which to send back performance data
+									i.e. send data back every 5 mins</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddStatisticalDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="data" type="tns:BrokerData" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>payload info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BrokerURI" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>a modified url representing the broker host</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BrokerHostname" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the hostname of the machine hosting the broker</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Domain" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the domain of the machine hosting the broker, use unspecified if a domain is not available</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OperationalStatus" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>the hostname of the machine hosting the broker</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OperationalStatusMessage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>a generic field for stating status information, such as an error message if the item is not operational</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the classname of the agent that recorded this data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddStatisticalDataResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response message</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="success" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>was the transaction successful?</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddStatisticalData">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddStatisticalDataRequestMsg" type="tns:AddStatisticalDataRequestMsg">
+					<xs:annotation>
+						<xs:documentation>request message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="BrokerData">
+		<xs:annotation>
+			<xs:documentation>broker data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QueueOrTopicName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>name of this queue or topic</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="QueueOrTopicCanonicalName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>an identifer that uniquely identifies this queue or topic</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessagesIn" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessagesOut" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessagesDropped" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ActiveConsumers" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalConsumers" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BytesIn" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BytesOut" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BytesDropped" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Depth" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>This is typically the size of a queue but can also represent work that still needs to be processed for this topic or queue.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This is typically Queue, Topic, Exchange, etc but any string can be used to describe this item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddStatisticalDataResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddStatisticalDataResponseMsg" type="tns:AddStatisticalDataResponseMsg">
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddMoreData">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:AddDataRequestMsg" nillable="true"  maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddMoreDataResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddDataResult" type="tns:AddDataResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddData">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:AddDataRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Action" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>action name, such as POST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>A generic container for attaching messages and debugging information from agents</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionID" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>A unique identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RelatedTransactionID" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>An identifier that links this transaction record to the same transaction that was recorded else where.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionThreadID" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>A unique identifier that presists through service chaining</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identity" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>identity of the users</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceHost" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>hostname of the machine hosting the service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Success" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true/false</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>An adjusted URI that includes the protocol, unqiue hostname, port and path of the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequestURI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The original unmodified requested url</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XmlRequest" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>request payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XmlResponse" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>response payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestSize" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>in bytes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseSize" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>in bytes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseTime" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>in ms</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agentType" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classname of the agent</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recordedat" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>timestamp the transaction was observed at</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="headersRequest" type="common:header" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>headers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="headersResponse" type="common:header" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>headers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddDataRequestMsg" type="tns:AddDataRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AddDataResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddDataResult" type="tns:AddDataResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddDataResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="tns:DataResponseStatus">
+				<xs:annotation>
+					<xs:documentation>was the transaction stored to disk successfully</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddDataResponseMsg" type="tns:AddDataResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="DataResponseStatus">
+		<xs:annotation>
+			<xs:documentation>request status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Success"/>
+			<xs:enumeration value="Failure"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="DataResponseStatus" type="tns:DataResponseStatus" nillable="true">
+		<xs:annotation>
+			<xs:documentation>status wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

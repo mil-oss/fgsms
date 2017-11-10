@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:class="urn:us:gov:ic:ism:v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:status" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="urn:org:miloss:fgsms:services:interfaces:status" elementFormDefault="qualified" attributeFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:element name="RemoveStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:RemoveStatusRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RemoveStatusRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The unique URI describing this resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RemoveStatusResponse">
+		<xs:annotation>
+			<xs:documentation>An empty response, except for the classification level. An exception shall be thrown if an error occurs or access was denied.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:RemoveStatusResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RemoveStatusResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:GetStatusRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetAllStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:GetStatusRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetStatusRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The unique URI describing this resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAllStatusRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:element name="GetStatusResponse">
+		<xs:annotation>
+			<xs:documentation>Represents whether or not the status was saved successfully.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetStatusResponseResult" type="tns:GetStatusResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetStatusResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Operational" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Is this resource currently operational?
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The unique URI describing this resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>An associated message that corresponds with the current status, optional.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeStamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status was recorded.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastStatusChangeTimeStamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status last changed. Use this for calculating up/down time
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAllStatusResponse">
+		<xs:annotation>
+			<xs:documentation>Represents whether or not the status was saved successfully.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetStatusResponseResult" type="tns:GetStatusResponseMsg" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetMoreStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:SetStatusRequestMsg" nillable="true"  maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetMoreStatusResponse">
+		<xs:annotation>
+			<xs:documentation>Represents whether or not the status was saved successfully.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetStatusMoreResponseResult" type="tns:SetStatusResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:SetStatusRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetStatusRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Operational" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Is this resource currently operational?
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The unique URI describing this resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>An associated message that corresponds with the current status, optional.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The hostname of the machine hosting this thing, only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DomainName" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The domain of the machine hosting this thing, only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeStamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status was recorded.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PolicyType" type="common:policyType" default="Status" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status was recorded. only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ParentObject" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>If specified, this presents the policy uri of the owning object. only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetStatusRequestMsg" type="tns:SetStatusRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetStatusResponse">
+		<xs:annotation>
+			<xs:documentation>Represents whether or not the status was saved successfully.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetStatusResponseResult" type="tns:SetStatusResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetStatusResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="tns:SetResponseStatus">
+				<xs:annotation>
+					<xs:documentation>response status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetStatusResponseMsg" type="tns:SetStatusResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="SetResponseStatus">
+		<xs:annotation>
+			<xs:documentation>whether or not the status could be recorded</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Success"/>
+			<xs:enumeration value="Failure"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SetResponseStatus" type="tns:SetResponseStatus" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--extension -->
+	<xs:element name="SetExtendedStatus">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="req" type="tns:SetExtendedStatusRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetExtendedStatusRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveats</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Operational" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Is this resource currently operational?
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The unique URI describing this resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>An associated message that corresponds with the current status, optional.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The hostname of the machine hosting this thing, only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DomainName" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The domain of the machine hosting this thing, only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeStamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status was recorded.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PolicyType" type="common:policyType" default="Status" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The timestamp at which this status was recorded. only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ParentObject" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>If specified, this presents the policy uri of the owning object. only used during policy creation
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Data" type="common:NameValuePairSet">
+				<xs:annotation>
+					<xs:documentation>If specified, this presents the a generic container for name value pair sets
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetExtendedStatusRequestMsg" type="tns:SetStatusRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

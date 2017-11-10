@@ -1,0 +1,1 @@
+java -cp fgsms.Common.jar;xercesImpl.jar;log4j-1.2.16.jar fgsms.common.Main en

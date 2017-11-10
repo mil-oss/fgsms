@@ -1,0 +1,66 @@
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+            xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+
+<transport name="http">
+    <requestFlow>
+        <handler type="java:org.apache.axis.handlers.http.URLMapper"/>
+    	<handler name="FGSM"	type="java:org.miloss.fgsms.agents.Axis1MonitorInbound"/>
+    </requestFlow>
+    <responseFlow>
+        <handler name="FGSM" type="java:org.miloss.fgsms.agents.Axis1MonitorOutbound"/>
+    </responseFlow>
+</transport>
+
+
+ <transport name="SimpleHTTP" pivot="HTTPSender">
+   <requestFlow>
+    <handler name="HTTPActionHandler"
+             type="java:org.apache.axis.handlers.http.HTTPActionHandler"/>
+   </requestFlow>
+  </transport>
+  
+  
+  
+ 
+  
+
+  <service name="EchoService" provider="Handler">
+      <parameter name="handlerClass"
+                 value="org.apache.axis.handlers.EchoHandler"/>
+  </service>
+
+
+
+
+ <!-- note that either style="message" OR provider="java:MSG" both work -->
+  <service name="MessageService" style="message">
+    <parameter name="className" value="samples.message.MessageService" />
+    <parameter name="allowedMethods" value="echoElements" />
+  </service>
+  <service name="MessageService2" style="message">
+    <parameter name="className" value="samples.message.MessageService" />
+    <parameter name="allowedMethods" value="process" />
+  </service>
+
+
+ <!-- Services from HelloWorld WSDL service -->
+
+  <service name="HelloPort" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://hello.jaxrpc.samples/"/>
+      <parameter name="wsdlServiceElement" value="HelloWorld"/>
+      <parameter name="wsdlServicePort" value="HelloPort"/>
+      <parameter name="className" value="samples.jaxrpc.hello.HelloBindingImpl"/>
+      <parameter name="wsdlPortType" value="Hello"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="sayHello" qname="operNS:sayHello" xmlns:operNS="http://hello.jaxrpc.samples/" returnQName="result" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="String_1" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="sayHello"/>
+
+  </service>
+
+
+
+
+</deployment>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Frequently Asked Questions"
+  toplink="false">
+
+  <part id="general">
+    <title>General</title>
+
+    <faq id="whats-fgsms">
+      <question>
+        What is FGSMS?
+      </question>
+      <answer>
+        <p>FGSMS is a centralized service monitoring and management system.</p>
+      </answer>
+    </faq>
+
+    <faq id="whats-name">
+      <question>
+        What's with the terrible name?
+      </question>
+      <answer>
+        <p>FGSMS originally had a cool name, unfortunately while it was closed source, someone else in the public sector used the same name, thus we had to rename it. This was the only thing the lawyers would recommend.</p>
+      </answer>
+    </faq>
+
+    <faq id="whats-previousversions">
+      <question>
+        Is version information available for prior to the open source release?
+      </question>
+      <answer>
+        <p>Yes, but only for U.S. Government employees and contractors</p>
+      </answer>
+    </faq>
+
+
+      <faq id="whats-agents">
+      <question>
+        What kind of agents are there?
+      </question>
+      <answer>
+        <p>Agents are bucketed into 5 categories:
+        <ul>
+          <li>Status only</li>
+          <li>Transactional (like SOAP or REST)</li>
+          <li>Statistical (like an AMQP broker)</li>
+          <li>Process (Postgres or whatever)</li>
+          <li>Machine (Windows, Linux, etc)</li>
+        </ul>
+        Each agent has different capabilities. Some can run on the fgsms server, where as other have to be embedded with either the service provider or with the client.
+        </p>
+      </answer>
+    </faq>
+
+    <faq id="whats-bar">
+      <question>
+        What can it monitor?
+      </question>
+      <answer>
+        <ul>
+          <li>Apache CXF services and clients</li>
+          <li>JAXWS services and clients</li>
+          <li>ASP.NET services and clients</li>
+          <li>WCF services and clients</li>
+          <li>JBoss ESB deployments</li>
+          <li>Apache Qpid</li>
+          <li>Apache Axis 1.x services and clients</li>
+          <li>Java Servlets 2.5 and up</li>
+          <li>Apache Service Mix</li>
+          <li>Active MQ</li>
+          <li>Most operating systems</li>
+          <li>Processes that run on those operating systems</li>
+        </ul>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="install">
+
+    <title>Installation</title>
+
+    <faq id="how-install">
+      <question>
+        How do I install FGSMS server?
+      </question>
+      <answer>
+        <p>FGSMS comes as an all in one Tomcat based container. You can also deploy the war files to similar web app servers.</p>
+      </answer>
+    </faq>
+
+<faq id="how-install-agent">
+      <question>
+        How do I install FGSMS agent?
+      </question>
+      <answer>
+        <p>Depends on the agent. Some agents run embedded with the thing you're monitoring, others can run remotely from the fgsms server. </p>
+      </answer>
+    </faq>
+  </part>
+
+
+</faqs>

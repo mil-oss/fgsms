@@ -1,0 +1,42 @@
+
+  <application-policy name="AD">
+
+      <authentication>
+
+          <login-module code="org.jboss.security.auth.spi.LdapExtLoginModule" flag="required" >
+
+              <module-option name="java.naming.provider.url">ldap://pdc.yourdomain.com:389</module-option>
+
+	<!-- just a basic user account that can enumerate the ldap/ad -->
+              <module-option name="bindDN">cn=username,cn=Users,dc=yourdomain,dc=com</module-option>
+
+              <module-option name="bindCredential">changeit</module-option>
+	<!-- this is the OU of the users we want to be able to sign in
+              <module-option name="baseCtxDN">OU=Users,dc=yourdomain,dc=com</module-option>
+	<!-- use the standard windows username for logins -->
+              <module-option name="baseFilter">(sAMAccountName={0})</module-option>
+	<!-- this is the OU for groups -->
+              <module-option name="rolesCtxDN">OU=Users,dc=yourdomain,dc=com</module-option>
+
+              <module-option name="roleFilter">(sAMAccountName={0})</module-option>
+
+              <module-option name="roleAttributeID">memberOf</module-option>
+
+              <module-option name="roleAttributeIsDN">true</module-option>
+
+              <module-option name="roleNameAttributeID">cn</module-option>
+ 
+
+              <module-option name="Context.REFERRAL">follow</module-option>
+
+              <module-option name="throwValidateError">true</module-option>
+
+              <module-option name="searchScope">SUBTREE_SCOPE</module-option>
+
+              <module-option name="allowEmptyPasswords">true</module-option>
+
+         </login-module>
+     
+
+     </authentication>
+</application-policy>

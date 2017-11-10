@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+	  <groupId>org.mil-oss</groupId>
+	  <artifactId>fgsms-ws-notification</artifactId>
+	  <version>7.0.0</version>
+     </parent>
+
+	<properties>
+		<cxf.version>2.7.11</cxf.version>
+	</properties>
+
+     <artifactId>fgsms-wsnotification-broker-war</artifactId>
+     <packaging>war</packaging>
+     <name>fgsms WS-Notification Broker WAR</name>
+     <description>A deployable WSN broker</description>
+     <dependencies>
+	  <dependency>
+	       <groupId>${project.groupId}</groupId>
+	       <artifactId>fgsms-wsnotification-broker-jar</artifactId>
+	       <version>${project.version}</version>
+	  </dependency>
+          <dependency>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>fgsms-jaxws-agent</artifactId>
+               <version>${project.version}</version>
+          </dependency>
+     </dependencies>
+     <build>
+	  <finalName>fgsms.WSNBroker</finalName>
+     </build>
+
+
+
+     <profiles>
+
+
+	  <profile>
+	       <id>jboss510native</id>
+	       <activation>
+		    <activeByDefault>false</activeByDefault>
+	       </activation>
+	       <build>
+		    <plugins>
+			 <plugin>
+			      <groupId>org.apache.maven.plugins</groupId>
+			      <artifactId>maven-war-plugin</artifactId>
+			      <configuration>
+				   <webResources>
+					<resource>
+					     <directory>jboss510native</directory>
+					</resource>
+
+				   </webResources>
+			      </configuration>
+			 </plugin>
+		    </plugins>
+	       </build>
+	       <dependencies>
+				
+	       </dependencies>
+	  </profile>
+
+
+
+	  <profile>
+	       <id>jboss610cxf</id>
+	       <activation>
+		    <activeByDefault>false</activeByDefault>
+	       </activation>
+	       <build>
+		    <plugins>
+			 <plugin>
+			      <groupId>org.apache.maven.plugins</groupId>
+			      <artifactId>maven-war-plugin</artifactId>
+			      <configuration>
+				   <webResources>
+					<resource>
+					     <directory>jboss610cxf</directory>
+					</resource>
+
+				   </webResources>
+			      </configuration>
+			 </plugin>
+		    </plugins>
+	       </build>
+	       <dependencies>
+	       </dependencies>
+			
+	  </profile>
+
+	  <profile>
+	       <id>jboss610native</id>
+	       <activation>
+		    <activeByDefault>false</activeByDefault>
+	       </activation>
+	       <build>
+		    <plugins>
+			 <plugin>
+			      <groupId>org.apache.maven.plugins</groupId>
+			      <artifactId>maven-war-plugin</artifactId>
+			      <configuration>
+				   <webResources>
+					<resource>
+					     <directory>jboss610native</directory>
+					</resource>
+
+				   </webResources>
+			      </configuration>
+			 </plugin>
+		    </plugins>
+	       </build>
+	       <dependencies>
+		   </dependencies>
+
+	  </profile>
+
+	  <profile>
+	       <id>tomcat6cxf</id>
+	       <activation>
+		    <activeByDefault>true</activeByDefault>
+	       </activation>
+	       <build>
+		    <plugins>
+			 <plugin>
+			      <groupId>org.apache.maven.plugins</groupId>
+			      <artifactId>maven-war-plugin</artifactId>
+			      <configuration>
+				   <webResources>
+					<resource>
+					     <directory>tomcat6cxf</directory>
+					</resource>
+
+				   </webResources>
+			      </configuration>
+			 </plugin>
+			 
+		    </plugins>
+
+	       </build>
+
+	       <dependencies>
+
+		     <dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <scope>test</scope>
+	       </dependency>
+
+		    <dependency>
+			 <groupId>org.apache.cxf</groupId>
+			 <artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${cxf.version}</version>
+		    </dependency>
+		    <dependency>
+			 <groupId>org.apache.cxf</groupId>
+			 <artifactId>cxf-rt-rs-extension-providers</artifactId>
+				<version>${cxf.version}</version>
+		    </dependency>
+		    <dependency>
+			 <groupId>org.apache.cxf</groupId>
+			 <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+		    </dependency>
+
+		    <dependency>
+			 <groupId>xml-apis</groupId>
+			 <artifactId>xml-apis</artifactId>
+		    </dependency>
+
+
+		    <dependency>
+			 <groupId>org.apache.cxf</groupId>
+			 <artifactId>cxf-rt-transports-http</artifactId>
+			 <exclusions>
+			      <exclusion>
+				   <groupId>cglib</groupId>
+				   <artifactId>cglib</artifactId>
+			      </exclusion>
+			 </exclusions>
+				<version>${cxf.version}</version>
+		    </dependency>
+		    <dependency>
+			 <groupId>org.springframework</groupId>
+			 <artifactId>spring-context</artifactId>
+		    </dependency>
+		    <dependency>
+			 <groupId>org.springframework</groupId>
+			 <artifactId>spring-web</artifactId>
+		    </dependency>
+
+		    <dependency>
+			 <groupId>xerces</groupId>
+			 <artifactId>xercesImpl</artifactId>
+		    </dependency>
+
+		    <dependency>
+			 <groupId>xalan</groupId>
+			 <artifactId>xalan</artifactId>
+		    </dependency>
+
+
+
+		    <dependency>
+			 <groupId>commons-dbcp</groupId>
+			 <artifactId>commons-dbcp</artifactId>
+			 <version>1.2.2</version>
+		    </dependency>
+
+		    <dependency>
+			 <groupId>org.slf4j</groupId>
+			 <artifactId>slf4j-api</artifactId>
+		    </dependency>
+
+		    <dependency>
+			 <groupId>org.slf4j</groupId>
+			 <artifactId>slf4j-log4j12</artifactId>
+		    </dependency>
+
+	       </dependencies>
+	  </profile>
+     </profiles>
+
+</project>

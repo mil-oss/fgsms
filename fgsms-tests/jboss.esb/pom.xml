@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-tests</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <groupId>org.mil-oss</groupId>
+    <artifactId>jboss-esb</artifactId>
+    
+    <packaging>jar</packaging>
+
+    <name>JBoss ESB Integration Tests</name>
+    <description>Used for integration testing the FGSMS server</description>
+
+
+    <properties>
+        <version.jbossesb>4.12</version.jbossesb>
+    </properties>
+	<!-- start with run -Djboss.service.binding.set=ports-01 
+	
+    -->
+    
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>fgsms-test-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>fgsms-agentcore</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+	
+    </dependencies>
+
+    <build>    
+        <finalName>jboss.esb</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>true</skipSource>
+
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.miloss.fgsms.agents.esb.Main</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-files</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
+                                <get src="http://download.jboss.org/jbossesb/${version.jbossesb}/binary/jbossesb-server-4.12.zip" dest="jbossesb-server-${version.jbossesb}.zip" verbose="false" usetimestamp="true" />
+                                <!-- unzip it, add the agent, -->
+                                <unzip src="jbossesb-server-${version.jbossesb}.zip" dest="target/esb" />
+                                <copy file="../../fgsms-agents/fgsms-jboss-esb-agent/target/fgsms-jboss-esb-agent-${project.version}-jar-with-dependencies.jar" toFile="target/esb/jbossesb-server-${version.jbossesb}/server/default/lib/fgsms-jboss-esb-agent-${project.version}-jar-with-dependencies.jar" />
+                                <copy toDir="target/esb/jbossesb-server-${version.jbossesb}/samples/quickstarts/webservice_proxy_basic_monitored/">
+                                    <fileset dir="src/webservice_proxy_basic_monitored/" />
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+					 
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+
+        
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>jbossesb-server-4.12.zip</file>
+                                    <type>zip</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

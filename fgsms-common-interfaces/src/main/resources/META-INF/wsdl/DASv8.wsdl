@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:dataAccessService" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="urn:org:miloss:fgsms:services:interfaces:status" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:ns="urn:us:gov:ic:ism:v2" xmlns:opstat="urn:org:miloss:fgsms:services:interfaces:opstatus" name="DataAccessService" targetNamespace="urn:org:miloss:fgsms:services:interfaces:dataAccessService">
+	<wsdl:documentation>fgsms Data Access Service. Provides read access and basic analytical functions of fgsms collected data. UNCLASSIFIED
+	
+	</wsdl:documentation>
+	<wsdl:import namespace="urn:org:miloss:fgsms:services:interfaces:opstatus" location="operatingstatusA.wsdl"/>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults">
+			<xs:import schemaLocation="faults.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:faults"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:dataAccessService">
+			<xs:import schemaLocation="DASv8.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:dataAccessService"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageStats_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageStats"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageStats_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageStatsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageHostingStats_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageHostingStats"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageHostingStats_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageHostingStatsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageHostingStats_ServiceUnavailableExceptionFault_FaultMessage">
+		<wsdl:part name="detail" element="q3:ServiceUnavailableException" xmlns:q3="urn:org:miloss:fgsms:services:interfaces:faults"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageHostingStats_AccessDeniedExceptionFault_FaultMessage">
+		<wsdl:part name="detail" element="q4:AccessDeniedException" xmlns:q4="urn:org:miloss:fgsms:services:interfaces:faults"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetRecentMessageLogs_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetRecentMessageLogs"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetRecentMessageLogs_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetRecentMessageLogsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageLogsByRange_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageLogsByRange"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageLogsByRange_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageLogsByRangeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllOperationalStatusLog_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllOperationalStatusLog"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllOperationalStatusLog_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllOperationalStatusLogResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetOperationalStatusLog_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetOperationalStatusLog"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetOperationalStatusLog_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetOperationalStatusLogResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetSLAFaultRecordsLog_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetSLAFaultRecords"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetSLAFaultRecordsLog_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetSLAFaultRecordsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageTransactionLog_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageTransactionLog"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageTransactionLog_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageTransactionLogResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMonitoredServiceList_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMonitoredServiceList"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMonitoredServiceList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMonitoredServiceListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetServiceHostList_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetServiceHostList"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetServiceHostList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetServiceHostListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageStatsAll_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageStatsAll"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetPerformanceAverageStatsAll_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetPerformanceAverageStatsAllResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageTransactionLogDetails_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageTransactionLogDetails"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMessageTransactionLogDetails_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMessageTransactionLogDetailsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetDataCollectorList_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetDataCollectorList"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetDataCollectorList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetDataCollectorListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAlerts_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAlerts"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAlerts_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAlertsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAuditLog_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAuditLog"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAuditLog_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAuditLogResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_PurgePerformanceData_InputMessage">
+		<wsdl:part name="parameters" element="tns:PurgePerformanceData"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_PurgePerformanceData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PurgePerformanceDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetHistoricalTopicQueueDetails_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistoricalTopicQueueDetails"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetHistoricalTopicQueueDetails_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistoricalTopicQueueDetailsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetBrokerList_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetBrokerList"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetBrokerList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetBrokerListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetCurrentBrokerDetails_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetCurrentBrokerDetails"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetCurrentBrokerDetails_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetCurrentBrokerDetailsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetHistoricalBrokerDetails_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistoricalBrokerDetails"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetHistoricalBrokerDetails_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetHistoricalBrokerDetailsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAgentTypes_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentTypes"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAgentTypes_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentTypesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetThreadTransactions_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetThreadTransactions"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetThreadTransactions_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetThreadTransactionsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetQuickStats_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetQuickStats"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetQuickStats_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetQuickStatsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetQuickStatsAll_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetQuickStatsAll"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetQuickStatsAll_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetQuickStatsAllResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAuditLogsByTimeRange_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAuditLogsByTimeRange"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAuditLogsByTimeRange_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAuditLogsByTimeRangeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentMachineDataByDomain_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentMachineDataByDomain"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentMachineDataByDomain_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentMachineDataByDomainResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentMachineData_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentMachineData"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentMachineData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentMachineDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentProcessData_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentProcessData"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMostRecentProcessData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMostRecentProcessDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllMostRecentMachineAndProcessData_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllMostRecentMachineAndProcessData"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllMostRecentMachineAndProcessData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllMostRecentMachineAndProcessDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMachinePerformanceLogsByRange_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMachinePerformanceLogsByRange"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetMachinePerformanceLogsByRange_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMachinePerformanceLogsByRangeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetProcessPerformanceLogsByRange_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetProcessPerformanceLogsByRange"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetProcessPerformanceLogsByRange_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetProcessPerformanceLogsByRangeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetServiceDependencies_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetServiceDependencies"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetServiceDependencies_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetServiceDependenciesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllServiceDependencies_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllServiceDependencies"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_GetAllServiceDependencies_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllServiceDependenciesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_DeleteServiceDependency_InputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteServiceDependency"/>
+	</wsdl:message>
+	<wsdl:message name="dataAccessService_DeleteServiceDependency_OutputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteServiceDependencyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceUnavailableException">
+		<wsdl:part name="detail" element="faults:ServiceUnavailableException"/>
+	</wsdl:message>
+	<wsdl:message name="AccessDeniedException">
+		<wsdl:part name="detail" element="faults:AccessDeniedException"/>
+	</wsdl:message>
+	<wsdl:portType name="dataAccessService">
+		<wsdl:documentation>DataAccessService WSDL Interface</wsdl:documentation>
+		<wsdl:operation name="GetAlerts">
+			<wsdl:documentation>
+            Get Average Performance Statistics For a Service
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAlerts_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAlerts"/>
+			<wsdl:output message="tns:dataAccessService_GetAlerts_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAlertsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPerformanceAverageStats">
+			<wsdl:documentation>
+            Get Average Performance Statistics For a Service
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetPerformanceAverageStats_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStats"/>
+			<wsdl:output message="tns:dataAccessService_GetPerformanceAverageStats_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStatsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPerformanceAverageStatsAll">
+			<wsdl:documentation>
+            Get Average Performance Statistics For All Services - this will return performance stats for all services that the requestor has access to
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetPerformanceAverageStatsAll_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStatsAll"/>
+			<wsdl:output message="tns:dataAccessService_GetPerformanceAverageStatsAll_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStatsAllResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageTransactionLogDetails">
+			<wsdl:documentation>
+            Returns a specific message transaction log 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMessageTransactionLogDetails_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLogDetails"/>
+			<wsdl:output message="tns:dataAccessService_GetMessageTransactionLogDetails_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLogDetailsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPerformanceAverageHostingStats">
+			<wsdl:documentation>
+            Get Average Performance Statistics a Hosting Server
+            I.E. a machine hosting a web service that is monitored by fgsms
+            Requires Global Admin permissions
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetPerformanceAverageHostingStats_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageHostingStats"/>
+			<wsdl:output message="tns:dataAccessService_GetPerformanceAverageHostingStats_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageHostingStatsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetRecentMessageLogs">
+			<wsdl:documentation>
+            Returns all available message logs sorted by timestamp descending, i.e. the most recent first. options are offset (for paging) and record count 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetRecentMessageLogs_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetRecentMessageLogs"/>
+			<wsdl:output message="tns:dataAccessService_GetRecentMessageLogs_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetRecentMessageLogs"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageLogsByRange">
+			<wsdl:documentation>
+            Returns all available message logs for a given period of time
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMessageLogsByRange_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageLogsByRange"/>
+			<wsdl:output message="tns:dataAccessService_GetMessageLogsByRange_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageLogsByRangeResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSLAFaultRecords">
+			<wsdl:documentation>
+            Returns all available SLA fault records, transactional and nontransactional logs for a given period of time and service 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetSLAFaultRecordsLog_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetSLAFaultRecords"/>
+			<wsdl:output message="tns:dataAccessService_GetSLAFaultRecordsLog_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetSLAFaultRecordsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetOperationalStatusLog">
+			<wsdl:documentation>
+            Returns all available operational status change logs for a given period of time and service 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetOperationalStatusLog_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetOperationalStatusLog"/>
+			<wsdl:output message="tns:dataAccessService_GetOperationalStatusLog_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetOperationalStatusLogResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllOperationalStatusLog">
+			<wsdl:documentation>
+            Returns all available operational status change logs for a given period of time for all services 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAllOperationalStatusLog_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllOperationalStatusLog"/>
+			<wsdl:output message="tns:dataAccessService_GetAllOperationalStatusLog_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllOperationalStatusLogResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageTransactionLog">
+			<wsdl:documentation>
+            Return a specific message log for a given web service transaction
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMessageTransactionLog_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLog"/>
+			<wsdl:output message="tns:dataAccessService_GetMessageTransactionLog_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLogResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMonitoredServiceList">
+			<wsdl:documentation>
+            GetMonitoredServiceList
+            Returns 0 or more monitored services. 
+            This list of services is generated from the defined policies 
+            The list of soap actions is generated from the actually message transactions
+            meaning that if a particular action has never been executed, fgsms doesn't know about it.
+            Returns a listing of services along with there associated soap actions
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMonitoredServiceList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMonitoredServiceList"/>
+			<wsdl:output message="tns:dataAccessService_GetMonitoredServiceList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMonitoredServiceListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetServiceHostList">
+			<wsdl:documentation>
+            GetServiceHostList
+            Returns 0 or more host names of machines hosting monitored web services.
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetServiceHostList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceHostList"/>
+			<wsdl:output message="tns:dataAccessService_GetServiceHostList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceHostListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetDataCollectorList">
+			<wsdl:documentation>
+            GetDataCollectorList
+            Returns 0 or more host names of machines hosting data collector services
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetDataCollectorList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetDataCollectorList"/>
+			<wsdl:output message="tns:dataAccessService_GetDataCollectorList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetDataCollectorListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="PurgePerformanceData">
+			<wsdl:documentation>
+            Removes performance data for the specified service(s) and optionally for the specified time range.
+            If access is denied for any item, no changes will be made and a fault will be returned.
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_PurgePerformanceData_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/PurgePerformanceData"/>
+			<wsdl:output message="tns:dataAccessService_PurgePerformanceData_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/PurgePerformanceDataResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAuditLog">
+			<wsdl:documentation>
+            Returns the fgsms audit log for 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAuditLog_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLog"/>
+			<wsdl:output message="tns:dataAccessService_GetAuditLog_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLogResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetCurrentBrokerDetails">
+			<wsdl:documentation>
+            Returns the last known data set for a broker 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetCurrentBrokerDetails_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetCurrentBrokerDetails"/>
+			<wsdl:output message="tns:dataAccessService_GetCurrentBrokerDetails_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetCurrentBrokerDetailsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBrokerList">
+			<wsdl:documentation>
+            Returns the current list of monitored brokers and some general statistics on each broker, such as current total message counts as reported by the broker, average queue depth amonst all queues, etc. 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetBrokerList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetBrokerList"/>
+			<wsdl:output message="tns:dataAccessService_GetBrokerList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetBrokerListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistoricalBrokerDetails">
+			<wsdl:documentation>
+            Returns the historical data for a specific broker, such as average queue depth across all topics and queues, over the given period of time 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetHistoricalBrokerDetails_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalBrokerDetails"/>
+			<wsdl:output message="tns:dataAccessService_GetHistoricalBrokerDetails_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalBrokerDetailsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistoricalTopicQueueDetails">
+			<wsdl:documentation>
+            Returns the historical data for a specific topic or queue on a specific broker 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetHistoricalTopicQueueDetails_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalTopicQueueDetails"/>
+			<wsdl:output message="tns:dataAccessService_GetHistoricalTopicQueueDetails_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalTopicQueueDetailsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentTypes">
+			<wsdl:documentation>
+            Returns a listing of fgsms agents that have recorded data 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAgentTypes_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAgentTypes"/>
+			<wsdl:output message="tns:dataAccessService_GetAgentTypes_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAgentTypesResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetThreadTransactions">
+			<wsdl:documentation>
+            Returns a listing of related transaction IDs, given a thread transaction id 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetThreadTransactions_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetThreadTransactions"/>
+			<wsdl:output message="tns:dataAccessService_GetThreadTransactions_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetThreadTransactionsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetQuickStats">
+			<wsdl:documentation>
+            quickly returns statistics for a given service 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetQuickStats_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStats"/>
+			<wsdl:output message="tns:dataAccessService_GetQuickStats_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStatsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetQuickStatsAll">
+			<wsdl:documentation>
+            quickly returns statistics for all accessible services 
+        
+           
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetQuickStatsAll_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStatsAll"/>
+			<wsdl:output message="tns:dataAccessService_GetQuickStatsAll_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStatsAllResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAuditLogsByTimeRange">
+			<wsdl:documentation>
+            obtain audit logs by time range, requires global admin role 
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAuditLogsByTimeRange_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLogsByTimeRange"/>
+			<wsdl:output message="tns:dataAccessService_GetAuditLogsByTimeRange_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLogsByTimeRangeResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentMachineDataByDomain">
+			<wsdl:documentation>
+          get all machines in a given domain plus drive info
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMostRecentMachineDataByDomain_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineDataByDomain"/>
+			<wsdl:output message="tns:dataAccessService_GetMostRecentMachineDataByDomain_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineDataByDomainResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentMachineData">
+			<wsdl:documentation>
+           machine's perf data plus drive usage
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMostRecentMachineData_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineData"/>
+			<wsdl:output message="tns:dataAccessService_GetMostRecentMachineData_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineDataResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentProcessData">
+			<wsdl:documentation>
+           process's perf data 
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMostRecentProcessData_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentProcessData"/>
+			<wsdl:output message="tns:dataAccessService_GetMostRecentProcessData_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentProcessDataResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllMostRecentMachineAndProcessData">
+			<wsdl:documentation>
+             returns the most recent information for all machine and processes that the requestor has access to
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAllMostRecentMachineAndProcessData_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllMostRecentMachineAndProcessData"/>
+			<wsdl:output message="tns:dataAccessService_GetAllMostRecentMachineAndProcessData_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllMostRecentMachineAndProcessDataResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMachinePerformanceLogsByRange">
+			<wsdl:documentation>
+            returns performance and drive information logs of a specific machine records by uri and time range
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetMachinePerformanceLogsByRange_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMachinePerformanceLogsByRange"/>
+			<wsdl:output message="tns:dataAccessService_GetMachinePerformanceLogsByRange_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMachinePerformanceLogsByRangeResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessPerformanceLogsByRange">
+			<wsdl:documentation>
+returns performance logs of a specific process records by uri and time range
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetProcessPerformanceLogsByRange_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetProcessPerformanceLogsByRange"/>
+			<wsdl:output message="tns:dataAccessService_GetProcessPerformanceLogsByRange_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetProcessPerformanceLogsByRangeResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetServiceDependencies">
+			<wsdl:documentation>
+returns the service policy urls that the given service depends on
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetServiceDependencies_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceDependencies"/>
+			<wsdl:output message="tns:dataAccessService_GetServiceDependencies_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceDependenciesResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllServiceDependencies">
+			<wsdl:documentation>
+returns the service policy urls that all the service depends on
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_GetAllServiceDependencies_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllServiceDependencies"/>
+			<wsdl:output message="tns:dataAccessService_GetAllServiceDependencies_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllServiceDependenciesResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteServiceDependency">
+			<wsdl:documentation>
+removes a record of a specific service dependency
+            </wsdl:documentation>
+			<wsdl:input message="tns:dataAccessService_DeleteServiceDependency_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/DeleteServiceDependency"/>
+			<wsdl:output message="tns:dataAccessService_DeleteServiceDependency_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/DeleteServiceDependencyResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/ServiceUnavailableException"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:faults/AccessDeniedException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="dataAccessService" type="tns:dataAccessService">
+		<wsdl:documentation>DAS Binding</wsdl:documentation>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetPerformanceAverageStats">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStats" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPerformanceAverageStatsAll">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageStatsAll" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPerformanceAverageHostingStats">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetPerformanceAverageHostingStats" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageLogsByRange">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageLogsByRange" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetRecentMessageLogs">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetRecentMessageLogs" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageTransactionLog">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMessageTransactionLogDetails">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMessageTransactionLogDetails" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetOperationalStatusLog">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetOperationalStatusLog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSLAFaultRecords">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetSLAFaultRecords" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllOperationalStatusLog">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllOperationalStatusLog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMonitoredServiceList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMonitoredServiceList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetServiceHostList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceHostList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetDataCollectorList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetDataCollectorList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="PurgePerformanceData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/PurgePerformanceData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAlerts">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAlerts" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAuditLog">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBrokerList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetBrokerList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCurrentBrokerDetails">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetCurrentBrokerDetails" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistoricalBrokerDetails">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalBrokerDetails" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetHistoricalTopicQueueDetails">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetHistoricalTopicQueueDetails" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetThreadTransactions">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetThreadTransactions" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentTypes">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAgentTypes" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetQuickStats">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStats" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetQuickStatsAll">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetQuickStatsAll" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAuditLogsByTimeRange">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAuditLogsByTimeRange" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentMachineDataByDomain">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineDataByDomain" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentMachineData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentMachineData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMostRecentProcessData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMostRecentProcessData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMachinePerformanceLogsByRange">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetMachinePerformanceLogsByRange" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllMostRecentMachineAndProcessData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllMostRecentMachineAndProcessData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessPerformanceLogsByRange">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetProcessPerformanceLogsByRange" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteServiceDependency">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/DeleteServiceDependency" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllServiceDependencies">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetAllServiceDependencies" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetServiceDependencies">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataAccessService/dataAccessService/GetServiceDependencies" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="dataAccessService">
+		<wsdl:documentation>Data Access Service for fgsms</wsdl:documentation>
+		<wsdl:port name="DASPort" binding="tns:dataAccessService">
+			<wsdl:documentation>Port definition, be sure to update the execution address as necessary.</wsdl:documentation>
+			<soap:address location="http://localhost:8080/fgsmsServices/DAS"/>
+		</wsdl:port>
+		<wsdl:port name="opStatusServiceBinding" binding="opstat:opStatusServiceBinding">
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

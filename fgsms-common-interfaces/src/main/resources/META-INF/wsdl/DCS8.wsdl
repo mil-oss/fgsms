@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:dataCollector" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:opstat="urn:org:miloss:fgsms:services:interfaces:opstatus" xmlns:pcs="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" name="DataCollectorService" targetNamespace="urn:org:miloss:fgsms:services:interfaces:dataCollector">
+	<wsdl:documentation>fgsms Data Collector Service. Primary collection point for record message transaction. UNCLASSIFIED
+	
+	
+	</wsdl:documentation>
+	<wsdl:import namespace="urn:org:miloss:fgsms:services:interfaces:opstatus" location="operatingstatusA.wsdl"/>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults">
+			<xs:import schemaLocation="faults.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:faults"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration">
+			<xs:import schemaLocation="PCS8.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:dataCollector">
+			<xs:import schemaLocation="DCS8.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:dataCollector"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="dataCollectorService_AddData_InputMessage">
+		<wsdl:part name="parameters" element="tns:AddData"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AddDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddStatisticalData_InputMessage">
+		<wsdl:part name="parameters" element="tns:AddStatisticalData"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddStatisticalData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AddStatisticalDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddMoreData_InputMessage">
+		<wsdl:part name="parameters" element="tns:AddMoreData"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddMoreData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AddMoreDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddMachineAndProcessData_InputMessage">
+		<wsdl:part name="parameters" element="tns:AddMachineAndProcessData"/>
+	</wsdl:message>
+	<wsdl:message name="dataCollectorService_AddMachineAndProcessData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:AddMachineAndProcessDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceUnavailableException">
+		<wsdl:part name="detail" element="faults:ServiceUnavailableException"/>
+	</wsdl:message>
+	<wsdl:message name="AccessDeniedException">
+		<wsdl:part name="detail" element="faults:AccessDeniedException"/>
+	</wsdl:message>
+	<wsdl:portType name="DCS">
+		<wsdl:documentation>DCS Port Type</wsdl:documentation>
+		<wsdl:operation name="AddData">
+			<wsdl:documentation>AddData, adds a single transaction record to the database</wsdl:documentation>
+			<wsdl:input message="tns:dataCollectorService_AddData_InputMessage"/>
+			<wsdl:output message="tns:dataCollectorService_AddData_OutputMessage"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddDataServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddDataAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="AddMoreData">
+			<wsdl:documentation>AddData, adds multiple transaction record to the database</wsdl:documentation>
+			<wsdl:input message="tns:dataCollectorService_AddMoreData_InputMessage"/>
+			<wsdl:output message="tns:dataCollectorService_AddMoreData_OutputMessage"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMoreDataServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMoreDataAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="AddStatisticalData">
+			<wsdl:documentation>AddData, adds a set of statistics records from a broker to the database</wsdl:documentation>
+			<wsdl:input message="tns:dataCollectorService_AddStatisticalData_InputMessage"/>
+			<wsdl:output message="tns:dataCollectorService_AddStatisticalData_OutputMessage"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddStatisticalDataServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddStatisticalDataAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="AddMachineAndProcessData">
+			<wsdl:documentation>AddMachineAndProcessData, adds a set of performance records from a set of monitored processes from a given machine</wsdl:documentation>
+			<wsdl:input message="tns:dataCollectorService_AddMachineAndProcessData_InputMessage"/>
+			<wsdl:output message="tns:dataCollectorService_AddMachineAndProcessData_OutputMessage"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMachineAndProcessDataServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMachineAndProcessDataAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DCSBinding" type="tns:DCS">
+		<wsdl:documentation>DCS Binding</wsdl:documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!--<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>-->
+		<wsdl:operation name="AddData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="AddStatisticalData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddStatisticalData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="AddMoreData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMoreData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="AddMachineAndProcessData">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddMachineAndProcessData" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DataCollectorService">
+		<wsdl:documentation>DCS Service</wsdl:documentation>
+		<wsdl:port name="DCSPort" binding="tns:DCSBinding">
+			<wsdl:documentation>DCS Port</wsdl:documentation>
+			<soap:address location="http://localhost:8080/fgsmsServices/DCS"/>
+		</wsdl:port>
+		<wsdl:port name="opStatusServiceBinding" binding="opstat:opStatusServiceBinding">
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

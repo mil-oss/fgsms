@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+	  <groupId>org.mil-oss</groupId>
+	  <artifactId>fgsms-server</artifactId>
+	  <version>7.0.0</version>
+     </parent>
+     <artifactId>fgsms-ui-common</artifactId>
+     <packaging>bundle</packaging>
+     <name>fgsms UI Common</name>
+     <description>User interface functions</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.15</version>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+	  <dependency>
+	       <groupId>junit</groupId>
+	       <artifactId>junit</artifactId>
+	       <scope>test</scope>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.mil-oss</groupId>
+	       <artifactId>fgsms-common-interfaces</artifactId>
+	       <version>${project.parent.version}</version>
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.mil-oss</groupId>
+	       <artifactId>fgsms-common</artifactId>
+	       <version>${project.parent.version}</version>
+	  </dependency>
+			 
+	  <dependency>
+	       <groupId>cewolf</groupId>
+	       <artifactId>cewolf</artifactId>
+	  </dependency>
+	  <dependency>
+	       <groupId>batik</groupId>
+	       <artifactId>batik-awt-util</artifactId>
+	       <version>1.6</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>batik</groupId>
+	       <artifactId>batik-dom</artifactId>
+	       <version>1.6</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>batik</groupId>
+	       <artifactId>batik-svggen</artifactId>
+	       <version>1.6</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>batik</groupId>
+	       <artifactId>batik-util</artifactId>
+	       <version>1.6</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>batik</groupId>
+	       <artifactId>batik-xml</artifactId>
+	       <version>1.6</version>
+	  </dependency>
+	  <dependency>
+	       <groupId>commons-logging</groupId>
+	       <artifactId>commons-logging</artifactId>
+	  </dependency>
+	  <!-- 18 -->
+	  <dependency>
+	       <groupId>org.jfree</groupId>
+	       <artifactId>jcommon</artifactId>
+		    
+	  </dependency>
+
+	  <dependency>
+	       <groupId>org.jfree</groupId>
+	       <artifactId>jfreechart</artifactId>
+	  </dependency>
+	  <dependency>
+	       <groupId>org.apache.juddi</groupId>
+	       <artifactId>juddi-client</artifactId>
+
+	  </dependency>
+	  <dependency>
+	       <groupId>org.apache.httpcomponents</groupId>
+	       <artifactId>httpclient</artifactId>
+	  </dependency>
+	  <dependency>
+	       <groupId>dom4j</groupId>
+	       <artifactId>dom4j</artifactId>
+	       <version>1.6.1</version>
+	  </dependency>
+       
+	  <dependency>
+	       <groupId>javax.servlet</groupId>
+	       <artifactId>servlet-api</artifactId>
+	       <scope>provided</scope>
+	  </dependency>
+          <dependency>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>fgsms-sla-processor</artifactId>
+               <version>${project.version}</version>
+               <scope>test</scope>
+          </dependency>
+          <dependency>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>fgsms-uddi-publisher</artifactId>
+               <version>${project.version}</version>
+               <scope>test</scope>
+          </dependency>
+          <dependency>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>fgsms-common-test-utils</artifactId>
+               <version>${project.version}</version>
+               <scope>test</scope>
+          </dependency>
+     </dependencies>
+</project>

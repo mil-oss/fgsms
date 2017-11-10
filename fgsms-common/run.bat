@@ -1,0 +1,1 @@
+java -cp dist\fgsms.Common.jar;..\external\xercesImpl.jar;..\external\log4j\log4j-1.2.16.jar org.miloss.fgsms.common.Main en 

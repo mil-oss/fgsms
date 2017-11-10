@@ -1,0 +1,1326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by army (USACERDEC) -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:pcs="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:sla="urn:org:miloss:fgsms:services:interfaces:sla" xmlns:ns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:opstat="urn:org:miloss:fgsms:services:interfaces:opstatus" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" name="PolicyConfigurationService" targetNamespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration">
+	<wsdl:documentation>fgsms Policy Configuration Service. UNCLASSIFIED
+	
+	</wsdl:documentation>
+	<wsdl:import namespace="urn:org:miloss:fgsms:services:interfaces:opstatus" location="operatingstatusA.wsdl"/>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration">
+			<xs:import schemaLocation="PCS8.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults">
+			<xs:import schemaLocation="faults.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:faults"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="policyConfigurationService_GetServicePolicy_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetServicePolicy"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetServicePolicy_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetServicePolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetUDDIDataPublishServicePolicies_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetUDDIDataPublishServicePolicies"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetUDDIDataPublishServicePolicies_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetUDDIDataPublishServicePoliciesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetServicePolicy_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetServicePolicy"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetServicePolicy_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetServicePolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetGlobalPolicy_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetGlobalPolicy"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetGlobalPolicy_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetGlobalPolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetGlobalPolicy_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetGlobalPolicy"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetGlobalPolicy_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetGlobalPolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_ElevateSecurityLevel_InputMessage">
+		<wsdl:part name="parameters" element="tns:ElevateSecurityLevel"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_ElevateSecurityLevel_OutputMessage">
+		<wsdl:part name="parameters" element="tns:ElevateSecurityLevelResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_DeleteServicePolicy_InputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteServicePolicy"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_DeleteServicePolicy_OutputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteServicePolicyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetServicePermissions_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetServicePermissions"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetServicePermissions_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetServicePermissionsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetServicePermissions_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetServicePermissions"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetServicePermissions_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetServicePermissionsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAdministrators_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAdministrators"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAdministrators_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAdministratorsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAdministrator_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetAdministrator"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAdministrator_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetAdministratorResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMyEmailAddress_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMyEmailAddress"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMyEmailAddress_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMyEmailAddressResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetMyEmailAddress_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetMyEmailAddress"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetMyEmailAddress_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetMyEmailAddressResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAlertRegistrations_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAlertRegistrations"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAlertRegistrations_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAlertRegistrationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAlertRegistrations_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetAlertRegistrations"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAlertRegistrations_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetAlertRegistrationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAvailableAlertRegistrations_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAvailableAlertRegistrations"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAvailableAlertRegistrations_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAvailableAlertRegistrationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetMailSettings_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetMailSettings"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetMailSettings_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetMailSettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMailSettings_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMailSettings"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMailSettings_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMailSettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAgentPrinicples_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentPrinicples"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAgentPrinicples_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentPrinicplesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAgentPrinicples_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetAgentPrinicples"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetAgentPrinicples_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetAgentPrinicplesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetCredentials_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetCredentials"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetCredentials_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetCredentialsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_ClearCredentials_InputMessage">
+		<wsdl:part name="parameters" element="tns:ClearCredentials"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_ClearCredentials_OutputMessage">
+		<wsdl:part name="parameters" element="tns:ClearCredentialsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_RemoveGeneralSettings_InputMessage">
+		<wsdl:part name="parameters" element="tns:RemoveGeneralSettings"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_RemoveGeneralSettings_OutputMessage">
+		<wsdl:part name="parameters" element="tns:RemoveGeneralSettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetGeneralSettings_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetGeneralSettings"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetGeneralSettings_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetGeneralSettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetGeneralSettings_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetGeneralSettings"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetGeneralSettings_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetGeneralSettingsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetDomainList_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetDomainList"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetDomainList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetDomainListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMachinesByDomain_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMachinesByDomain"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMachinesByDomain_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMachinesByDomainResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetProcessesListByMachine_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetProcessesListByMachine"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetProcessesListByMachine_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetProcessesListByMachineResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetProcessListByMachine_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetProcessListByMachine"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_SetProcessListByMachine_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetProcessListByMachineResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMonitoredItemsByMachine_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetMonitoredItemsByMachine"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetMonitoredItemsByMachine_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetMonitoredItemsByMachineResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_CreateAgentAction_InputMessage">
+		<wsdl:part name="parameters" element="tns:CreateAgentAction"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_CreateAgentAction_OutputMessage">
+		<wsdl:part name="parameters" element="tns:CreateAgentActionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_DeleteAgentActions_InputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteAgentActions"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_DeleteAgentActions_OutputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteAgentActionsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_UpdateAgentAction_InputMessage">
+		<wsdl:part name="parameters" element="tns:UpdateAgentAction"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_UpdateAgentAction_OutputMessage">
+		<wsdl:part name="parameters" element="tns:UpdateAgentActionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAgentActionsByMachine_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentActionsByMachine"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetAgentActionsByMachine_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAgentActionsByMachineResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_RegisterPlugin_InputMessage">
+		<wsdl:part name="parameters" element="tns:registerPlugin"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_RegisterPlugin_OutputMessage">
+		<wsdl:part name="parameters" element="tns:registerPluginResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_UnregisterPlugin_InputMessage">
+		<wsdl:part name="parameters" element="tns:unregisterPlugin"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_UnregisterPlugin_OutputMessage">
+		<wsdl:part name="parameters" element="tns:unregisterPluginResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetPluginInformation_InputMessage">
+		<wsdl:part name="parameters" element="tns:getPluginInformation"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetPluginInformation_OutputMessage">
+		<wsdl:part name="parameters" element="tns:getPluginInformationResponse"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetPluginList_InputMessage">
+		<wsdl:part name="parameters" element="tns:getPluginList"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetPluginList_OutputMessage">
+		<wsdl:part name="parameters" element="tns:getPluginListResponse"/>
+	</wsdl:message>
+	
+	
+		<wsdl:message name="policyConfigurationService_GetPluginHtmlFormattedDisplay_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetPluginHtmlFormattedDisplay"/>
+	</wsdl:message>
+	<wsdl:message name="policyConfigurationService_GetPluginHtmlFormattedDisplay_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetPluginHtmlFormattedDisplayResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ServiceUnavailableException">
+		<wsdl:part name="detail" element="faults:ServiceUnavailableException"/>
+	</wsdl:message>
+	<wsdl:message name="AccessDeniedException">
+		<wsdl:part name="detail" element="faults:AccessDeniedException"/>
+	</wsdl:message>
+	<wsdl:portType name="PCS">
+		<wsdl:documentation>&#xD;
+            IPolicyConfigurationService WSDL Interface, provides&#xD;
+           </wsdl:documentation>
+		<wsdl:operation name="GetServicePolicy">
+			<wsdl:documentation>&#xD;
+            GetServicePolicy returns a policy for a specific service&#xD;
+            If a policy does not exist, a default policy will be returned, specifically&#xD;
+            monitor successes and failures, no identity monitoring, no message recording&#xD;
+            Default Data retension (dataTTL) = 30 days&#xD;
+            Required Permission: none&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetServicePolicy_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePolicy"/>
+			<wsdl:output message="tns:policyConfigurationService_GetServicePolicy_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePolicyResponse"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePolicyAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePolicyServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetUDDIDataPublishServicePolicies">
+			<wsdl:documentation>&#xD;
+            GetServicePolicy returns a list of service policies for all services that are&#xD;
+            configured to data publication to uddi&#xD;
+            &#xD;
+            Note: Only information pretaining to uddi publication is returned,&#xD;
+            other data such as SLA or UserIdentification policies are not returned.&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetUDDIDataPublishServicePolicies_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetUDDIDataPublishServicePolicies"/>
+			<wsdl:output message="tns:policyConfigurationService_GetUDDIDataPublishServicePolicies_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetUDDIDataPublishServicePoliciesResponse"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetUDDIDataPublishServicePoliciesAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetUDDIDataPublishServicePoliciesServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetServicePolicy">
+			<wsdl:documentation>&#xD;
+            Saves a service policy to the configuration database&#xD;
+            Any existing policy for this service is deleted and replaced with the parameter.&#xD;
+            User Permissions are not affected&#xD;
+            Required Permission: write&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetServicePolicy_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePolicy"/>
+			<wsdl:output message="tns:policyConfigurationService_SetServicePolicy_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePolicyResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePolicyServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePolicyAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetGlobalPolicy">
+			<wsdl:documentation>&#xD;
+            Sets the global policy values&#xD;
+            Required permission: global admin role&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetGlobalPolicy_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGlobalPolicy"/>
+			<wsdl:output message="tns:policyConfigurationService_SetGlobalPolicy_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGlobalPolicyResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGlobalPolicyServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGlobalPolicyAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetGlobalPolicy">
+			<wsdl:documentation>&#xD;
+            requires the global policy values&#xD;
+            required permission: none&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetGlobalPolicy_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGlobalPolicy"/>
+			<wsdl:output message="tns:policyConfigurationService_GetGlobalPolicy_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGlobalPolicyResponse"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGlobalPolicyAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGlobalPolicyServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteServicePolicy">
+			<wsdl:documentation>&#xD;
+            Deletes a service policy to the configuration database and optionally, performance data&#xD;
+            Required Permission: administer&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_DeleteServicePolicy_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteServicePolicy"/>
+			<wsdl:output message="tns:policyConfigurationService_DeleteServicePolicy_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteServicePolicyResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteServicePolicyServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteServicePolicyAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetServicePermissions">
+			<wsdl:documentation>&#xD;
+            Sets the permissions on a particular service object&#xD;
+            Removes the current permission set and replaces it with the requested permission set&#xD;
+            Required Permission: administer&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetServicePermissions_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePermissions"/>
+			<wsdl:output message="tns:policyConfigurationService_SetServicePermissions_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePermissionsResponse"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePermissionsAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePermissionsServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetServicePermissions">
+			<wsdl:documentation>&#xD;
+            Returns the permission set from a service object&#xD;
+            Required Permission: read&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetServicePermissions_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePermissions"/>
+			<wsdl:output message="tns:policyConfigurationService_GetServicePermissions_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePermissionsResponse"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePermissionsAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePermissionsServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAdministrators">
+			<wsdl:documentation>&#xD;
+            Returns a list of users with the global admin role&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetAdministrators_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAdministrators"/>
+			<wsdl:output message="tns:policyConfigurationService_GetAdministrators_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAdministratorsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAdministratorsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAdministratorsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAdministrator">
+			<wsdl:documentation>&#xD;
+            Sets a list of users with the global admin role&#xD;
+            All previous entries are removed&#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetAdministrator_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAdministrator"/>
+			<wsdl:output message="tns:policyConfigurationService_SetAdministrator_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAdministratorResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAdministratorServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAdministratorAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ElevateSecurityLevel">
+			<wsdl:documentation>&#xD;
+           Elevate the security classification level of fgsms &#xD;
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_ElevateSecurityLevel_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ElevateSecurityLevel"/>
+			<wsdl:output message="tns:policyConfigurationService_ElevateSecurityLevel_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ElevateSecurityLevel"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ElevateSecurityLevelServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ElevateSecurityLevelAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMyEmailAddress">
+			<wsdl:documentation>&#xD;
+            Get my email address 
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetMyEmailAddress_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMyEmailAddress"/>
+			<wsdl:output message="tns:policyConfigurationService_GetMyEmailAddress_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMyEmailAddressResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMyEmailAddressServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMyEmailAddressAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetMyEmailAddress">
+			<wsdl:documentation>&#xD;
+            sets my email address
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetMyEmailAddress_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMyEmailAddress"/>
+			<wsdl:output message="tns:policyConfigurationService_SetMyEmailAddress_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMyEmailAddressResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMyEmailAddressServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMyEmailAddressAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAlertRegistrations">
+			<wsdl:documentation>&#xD;
+          returns a list of SLAs that I am subscribed to
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetAlertRegistrations_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAlertRegistrations"/>
+			<wsdl:output message="tns:policyConfigurationService_GetAlertRegistrations_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAlertRegistrationsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAlertRegistrationsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAlertRegistrationsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAlertRegistrations">
+			<wsdl:documentation>&#xD;
+          sets a list of SLAs that I am subscribed to
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetAlertRegistrations_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAlertRegistrations"/>
+			<wsdl:output message="tns:policyConfigurationService_SetAlertRegistrations_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAlertRegistrationsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAlertRegistrationsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAlertRegistrationsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAvailableAlertRegistrations">
+			<wsdl:documentation>&#xD;
+          returns a list of all SLAs that the current user can subscribe to
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetAvailableAlertRegistrations_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAvailableAlertRegistrations"/>
+			<wsdl:output message="tns:policyConfigurationService_GetAvailableAlertRegistrations_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAvailableAlertRegistrationsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAvailableAlertRegistrationsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAvailableAlertRegistrationsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentPrinicples">
+			<wsdl:documentation>&#xD;
+          returns a list of all user principles with the agent role, these are the service level users that are allowed to request and set new service policies and to add data to fgsms via the DCS
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetAgentPrinicples_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicples"/>
+			<wsdl:output message="tns:policyConfigurationService_GetAgentPrinicples_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicplesResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicplesServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicplesAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetAgentPrinicples">
+			<wsdl:documentation>&#xD;
+          seta list of all user principles with the agent role, these are the service level users that are allowed to request and set new service policies and to add data to fgsms via the DCS
+          all previous records are replaced
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetAgentPrinicples_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAgentPrinicples"/>
+			<wsdl:output message="tns:policyConfigurationService_SetAgentPrinicples_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAgentPrinicplesResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicplesServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicplesAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMailSettings">
+			<wsdl:documentation>&#xD;
+          gets mail settings that are used to deliver email for SLA alerts
+         
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetMailSettings_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMailSettings"/>
+			<wsdl:output message="tns:policyConfigurationService_GetMailSettings_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMailSettingsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMailSettingsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMailSettingsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetMailSettings">
+			<wsdl:documentation>&#xD;
+          sets a list of all settings that are used for SLA email alerts
+          requires global admin rights
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetMailSettings_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMailSettings"/>
+			<wsdl:output message="tns:policyConfigurationService_SetMailSettings_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMailSettingsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMailSettingsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMailSettingsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<!-- RC6 additions -->
+		<wsdl:operation name="RemoveGeneralSettings">
+			<wsdl:documentation>&#xD;
+         removes 1 or more specific settings, previous values are discarded
+          requires global admin rights
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_RemoveGeneralSettings_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RemoveGeneralSettings"/>
+			<wsdl:output message="tns:policyConfigurationService_RemoveGeneralSettings_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RemoveGeneralSettingsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RemoveGeneralSettingsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SRemoveGeneralSettingsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetGeneralSettings">
+			<wsdl:documentation>&#xD;
+         set 1 or more specific settings, previous values are overwritten, values not specified in the request, if present, remain represent
+          requires global admin rights
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetGeneralSettings_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGeneralSettings"/>
+			<wsdl:output message="tns:policyConfigurationService_SetGeneralSettings_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGeneralSettingsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGeneralSettingsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGeneralSettingsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetGeneralSettings">
+			<wsdl:documentation>&#xD;
+          sets a list of all settings that are used for fgsmss services
+          requires global admin rights or agent
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetGeneralSettings_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGeneralSettings"/>
+			<wsdl:output message="tns:policyConfigurationService_GetGeneralSettings_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGeneralSettingsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGeneralSettingsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGeneralSettingsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetCredentials">
+			<wsdl:documentation>&#xD;
+         sets authentication credentials for a specific service, typically used for connecting and obtaining status information only
+          requires write access permissions to the specified url
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetCredentials_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetCredentials"/>
+			<wsdl:output message="tns:policyConfigurationService_SetCredentials_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetCredentialsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetCredentialsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetCredentialsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ClearCredentials">
+			<wsdl:documentation>&#xD;
+         removes authentication credentials for a specific service, typically used for connecting and obtaining status information only
+          requires write access permissions to the specified url
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_ClearCredentials_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ClearCredentials"/>
+			<wsdl:output message="tns:policyConfigurationService_ClearCredentials_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ClearCredentialsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ClearCredentialsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ClearCredentialsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetDomainList">
+			<wsdl:documentation>&#xD;
+		provides infrastructure information, a list of all domains associated with this fgsms instance
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetDomainList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetDomainList"/>
+			<wsdl:output message="tns:policyConfigurationService_GetDomainList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetDomainListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetDomainListServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetDomainListAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMachinesByDomain">
+			<wsdl:documentation>&#xD;
+		provides infrastructure information, a list of all known hostnames associated with this fgsms instance
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetMachinesByDomain_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMachinesByDomain"/>
+			<wsdl:output message="tns:policyConfigurationService_GetMachinesByDomain_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMachinesByDomainResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMachinesByDomainServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMachinesByDomainAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessesListByMachine">
+			<wsdl:documentation>&#xD;
+		provides infrastructure information, a list of all known processes associated with a given hostname
+		requires global admin rights
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetProcessesListByMachine_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetProcessesListByMachine"/>
+			<wsdl:output message="tns:policyConfigurationService_GetProcessesListByMachine_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetProcessesListByMachineResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetProcessesListByMachineServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetProcessesListByMachineAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetProcessListByMachine">
+			<wsdl:documentation>&#xD;
+		provides infrastructure information, a list of all known processes associated with a given hostname
+		requires agent rights
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_SetProcessListByMachine_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetProcessListByMachine"/>
+			<wsdl:output message="tns:policyConfigurationService_SetProcessListByMachine_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetProcessListByMachineResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetProcessListByMachineServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetProcessListByMachineAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetMonitoredItemsByMachine">
+			<wsdl:documentation>&#xD;
+		provides infrastructure information, a list of all known processes associated with a given hostname
+		requires agent rights
+          As of RC6
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetMonitoredItemsByMachine_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMonitoredItemsByMachine"/>
+			<wsdl:output message="tns:policyConfigurationService_GetMonitoredItemsByMachine_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMonitoredItemsByMachineResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMonitoredItemsByMachineServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMonitoredItemsByMachineAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateAgentAction">
+			<wsdl:documentation>&#xD;
+		creates a new administrative action for an agent to perform. Only applies to machine policy items, requires global administrative rights
+		
+          As of 6.3
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_CreateAgentAction_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/CreateAgentAction"/>
+			<wsdl:output message="tns:policyConfigurationService_CreateAgentAction_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/CreateAgentActionResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/CreateAgentActionServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/CreateAgentActionAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteAgentActions">
+			<wsdl:documentation>&#xD;
+		deletes a list of administrative action for an agent to perform. Only applies to machine policy items, requires global administrative rights. actions must be in the completed state
+		
+          As of 6.3
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_DeleteAgentActions_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteAgentActions"/>
+			<wsdl:output message="tns:policyConfigurationService_DeleteAgentActions_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteAgentActionsResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteAgentActionsServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteAgentActionsAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAgentAction">
+			<wsdl:documentation>&#xD;
+		updates a administrative action for an agent to perform. Only applies to machine policy items, requires agent rights. 
+		
+          As of 6.3
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_UpdateAgentAction_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UpdateAgentAction"/>
+			<wsdl:output message="tns:policyConfigurationService_UpdateAgentAction_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UpdateAgentActionResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UpdateAgentActionServiceUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UpdateAgentActionAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentActionsByMachine">
+			<wsdl:documentation>&#xD;
+		returns a list of all administrative action for an agent to perform by machine. Only applies to machine policy items, requires agent or global administrative rights. 
+		
+          As of 6.3
+           &#xD;
+            &lt;param name="request"&gt;&lt;/param&gt;&#xD;
+            &lt;returns&gt;&lt;/returns&gt;</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetAgentActionsByMachine_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentActionsByMachine"/>
+			<wsdl:output message="tns:policyConfigurationService_GetAgentActionsByMachine_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentActionsByMachineResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentActionsByMachineUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentActionsByMachineAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="RegisterPlugin">
+			<wsdl:documentation>Registers the existence of a new plugin. Note: this does not actually copy files to the server(s), since 6.3</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_RegisterPlugin_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RegisterPlugin"/>
+			<wsdl:output message="tns:policyConfigurationService_RegisterPlugin_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RegisterPluginResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RegisterPluginUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RegisterPluginAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UnregisterPlugin">
+			<wsdl:documentation>Unregisters the existence of a plugin. Plugins cannot be unregistered if they are currently referenced from an existing policy. Note: this does not actually remove files to the server(s), since 6.3</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_UnregisterPlugin_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UnregisterPlugin"/>
+			<wsdl:output message="tns:policyConfigurationService_UnregisterPlugin_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UnregisterPluginResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UnregisterPluginUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UnregisterPluginAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPluginList">
+			<wsdl:documentation>Gets the current plugin list, since 6.3</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetPluginList_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginList"/>
+			<wsdl:output message="tns:policyConfigurationService_GetPluginList_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginListResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginListUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginListAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPluginInformation">
+			<wsdl:documentation>Gets detailed information about a plugin, since 6.3</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetPluginInformation_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginInformation"/>
+			<wsdl:output message="tns:policyConfigurationService_GetPluginInformation_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginInformationResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginInformationUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginInformationAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+			<wsdl:operation name="GetPluginHtmlFormattedDisplay">
+			<wsdl:documentation>Gets Html Formatted display of a given instance of a plugin, since 6.3</wsdl:documentation>
+			<wsdl:input message="tns:policyConfigurationService_GetPluginHtmlFormattedDisplay_InputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginHtmlFormattedDisplay"/>
+			<wsdl:output message="tns:policyConfigurationService_GetPluginHtmlFormattedDisplay_OutputMessage" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginHtmlFormattedDisplayResponse"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginHtmlFormattedDisplayUnavailableExceptionFault"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginHtmlFormattedDisplayAccessDeniedExceptionFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PCSBinding" type="tns:PCS">
+		<wsdl:documentation>PCS binding</wsdl:documentation>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetServicePolicy">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePolicy" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetUDDIDataPublishServicePolicies">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetUDDIDataPublishServicePolicies" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetServicePolicy">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePolicy" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetGlobalPolicy">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGlobalPolicy" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetGlobalPolicy">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGlobalPolicy" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteServicePolicy">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteServicePolicy" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetServicePermissions">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetServicePermissions" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetServicePermissions">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetServicePermissions" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAdministrators">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAdministrators" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ElevateSecurityLevel">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ElevateSecurityLevel" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAdministrator">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAdministrator" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMyEmailAddress">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMyEmailAddress" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetMyEmailAddress">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMyEmailAddress" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAlertRegistrations">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAlertRegistrations" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAlertRegistrations">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAlertRegistrations" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAvailableAlertRegistrations">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAvailableAlertRegistrations" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentPrinicples">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentPrinicples" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetAgentPrinicples">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetAgentPrinicples" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMailSettings">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMailSettings" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetMailSettings">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetMailSettings" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<!-- begin rc6 additions-->
+		<wsdl:operation name="GetGeneralSettings">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetGeneralSettings" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetGeneralSettings">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetGeneralSettings" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveGeneralSettings">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RemoveGeneralSettings" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetCredentials">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetCredentials" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ClearCredentials">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/ClearCredentials" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetDomainList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetDomainList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMachinesByDomain">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMachinesByDomain" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessesListByMachine">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetProcessesListByMachine" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetProcessListByMachine">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/SetProcessListByMachine" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetMonitoredItemsByMachine">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetMonitoredItemsByMachine" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAgentActionsByMachine">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetAgentActionsByMachine" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAgentAction">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UpdateAgentAction" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteAgentActions">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/DeleteAgentActions" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateAgentAction">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/CreateAgentAction" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RegisterPlugin">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/RegisterPlugin" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPluginInformation">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginInformation" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UnregisterPlugin">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/UnregisterPlugin" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPluginList">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginList" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+			<wsdl:operation name="GetPluginHtmlFormattedDisplay">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:policyConfiguration/policyConfigurationService/GetPluginHtmlFormattedDisplay" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PolicyConfigurationService">
+		<wsdl:documentation>PCS Service</wsdl:documentation>
+		<wsdl:port name="PCSPort" binding="tns:PCSBinding">
+			<wsdl:documentation>PCS Port</wsdl:documentation>
+			<soap:address location="http://localhost:8080/fgsmsServices/PCS"/>
+		</wsdl:port>
+		<wsdl:port name="opStatusServiceBinding" binding="opstat:opStatusServiceBinding">
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

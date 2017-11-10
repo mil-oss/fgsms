@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-parent</artifactId>
+        <version>7.0.0</version>
+    </parent>
+
+    <artifactId>apache-juddi</artifactId>
+    
+    <packaging>pom</packaging>
+
+    <name>Pre-Configured Apache Juddi</name>
+    <description>Used for integration testing, grabs the juddi-distro/tomcat/war file and repackages it</description>
+
+    <profiles>
+        <profile>
+            <id>http</id>
+            <activation>
+                <property>
+                    <name>forceHttp</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>download-files</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <taskdef classpathref="maven.plugin.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
+                                        <get src="http://dist.apache.org/repos/dist/release/juddi/juddi/3.3.3/juddi-distro-3.3.3.zip" dest="juddi-distro-3.3.3.zip" verbose="false" usetimestamp="true" />
+                                        <echo message="unzipping file" />
+                                        <unzip src="juddi-distro-3.3.3.zip" dest="${project.build.directory}/" />
+                                        <copy file="${project.build.directory}/../catalina.sh" toFile="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/bin/catalina.sh" overwrite="true" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/juddi-gui/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/juddiv3replication/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/examples/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/manager/" />
+								
+                                
+                                    </tasks>
+                                </configuration>
+                            </execution>
+					 
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>https</id>
+            <activation>
+                
+                <property>
+                    <name>!forceHttp</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>download-files</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <taskdef classpathref="maven.plugin.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
+                                        <get src="https://dist.apache.org/repos/dist/release/juddi/juddi/3.3.3/juddi-distro-3.3.3.zip" dest="juddi-distro-3.3.3.zip" verbose="false" usetimestamp="true" />
+                                        <echo message="unzipping file" />
+                                        <unzip src="juddi-distro-3.3.3.zip" dest="${project.build.directory}/" />
+                                        <copy file="${project.build.directory}/../catalina.sh" toFile="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/bin/catalina.sh" overwrite="true" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/juddi-gui/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/juddiv3replication/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/examples/" />
+                                        <delete dir="${project.build.directory}/juddi-distro-3.3.3/juddi-tomcat-3.3.3/webapps/manager/" />
+								
+                                
+                                    </tasks>
+                                </configuration>
+                            </execution>
+					 
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+            
+    </profiles>
+    <build>    
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+
+        
+           
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+        
+        </plugins>
+    </build>
+
+</project>

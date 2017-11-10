@@ -1,0 +1,612 @@
+# FGSMS SDK Introduction
+
+### NOTICE: This article is a work in process. It may be inaccurate or unclear. Pull requests welcome.
+
+FGSMS has a number of extensibility points. This article discusses how use some
+of those built in extensibility points to create plugins, effectively extending
+FGSMS. Also discussed is the Command Line Interface (CLI) app, making custom
+agents, interacting with the FGSMS SOAP services and some of the sample 
+plugins that in the source base for FSGSM. Finally, the guts of the FGSMS 
+database is discussed along with examples on exporting data
+for running your own queries, reports, number crunching, etc.
+
+# FGSMS Example Apps and the CLI
+FGSMS comes with an Example "SDK" application, which enables you to perform a 
+number of tasks that are not easy to do in the UI, such as bulk operations.
+
+## What's Included?
+
+As a job aid, a sample console application simply named, FGSMS.CLI provides access 
+to the FGSMS services. To access it, build the project using maven (or use 
+the version included with the distro) from the samples/FGSMS.SDK folder, then 
+run it, entering a username and password to access the server. 
+Note: PKI/CAC authentication is not currently supported by the FGSMS.SDK console app
+
+
+# FGSMS's extensibility points
+FGSMS provides a number of extensibility points, plus you're free to
+directly access the XML SOAP web services. The rest of this articles
+focuses on the following.
+
+ * How to create your own SLA Rules and Actions
+ * How to extend or write your own FGSMS web service
+ * How to create your own agents
+ * How to programmatically export data
+ * How to write your own application to receive alerts
+ * How to write your own federation target
+
+
+## Extended Service Level Agreements
+FGSMS defines an SLA as a set of <a href="apidocs/org/miloss/fgsms/services/interfaces/policyconfiguration/SLARuleGeneric.html">rules</a>
+that can be evaluated to true or false that represent some condition that requires an 
+<a href="apidocs/org/miloss/fgsms/services/interfaces/policyconfiguration/SLAAction.html">actions</a> to be triggered.
+
+Each rule must implement the <a href="apidocs/org/miloss/fgsms/plugins/sla/SLARuleInterface.html">
+SLA Rule Interface</a> and each Action must implement the
+<a href="apidocs/org/miloss/fgsms/plugins/sla/SLAActionInterface.html">SLA Action Interface</a>.
+
+Each action and rule set must also be also be registered in the
+Configuration Database. Registration is processed via the UI or via web
+service.
+
+Each rule and action is also responsible for providing help information to the user
+which defines what configuration settings are required on a per service, per SLA
+basis, validation rules. Globally define settings can also be used.
+
+Each rule has a `appliesTo` method, which defines whether or not this rule can
+process data of a given <a href="apidocs/org/miloss/fgsms/services/interfaces/policyconfiguration/ServicePolicy.html">service policy</a>.
+
+### Sample Project (maven based)
+
+In your favorite IDE and build system, create a new JAR project
+
+Required dependencies:
+
+    <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>fgsms-common-interfaces</artifactId>
+        <version>${project.version}</version>
+        <scope>provided<scope>
+    </dependency>
+    <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>fgsms-common</artifactId>
+        <version>${project.version}</version>
+        <scope>provided<scope>
+    </dependency>
+
+Add a class and have it implement one of the following:
+
+ - SLA Action: org.miloss.fgsms.plugins.sla.SLAActionInterface
+ - SLA Rule: org.miloss.fgsms.plugins.sla.SLARuleInterface
+
+Practical example: <a href="https://github.com/mil-oss/fgsms/tree/master/samples/fgsms.Examples.SLAPlugin">Example SLA Plugin</a>
+
+
+### How to deploy it
+
+1. Stop Tomcat if it's running alredy
+2. Copy the jar, along with any other dependencies to the following location: `tomcat/webapps/fgsmsServices/WEB-INF/lib`
+3. Start Tomcat
+
+If your FGSMS instance is clustered or load balanced, make sure you repeat this for all
+FGSMS servers.
+
+
+### How to register the plugin
+
+Each plugin must be registered in the database
+
+Note: this will eventually be (web enabled)[https://github.com/mil-oss/fgsms/issues/50] but for now
+
+Register your plugin in the database via psql
+
+    psql
+    \c fgsms_config
+    INSERT INTO plugins(  classname, displayname,appliesto)    VALUES ('your.package.Classname', 'A title for your plugin','type');`
+
+
+where `type` MUST be one of the following
+ - SLA_ACTION
+ - SLA_RULE
+ - FEDERATION_PUBLISH
+
+### Attaching it to a service policy for testing.
+
+This can be done via the user interface. Once the plugin is registered, it is immediately
+available for users via the web interface using the following procedure
+
+1. Login
+2. Click on `Manage`
+3. Click a service on the drop down box
+4. Click on `Service Level Agreements`
+5. Click on `Add Service Level Agreement`
+6. In the popup modal, select a rule (perhaps this is your new one)
+7. In the popup modal, click `Add` to add an action (perhaps this is your new action)
+8. Click `Done`
+9. Click `Done`
+10. Finally click `Save Policy`
+
+The policy should now be active. Agents use a caching mechanism so it may take
+several minutes for the policy to full in effect. All that's left to do is to 
+trigger the SLA to fire on the service that was selected in step 3.
+
+### Notable APIs
+
+#### org.miloss.fgsms.common.DBSettingsLoader
+
+Usage: server side
+Tasks: provide access to getting and setting globally defined configuration settings
+from the database. 
+From the UI: Administration > General Settings
+Example:
+
+    KeyNameValueEnc settings = DBSettingsLoader.GetPropertiesFromDB(true, "SDK.Samples.AlertRecieverService", "URL");
+    if (settings != null && settings.getKeyNameValue() != null && settings.getKeyNameValue().getPropertyValue() != null) {
+        //do something creative here
+    }
+
+#### org.miloss.fgsms.common.AuditLogger
+
+Usage: server side
+Tasks: log important events to the database
+From the UI: Administration > Audit Logs
+Example:
+
+
+    //MessageContext is option, but if defined and not null, the requestor's IP
+    //is added to the log message, usually only used from a web service call
+    AuditLogger.LogItem("java class", "method", "username", "message", new SecurityWrapper(), javax.xml.ws.handler.MessageContext);
+    //OR
+    AuditLogger.LogItem("java class", "method", "username", "message", "UNCLASSIFIED", null);
+
+## Write your own federation target
+
+FGSMS defines an Federation Target as a 
+<a href="xref/org/miloss/fgsms/plugins/federation/FederationInterface.html">
+plugin</a> that is used to periodically share, transmit or otherwise publish
+information via some mechanism. A user with global administrator privileges can
+define how often this occurs. For convenience, aggergated statistics is provide
+
+Currently, FGSMS provides a single federation plugin, the UDDI Publisher. On
+a periodic basis, it attaches statistics from the `Statistics Aggregator` to
+registered UDDI 'Binding Templates'
+
+### Sample Project (maven based)
+
+In your favorite IDE and build system, create a new JAR project
+
+Required dependencies:
+
+- groupId: `org.mil-oss`, artifactId: `fgsms.Common.Interfaces`, scope: `provided`
+- groupId: `org.mil-oss`, artifactId: `fgsms.Common` scope: `provided`
+
+Add a class and have it implement one of the following:
+
+ - Federation Interface: `org.miloss.fgsms.plugins.federation.FederationInterface`
+
+Practical example: <a href="https://github.com/mil-oss/fgsms/tree/master/fgsms.UddiPublisher">UDDI Publisher</a>
+
+### How to deploy it
+
+Follow the SLA plugin instructions.
+
+### How to register the plugin
+
+Follow the SLA plugin instructions.
+
+### Attaching it to a service policy for testing.
+
+This can be done via the user interface. Once the plugin is registered, it is immediately
+available for users via the web interface using the following procedure
+
+1. Login
+2. Click on `Manage`
+3. Click a service on the drop down box
+4. Click on `Federation`
+5. Click on `Add Federation Target`
+6. In the popup modal, select the plugin (this is your new one)
+7. Click `Done`
+8. Finally click `Save Policy`
+
+The policy should now be active. The Federation Publisher is an FGSMS Quartz job.
+By default, it fires every 30 seconds. All you have to do at this point is wait.
+
+## Extending an existing FGSMS service
+
+The two most likely candidates for extending the FGSMS Web Services are
+the Data Access Service and the Reporting Service.
+
+The Reporting Service’s interface includes report types for wide array
+of report types, however not all of them were implemented because these
+specific reports did not add any valuable information or insight to
+service usage or simply did not have much meaning. The reports available
+in FGSMS represent the best ideas that were available at its inception.
+Surely, users will have custom needs that can be met with the available
+information that is recorded. Creative developers should have no problem
+creating and/or extending FGSMS.
+
+The Data Access Service includes the capability to pull common queries
+from the recorded data set, such as average response time over a given
+date/time range. In the future, there may be custom needs for displaying recorded
+information and queries in the Web GUI. In this case, the DAS is the prime
+candidate for extending.
+
+When extending FGSMS, always be sure to enforce the permission structure provided. 
+Current access control rules are defined [here](permissions.html).
+On each service invocation, several 
+key actions are performed:
+
+ * Identify the requestor and log using the audit logger.
+ * Validate the inbound message for correctness and classification level. 
+ * Assert that the requestor has the required permission for this method.
+ * Execute and format the response. Note: Always used parameterized SQL queries.
+ * Append the defined classification level from the FGSMS database.
+
+By following the existing code patterns and by using the included utility functions,
+ adding new functions and functionality should be fairly easy.
+
+# FGSMS Agents
+
+There are a number of different types of FGSMS Agents that you can build depending on the type of “thing” that you wish to monitor and what kind of data you need to record.
+
+There are several types:
+
+ * Transactional Service Agents, requires the monitoring of individual transactions
+ * Status Agents, requires the monitoring of the availability of a particular component or item on a periodic basis
+ * Statistics Agents, records statistics about a component and its status on a periodic basis
+ * Process and Operating System agents, monitors a computer and/or processes running on the computer.
+
+Important: FGSMS uses unique URLs as an identifier for items stored within the database. When creating your own agent, ensure that the URL uniquely identifies a service on a machine. This can be accomplished with (Java, IPAddressUtility.ModifyURL, .NET MessageProcessor.ModifyURL). Port numbers and protocols must be specified
+
+Example: `Protocol:\\hostname:port\path`
+
+In general, the hostname is preferred over other means if identification, such as an IP address. 
+This is due to machines having multiple addresses. Certain services are load 
+balanced, which means certain URL patterns can map to more than one machine.
+MAC addresses are also not super useful in this case, as computers often have
+more than one network card, each with a unique address.
+
+## Transactional Web Service Agents
+
+Agents need two things in order to function, a service policy (from the PCS) and 
+an available Data Collection Service (DCS). In other words, any custom agent must 
+function as a web service client to the PCS and DCS as well as have the ability 
+to obtain the required information from the framework, web service, or container 
+of the thing that is to be monitored. The “thing” that we are monitoring can be 
+anything, so long as a request and response can be paired with each other. In 
+order to access the FGSMS services, you will need credentials with the `agent`
+role defined. In general, the process is as follows:
+
+ * Some transaction is observed
+ * Request and cache the policy for this object from the PCS
+ * Uses the policy to reduce and/or filter data
+ * Send data to the DCS
+ * Update the cached service policy as needed
+
+Normally, all of these functions are performed by the Message Processor and the 
+associated framework behind it. The agent's is merely responsible for collecting 
+the information and handing it over to the Message Processor.
+
+FGSMS provides transactional agents for most XML/SOAP web service frameworks. If 
+you have a specific need and whatever it is that you are monitoring fits into 
+this profile, then you may wish to adapter the existing components to meet your needs.
+
+### Workflow Diagrams
+
+In order to help aid others in how all of stuff works together, we put together a few
+flow diagrams using ['https://www.draw.io/'](https://www.draw.io/) online tooling.
+
+!['Embedded Service Monitoring Workflow'](images/server-side-monitoring.png)
+
+(Above) - This diagram outlines the general workflow for the capture of transactional 
+data, caching, processing and transmitting back to the FGSMS server and services.
+
+!['Embedded Client and Service Monitoring Workflow'](images/client-and-service-monitoring.png)
+
+(Above) - This (simplified) diagram outlines the general workflow for monitoring
+traffic from both a client and from the service's perspective. It is simplified as
+the interactions from client side message processor to the server are omitted. It is the
+same workflow except the directions are different: inbound response vs inbound request.
+
+!['FGSMS server data processing'](images/transaction-data-storage-and-processing.png)
+
+(Above) - This diagram outlines the general process for the capture of data from
+embedded agents. Once data is received and authorized, it's it stored in the database.
+It is in handed off to the Service Level Agreement engine to process for any defined
+rules for further processing. Only transactional rules are processed as this time.
+Non-transactional rules, such as MTBF are handled by the NT SLA Processor in a quartz
+job.
+
+## Roll Your Own (Transactional) Web Service .NET Agent
+
+The transactional agent is triggered on a per service execution basis which collects and passes information along to a thread safe Message Processor (MP) in the class named: `FGSMS.Agents.MessageProcessor` in `FGSMS.NETAgents.dll`
+
+The Message Processor's job is to obtain service policies, filter out unwanted data and to send this data to the DCS. This action is invoked in a separate running thread in order to prevent additional lag for the monitored service’s transactions.  The MessageProcessor requires you to have all of the information available at the same time (see “ProcessMessage” , 3 overloads). If your framework or object does not make both the request and the response available at the same time, you can use the AgentMessageTable class to use as a holder to temporarily cache the request object as long as you remove the cached data eventually.
+
+If your agent also sees SOAP traffic, you must manually filter out data related to FGSMS to prevent recursive looping.
+
+.NET agents load their configuration either from a specific application config file or from the machien config file. (It's good idea to test both scenarios).
+
+## Roll Your Own (Transactional) Web Service Java Agents
+
+In the Java implementation for JAX-WS based services, FGSMS agents use JAX-WS for interacting with the DCS and PCS services. 
+
+The agents are triggered on a per service execution basis and collect and pass information along to a thread safe Message Processor (MP). The MP’s job is to obtain service policies, filter out unwanted data and to send this data to the DCS. This action is invoked in a separate running thread in order to prevent additional lag for the monitored service’s transactions. 
+
+In Java, the MessageProcessor is located within FGSMS.AgentCore.jar
+
+Recusive Looping, as a warning, all FGSMS agents MUST filter out (ignore) messages with a SOAP action that correlates to the DCS services’s AddData. 
+
+`urn:org:miloss:fgsms:services:interfaces:dataCollector/dataCollectorService/AddData`
+
+Not performing this task will end up with a never ending loop. As an implementation note, when running Jboss on a Windows platform, SOAPAction is reported without quotation marks. On Linux, SOAPAction is reported WITH quotation marks.
+
+## Status Agents
+
+Status Agents can report the status of any arbitrary "thing" and is typically performed on a periodic basis which provides a heartbeat. Status Agents, such as the Status Bueller, report back status information to FGSMS on a periodic basis. 
+
+The FGSMS server contains a number of different web services, including the Status Service, which is the primary interaction point of a a status agent. In order to make your own status agent, you need to be able to:
+
+ * Determine the status of something
+ * Determine a unique URI identifier of the something
+
+If you can get this information, then all you have to do is hand over this information to <a href="http://mil-oss.github.io/fgsms/apidocs/org/miloss/fgsms/agentcore/StatusHelper.html">Status Helper</a>, which will take are of notifing the FGSMS server.
+
+Reference `fgsms.AgentCore.jar`
+
+
+
+## Statistical Brokers Agents
+
+Broker agents can either run on the FGSMS server or embedded on the same machine hosting the broker. Agents running the server store data directly to the database. Embedded agents report statistics of message brokers by providing an availability status and general statistics for queues or topics to the FGSMS Data Collector Service. 
+
+Please reference the `fgsms.QpidPyAgent` for an example of an embedded agent.
+Please reference the `fgsms.QpidJMXAgent` for an example of an agent running on the FGSMS server.
+Please reference the `fgsms.SMX` for an example of an agent running on the FGSMS server.
+
+
+## Web Services as a Self Reporting Agents
+
+If you, as a service developer do not wish to use any of the pre-built agents or have a unique situation and/or technology, you want to look into having your service be a self reporting agent. Essentially, this means that your service would need to be able to keep track of timing information for each public method that is executed (and that you which to report data on) and adhere to the FGSMS service policies.
+
+At this stage, you would essentially be building and integrating your own embedded agent. In either case, it is recommended that you at least look at the pre-built service agents classes as examples. By following the logic, it should be fairly easy to build your own solution.
+The vast majority of all necessary logic is within fgsms.AgentCore.jar for Java and FGSMS.NETAgent.dll for .NET, specifically in the
+Message Process and the Helper classes.
+
+## Making an agent that runs within the FGSMS server
+
+Making an agent that runs on the server enables you to have a few more options. Web service communication is not an issue and you'll have
+direct access to the databases. Most of the logic can be borrowed/leveraged/stolen/whatever from the existing agents and from within the Helper classes within fgsms.SLAProcessor.jar. This provides a number of the Status functions via direct database access. These same functions are mimicked in fgsms.AgentCore in various classes.
+
+Here's a few of the server based agents.
+
+- Apache Service Mix (uses JMX to remote connect and capture statistics)
+- Apache Qpid (uses JMX to remote connect and capture statistics)
+- Bueller (pings websites/services with HTTP GET)
+- HornetQ (uses JMX to remote connect and capture statistics)
+
+
+## Making your agent work
+
+If order for your agent to work, it'll need a few things to get going.
+
+ * An fgsms-agent.properties config file (Java only) or an app/web/machine.config for .NET
+ * Credentials for accessing the FGSMS server with the "agent" role. Credentials can be
+   * Username/password (which are expected to be encrypted)
+   * A client PKI (X509) certificate
+
+Care should be taken to help optimize memory and bandwidth usage especially when 
+auditing a message flow (i.e. when the request and/or response is being recorded).
+ In the existing agents, requests for adding transactional data are packaged 
+together into message no larger than 1 megabyte. In addition, request/response
+ messages, when being recorded, should be capped by adhering to the policy that 
+is returned by the PCS. The default maximum is 1024000 bytes which means that 
+messages larger than this should be truncated by the agent (meaning the message 
+reported back to FGSMS, not the actual service message).
+
+Agents should NEVER cause a service to fail. 
+
+## The Persistent Agent
+
+In order to support disconnected operations, FGSMS's agents can store collected 
+data to disk. The stored information is encrypted. When connectivity is 
+reestablished, this "queue" can then be purged. It's the persistent agents's 
+job to monitor the offline storage location at to periodically attempt to reestablish 
+connectivity to the FGSMS server. The persistent agent, only works for 
+transactional web service traffic.
+
+## Extending the Operating System agent
+
+The FGSMS OS agent uses the Hyperic SIGAR API to collect data in a generic fashion
+across many types of operating systems. It has a few extensibility points worth
+mentioning.
+
+### Sensor data capture
+
+The sensor interface enables you to attach sensor data to the collected machine
+data. Currently, there is little to no processing done on sensor data at the 
+FGSMS server. No reports, no CSV exports, nothing. The data is simply stored there.
+
+Add `org.mil-oss:fgsms-os-agent` as a `provided` dependency and implement
+the interface `org.miloss.fgsms.osagent.sensor.ISensorProvider`.
+
+To run it, edit the `sensor.properties` files that comes with OS Agent and add
+your class to it. Finally, add your jar and it's dependencies to the classpath
+of the OS Agent and fire it up.
+
+# Database and Stored Procedures
+
+Java implementation of FGSMS is specifically targeted for use with PostgreSQL. 
+It may work without modification on other databases, but every DBMS is different
+ and modifications will most likely be necessary if porting the FGSMS to 
+something other than PostgreSQL.
+
+Currently, the only store procedures in use are triggers on the RawData table 
+of the FGSMS Performance database which updates various tallies to speed up the 
+user interface and Data Access Service.
+
+At one point in time, some experiments were been performed to port FGSMS to Microsoft’s SQL Server. It’s possible but the problem lies in Postgres’s case sensitivity and escape characters. Postgres uses double quotes where as Microsoft uses square brackets. A find and replace may solve this issue and will be considered in the future (or maybe OpenJPA).
+
+
+## Programmatically export data
+
+<a href="https://github.com/mil-oss/fgsms/tree/master/fgsms-samples/fgsms.ExportDataFromViaWebService">Exporting from the database directly</a>
+
+<a href="https://github.com/mil-oss/fgsms/tree/master/fgsms-samples/fgsms.ExportDataFromViaWebService">Exporting via web service calls</a>
+
+
+
+# Editing the User Interface of FGSMS
+
+FGSMS has one web interface – FGSMSBootstrap which utilizes the jQuery Ui; however, FGSMSBootstrap is built upon a twitter bootstrap package for a more updated look that is meant to be more aesthetically pleasing for the user. 
+
+## FGSMS Bootstrap (User Interface)
+
+Most of FGSMS Bootstrap’s pages are categorized within their `src/main/webapp` folder.
+Because the interfaces use ajax heavily, all new pages are inserted within the “mainpane” div in the index.jsp, making the “back” 
+button on the browser useless (it would redirect the user to the login page). 
+In this UI, we have a breadcrumbing system located in the footer section of `index.jsp`
+to keep track of the user’s progress through our website. This issue is documented [here](https://github.com/mil-oss/fgsms/issues/137).
+
+Most functionality of breadcrumbing and ajaxing are in `main.js`. Of them
+all, the three noteworthy ones are: loadpage, postBack, and postBackReRender.
+
+Loadpage: load the page within the specific div container
+postBack: post back to the server with the data and write out the response to the resultBar. 
+postBackReRender: post back to the server and rerender the current page
+
+In order to update the breadcrumbing, add an optional last parameter that
+tracks the “parent” pages or the history of the user’s progress.
+
+Also, it is important to note that all pages are relative to index.jsp
+file which contains the outline of the pages (header/mainpane/footer+breadcrumbing).
+So, for instance, if you are editing the “js/scheduledReports/scheduledReportsScript.js”
+and are trying to access the “reporting/scheduledReportsEditFunctionality.jsp”
+file, you do not have to write “…/…/reporting/scheduledReportsEditFunctionality.jsp,”
+you can simply write “reporting/scheduledReportsEditFunctionality.jsp.”
+
+Be wary of mixing jQuery UI within twitter bootstrap as not everything is
+compatible. For more information on twitter bootstrap specifically, go
+to the homepage at: http://twitter.github.com/bootstrap/
+
+## Notable APIs - Java
+
+ * FGSMS.Common has a multitude of commonly used functions within FGSMS. The following is a list of useful APIs that you may need if extending FGSMS to meet a new need.
+ * UserIdentUtil – Provides access control decisions based on the permission structure within the configuration database
+ * Utility – Provides a number of string and conversion tools, database connection functions, audit logging, IP utilities and encryption tools
+ * FGSMS.AgentCore – This jar provides all of the necessary functionality to monitor traffic and report back to the FGSMS services.
+ * Message Processor – receives messages from agents and controls the threading of the DataPusher
+ * DataPusher – handles configuration loading, dynamic discovery, service policy loading and enforcement, and acts as the call back mechanism to the FGSMS services (PCS and DCS)
+ * .NET - Message Processor (Transactional Agents)
+ * .NET - ConfigLoader loads configuration information and client proxies for all of the FGSMS services
+ * .NET - Windows Service Monitor - Provides monitoring of Windows Services, Hard Drive space and IIS Applications Pools. Provides a good example of setting the status of items.
+ * Java - Message Processor (Transactional Agents)
+ * Java - Utility, contains encryption/decryption classes, various helper functions
+ * Java - IPAddressUtility, resolves urls to 'modified' unique URLs that are used by FGSMS
+ * Java - UserIdentityUtil, identifies user names from context variables and provides access control decisions for FGSMS's services
+ * Java - *Helper, provides wrappers around accessing the FGSMS services that provide some degree of reliabilty
+ * Java - Agent Core, provides a wide array of helper functions for writing your own agents
+
+## Known Issues and Limitations
+
+The FGSMS .NET WCF Agent is triggered after security processing is
+completed, thus any faults related to security validation failure will
+not be logged or alerted.
+
+
+## Updating the look and feel of the user interface (Bootstrap)
+
+FGSMS uses [Twitter's Bootstrap](http://getbootstrap.com/2.3.2/) for UI theming. There's tons of plugins
+available for it and changing the color scheme is fairly easy to do. Just remember
+it's still on version v2 and not the latest and greatest.
+
+
+# Using the FGSMS Web Services
+
+To make integration easier, all of the WSDLs, XSDs, and interface code are fairly well documented.
+
+You'll want to use the following maven artifact for a quick win.
+
+    groupId `org.mil-oss`
+    artifactId `fgsms-common-interfaces`
+
+    
+Where to go from here really depends on your use case but the CLI is a great place
+to start.
+
+## Building an agent
+
+    groupId `org.mil-oss`
+    artifactId `fgsms-agent-core`
+
+And see the *Helper* classes as well as the `MessageProcessor`.
+
+The Policy Configuration Service provides access to both global and service 
+specific policies as well as viewing and changing permissions. Consult WSDL and 
+code documentation for the permissions required to execute each action.
+
+The Data Collector Service (DCS) acts as a collection point for service 
+invocation metrics. It is exclusively accessed by authorized FGSMS Agents. 
+
+## Looking to extract data
+
+The Policy Configuration Service provides access to both global and service 
+specific policies as well as viewing and changing permissions. Consult WSDL and 
+code documentation for the permissions required to execute each action.
+
+The Data Access Service (DAS) provides access to most common queries, such as a
+verage performance statistics over a given period of time. Consult WSDL and code 
+documentation for the permissions required to execute each action. 
+
+The Status Service (SS) will tell you what is up and what is not on demand.
+
+The Reporting Service provides the ability to custom tailor a HTML encoded 
+report for a set of services, over a given period of time, for a given set of 
+report types. 
+
+The Automated Reporting Service provides the ability to define reporting jobs 
+and to retrieve the listing of completed reports that are available for pickup 
+via the Report Fetcher servlet.
+
+[Access control rules apply](permissions.html)
+
+# More Examples
+
+## Write your own application to receive alerts
+
+TODO This section is incomplete.
+
+Alerts in FGSMS are processed via two components
+
+- Transactional SLA Processor - handles all directly measured SLA Rules
+- Non-transactional SLA Processor - handles all aggregated/calculated over time SLA Rules
+
+When an SLA rule is triggered (resolves to true), the SLA Actions are processed. FGSMS has a number of 
+SLA Actions built via the plugin system. Here's a few examples.
+
+- Send a <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wsdm">WSDM</a> alert via [WS-Notification](https://www.oasis-open.org/committees/wsn/)
+- Send a <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wsdm">WSDM</a> alert via [HornetQ](http://hornetq.jboss.org/) JMS broker
+- Send a <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=wsdm">WSDM</a> alert via [AMQP Qpid](https://qpid.apache.org/) JMS broker
+
+If you read between the lines, all of these are publish and subscribe mechanisms. We didn't want to reinvent the wheel.
+Here's the general steps required (which will vary based on the alerting mechanism you choose).
+
+1. Configure FGSMS's server (User interface > Administrator > General Settings)
+2. Edit the service policy for the service you want alerts on.
+3. Add a SLA to that service policy with the actions set to your desired action plugin
+4. Save it
+5. Develop an application that communicates to the same alerting mechanism as the action plugin.
+6. Subscribe to that action plugin's pub/sub mechanism
+7. Test by purposely causing the SLA Rule from step 3 to trigger.
+
+There are many examples using a number of mechanisms in the `fgsms.tests` directory, labeled as `Smoke Tests`.
+These tests are ran on every build in order to ensure that everything is functional via the alerting plugins.
+As such, they are great starting points for an example on how to integrate with and test against the
+various systems FGSMS interoperates with.
+
+# Future documentation
+
+- Create a new Quartz Job, such as a polling agent, or something that exports data on a periodic basis.
+- Add new functionality to the user interface
+

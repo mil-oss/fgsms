@@ -1,0 +1,14 @@
+﻿<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="FGSMS.WebParts.RedLightGreenLightWebPart, FGSMS.WebParts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=eb2f31c22dc30917" />
+      <importErrorMessage>Cannot import Web Part.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Red Light Green Light</property>
+        <property name="Description" type="string">Provides the current operating status of all services in FGSMS that you have access to.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

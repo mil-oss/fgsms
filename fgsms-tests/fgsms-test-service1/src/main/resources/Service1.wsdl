@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="HelloWorldESMWCF1.xsd" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="HelloWorldESMWCF.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_WorkingGetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:WorkingGetData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_WorkingGetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WorkingGetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CallDependantService_InputMessage">
+    <wsdl:part name="parameters" element="tns:CallDependantService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CallDependantService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CallDependantServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CallWCFDependantService_InputMessage">
+    <wsdl:part name="parameters" element="tns:CallWCFDependantService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CallWCFDependantService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CallWCFDependantServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_FailingGetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:FailingGetData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_FailingGetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FailingGetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_LongRunningGetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:LongRunningGetData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_LongRunningGetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LongRunningGetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RandomWorkingMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomWorkingMethod" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RandomWorkingMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomWorkingMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OneWayMethodMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:OneWayMethodMethod" />
+  </wsdl:message>
+  
+  
+  
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="WorkingGetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/WorkingGetData" message="tns:IService1_WorkingGetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/WorkingGetDataResponse" message="tns:IService1_WorkingGetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CallDependantService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CallDependantService" message="tns:IService1_CallDependantService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CallDependantServiceResponse" message="tns:IService1_CallDependantService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CallWCFDependantService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CallWCFDependantService" message="tns:IService1_CallWCFDependantService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CallWCFDependantServiceResponse" message="tns:IService1_CallWCFDependantService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FailingGetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/FailingGetData" message="tns:IService1_FailingGetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/FailingGetDataResponse" message="tns:IService1_FailingGetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LongRunningGetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/LongRunningGetData" message="tns:IService1_LongRunningGetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LongRunningGetDataResponse" message="tns:IService1_LongRunningGetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomWorkingMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RandomWorkingMethod" message="tns:IService1_RandomWorkingMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RandomWorkingMethodResponse" message="tns:IService1_RandomWorkingMethod_OutputMessage" />
+    </wsdl:operation>
+	
+	  <wsdl:operation name="OneWayMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/OneWayMethod" message="tns:IService1_OneWayMethodMethod_InputMessage" />
+      
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WorkingGetData">
+      <soap:operation soapAction="http://tempuri.org/IService1/WorkingGetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CallDependantService">
+      <soap:operation soapAction="http://tempuri.org/IService1/CallDependantService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CallWCFDependantService">
+      <soap:operation soapAction="http://tempuri.org/IService1/CallWCFDependantService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FailingGetData">
+      <soap:operation soapAction="http://tempuri.org/IService1/FailingGetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LongRunningGetData">
+      <soap:operation soapAction="http://tempuri.org/IService1/LongRunningGetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomWorkingMethod">
+      <soap:operation soapAction="http://tempuri.org/IService1/RandomWorkingMethod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+	
+	 <wsdl:operation name="OneWayMethod">
+      <soap:operation soapAction="http://tempuri.org/IService1/OneWayMethod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    
+    </wsdl:operation>
+	
+	
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://FGSMSdev1/HelloWorldESMTester/HelloWorldESMWCF.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="wsddsService"
+    targetNamespace="http://www.rti.com/wsdds/wsdds_types.xsd"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdds="http://www.rti.com/wsdds/wsdds_types.xsd"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <xsd:schema
+            targetNamespace="http://www.rti.com/wsdds/wsdds_types.xsd"
+            elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsdds="http://www.rti.com/wsdds/wsdds_types.xsd">
+
+            <xsd:include schemaLocation="wsdds_types.xsd"></xsd:include>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="loginRequest">
+        <wsdl:part name="loginRequest" element="wsdds:loginRequestParameter" />
+    </wsdl:message>
+    <wsdl:message name="loginResponse">
+        <wsdl:part name="loginResponse" element="wsdds:loginResponseParameter" />
+    </wsdl:message>
+    <wsdl:message name="logoutRequest">
+        <wsdl:part name="logoutRequest" element="wsdds:logoutRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="logoutResponse">
+        <wsdl:part name="logoutResponse" element="wsdds:logoutResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createSubscriptionRequest">
+        <wsdl:part name="createSubscriptionRequest" element="wsdds:createSubscriptionRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createSubscriptionResponse">
+        <wsdl:part name="createSubscriptionResponse" element="wsdds:createSubscriptionResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createPublicationRequest">
+        <wsdl:part name="createPublicationRequest" element="wsdds:createPublicationRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createPublicationResponse">
+        <wsdl:part name="createPublicationResponse" element="wsdds:createPublicationResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeSubscriptionRequest">
+        <wsdl:part name="removeSubscriptionRequest" element="wsdds:removeSubscriptionRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeSubscriptionResponse">
+        <wsdl:part name="removeSubscriptionResponse" element="wsdds:removeSubscriptionResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSubscriptionsRequest">
+        <wsdl:part name="getSubscriptionsRequest" element="wsdds:getSubscriptionsRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getSubscriptionsResponse">
+        <wsdl:part name="getSubscriptionsResponse" element="wsdds:getSubscriptionsResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removePublicationRequest">
+        <wsdl:part name="removePublicationRequest" element="wsdds:removePublicationRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removePublicationResponse">
+        <wsdl:part name="removePublicationResponse" element="wsdds:removePublicationResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPublicationsRequest">
+        <wsdl:part name="getPublicationsRequest" element="wsdds:getPublicationsRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPublicationsResponse">
+        <wsdl:part name="getPublicationsResponse" element="wsdds:getPublicationsResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="readRequest">
+        <wsdl:part name="readRequest" element="wsdds:readRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="readResponse">
+        <wsdl:part name="readResponse" element="wsdds:readResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="writeRequest">
+        <wsdl:part name="writeRequest" element="wsdds:writeRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="writeResponse">
+        <wsdl:part name="writeResponse" element="wsdds:writeResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addNotificationEndpointRequest">
+        <wsdl:part name="addNotificationEndpointRequest" element="wsdds:addNotificationEndpointRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addNotificationEndpointResponse">
+        <wsdl:part name="addNotificationEndpointResponse" element="wsdds:addNotificationEndpointResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeNotificationEndpointRequest">
+        <wsdl:part name="removeNotificationEndpointRequest" element="wsdds:removeNotificationEndpointRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeNotificationEndpointResponse">
+        <wsdl:part name="removeNotificationEndpointResponse" element="wsdds:removeNotificationEndpointResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getNotificationEndpointsRequest">
+        <wsdl:part name="getNotificationEndpointsRequest" element="wsdds:getNotificationEndpointsRequestParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getNotificationEndpointsResponse">
+        <wsdl:part name="getNotificationEndpointsResponse" element="wsdds:getNotificationEndpointsResponseParameter"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="wsddsService">
+        <wsdl:operation name="Login">
+            <wsdl:input message="wsdds:loginRequest" />
+            <wsdl:output message="wsdds:loginResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="Logout">
+            <wsdl:input message="wsdds:logoutRequest"></wsdl:input>
+            <wsdl:output message="wsdds:logoutResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateSubscription">
+            <wsdl:input message="wsdds:createSubscriptionRequest"></wsdl:input>
+            <wsdl:output message="wsdds:createSubscriptionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePublication">
+            <wsdl:input message="wsdds:createPublicationRequest"></wsdl:input>
+            <wsdl:output message="wsdds:createPublicationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveSubscription">
+            <wsdl:input message="wsdds:removeSubscriptionRequest"></wsdl:input>
+            <wsdl:output message="wsdds:removeSubscriptionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemovePublication">
+            <wsdl:input message="wsdds:removePublicationRequest"></wsdl:input>
+            <wsdl:output message="wsdds:removePublicationResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSubscriptions">
+            <wsdl:input message="wsdds:getSubscriptionsRequest"></wsdl:input>
+            <wsdl:output message="wsdds:getSubscriptionsResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPublications">
+            <wsdl:input message="wsdds:getPublicationsRequest"></wsdl:input>
+            <wsdl:output message="wsdds:getPublicationsResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Read">
+            <wsdl:input message="wsdds:readRequest"></wsdl:input>
+            <wsdl:output message="wsdds:readResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Write">
+            <wsdl:input message="wsdds:writeRequest"></wsdl:input>
+            <wsdl:output message="wsdds:writeResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddNotificationEndpoint">
+            <wsdl:input message="wsdds:addNotificationEndpointRequest"></wsdl:input>
+            <wsdl:output message="wsdds:addNotificationEndpointResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveNotificationEndpoint">
+            <wsdl:input message="wsdds:removeNotificationEndpointRequest"></wsdl:input>
+            <wsdl:output message="wsdds:removeNotificationEndpointResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetNotificationEndpoints">
+            <wsdl:input message="wsdds:getNotificationEndpointsRequest"></wsdl:input>
+            <wsdl:output message="wsdds:getNotificationEndpointsResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="wsddsService" type="wsdds:wsddsService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Login">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Logout">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateSubscription">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePublication">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveSubscription">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemovePublication">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSubscriptions">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPublications">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Read">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Write">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddNotificationEndpoint">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveNotificationEndpoint">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetNotificationEndpoints">
+            <soap:operation/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

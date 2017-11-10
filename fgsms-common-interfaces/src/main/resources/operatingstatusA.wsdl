@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:opstatus" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" name="OperatingStatus" targetNamespace="urn:org:miloss:fgsms:services:interfaces:opstatus">
+	<wsdl:documentation>fgsms Operating Status. Provides read only access to the current operating status of this service.
+
+	</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:common">
+			<xs:import schemaLocation="fgsmsCommon.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:common"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getOpStatus_InputMessage">
+		<wsdl:part name="parameters" element="common:GetOperatingStatus"/>
+	</wsdl:message>
+	<wsdl:message name="getOpStatus_OutputMessage">
+		<wsdl:part name="parameters" element="common:GetOperatingStatusResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="opStatusService">
+		<wsdl:documentation>Operating Status Port Type</wsdl:documentation>
+		<wsdl:operation name="GetOperatingStatus">
+			<wsdl:documentation>Get the operating status of this service</wsdl:documentation>
+			<wsdl:input message="tns:getOpStatus_InputMessage"/>
+			<wsdl:output message="tns:getOpStatus_OutputMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="opStatusServiceBinding" type="tns:opStatusService">
+		<wsdl:documentation>Status Binding</wsdl:documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetOperatingStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:opStatusService/GetOperatingStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

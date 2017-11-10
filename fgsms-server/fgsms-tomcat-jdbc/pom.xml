@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-server</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <artifactId>fgsms-tomcat-jdbc</artifactId>
+    <packaging>bundle</packaging>
+    <name>fgsms Tomcat JDCP Encryption Connection</name>
+    <description>Supports the encryption of jdbc database credentials for tomcat</description>
+    <dependencies>
+	
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>provided</scope>
+            <!-- included in tomcat's lib directory already -->
+        </dependency>
+	
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-dbcp</artifactId>
+            <version>7.0.73</version>
+            <scope>provided</scope>
+            <type>jar</type>
+            <!-- included in tomcat's lib directory already -->
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/src/main/java/org/miloss/fgsms/common/" overwrite="true">
+                                    <fileset dir="${basedir}/../../fgsms-common/src/main/java/org/miloss/fgsms/common/">
+                                        <include name="AES.java" />
+                                        <include name="Logger.java" />
+                                        <include name="Constants.java" />
+                                        <include name="aes128.key" />
+                                        
+                                        <include name="AesCbcWithIntegrity.java" />
+                                        <type type="file" />
+                                    </fileset>
+                                   
+                                    <fileset dir="${basedir}/../../fgsms-common/target/generated-sources/java-templates/org/miloss/fgsms/common/">
+                                        <include name="Constants.java" />
+                                        <type type="file" />
+                                    </fileset>
+                                </copy>
+                                        
+                                <copy todir="${basedir}/src/main/java/org/miloss/fgsms/common/codec/" overwrite="true">
+                                     
+                                    <fileset dir="${basedir}/../../fgsms-common/src/main/java/org/miloss/fgsms/common/codec/">
+                                        <include name="*.java" />
+                                    </fileset>
+                                </copy>
+                                 <copy todir="${basedir}/src/main/resources/" overwrite="true">
+                                     
+                                    <fileset dir="${basedir}/../../fgsms-common/src/main/resources/">
+                                        <include name="*.key" />
+                                    </fileset>
+                                </copy>
+                                        
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

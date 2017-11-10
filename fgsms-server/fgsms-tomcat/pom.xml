@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-server</artifactId>
+        <version>7.0.0</version>
+    </parent>
+    <artifactId>fgsms-tomcat</artifactId>
+    <name>fgsms Tomcat Packaging</name>
+    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>commons-discovery</groupId>
+            <artifactId>commons-discovery</artifactId>
+            <version>0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-tomcat-jdbc</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>apache-tomcat</artifactId>
+            <version>${project.parent.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <artifactId>fgsms.Services</artifactId>
+            <groupId>org.mil-oss</groupId>
+            <version>${project.parent.version}</version>
+            <type>war</type>
+        </dependency>
+		
+        <dependency>
+            <artifactId>fgsms-wsnotification-broker-war</artifactId>
+            <groupId>org.mil-oss</groupId>
+            <version>${project.parent.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <artifactId>fgsms.Bootstrap</artifactId>
+            <groupId>org.mil-oss</groupId>
+            <version>${project.parent.version}</version>
+            <type>war</type>
+        </dependency>
+       
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jaxws_2.2_spec</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+	
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>tomcat6cxf</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.10</version>
+                        <executions>
+                            <execution>
+                                <id>copy-wars</id>
+                                <phase>compile<!-- or any other valid maven phase -->
+                                </phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <stripVersion>true</stripVersion>
+                                    <outputDirectory>
+                                        ${project.build.directory}
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <id>test</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks>
+                                        <property name="compile_classpath" refid="maven.compile.classpath" />
+                                        <property name="runtime_classpath" refid="maven.runtime.classpath" />
+                                        <property name="test_classpath" refid="maven.test.classpath" />
+                                        <property name="plugin_classpath" refid="maven.plugin.classpath" />
+                                        <property name="project.version" value="${project.version}" />
+
+                                        <property name="dependency.fgsms-tomcat-jdbc.jar" value="${maven.dependency.org.mil-oss.fgsms-tomcat-jdbc.jar.path}" />
+                                        <property name="dependency.log4j.jar" value="${maven.dependency.log4j.log4j.jar.path}" />
+                                        <property name="dependency.postgres.jar" value="${maven.dependency.org.postgresql.postgresql.jar.path}" />
+                                        <property name="dependency.commons-discovery.jar" value="${maven.dependency.commons-discovery.commons-discovery.jar.path}" />
+                                        <property name="dependency.tomcat.zip" value="${maven.dependency.org.mil-oss.apache-tomcat.zip.path}" />
+                                        <property name="dependency.fgsms.services.war" value="${project.build.directory}/fgsms.Services.war" />
+                                        <property name="dependency.fgsms.bootstrap.war" value="${project.build.directory}/fgsms.Bootstrap.war" />
+                                        <property name="dependency.fgsms.wsnbroker.war" value="${project.build.directory}/fgsms-wsnotification-broker-war.war" />
+                                        <property name="dependency.jaxws.jar" value="${maven.dependency.org.apache.geronimo.specs.geronimo-jaxws_2.2_spec.jar.path}" />
+                                        <ant antfile="${basedir}/build.xml">
+                                            <property name="dependency.tomcat.zip" value="${dependency.tomcat.zip}" />
+                                            <target name="package-tomcat" />
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.2-beta-3</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attached</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/assembly.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <configuration>
+                            <skipSource>true</skipSource>
+
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.6</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.7</version>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

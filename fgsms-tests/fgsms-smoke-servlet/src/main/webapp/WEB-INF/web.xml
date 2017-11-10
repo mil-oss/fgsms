@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>Apache-Axis</display-name>
+  
+    <listener>
+        <listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>
+    </listener>
+  
+    <servlet>
+        <servlet-name>NoFrameworkRestService</servlet-name>
+        <display-name>NoFrameworkRestService</display-name>
+        <servlet-class>
+            org.miloss.fgsms.smoke.servlet.NoFrameworkRestServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>echo</servlet-name>
+        <servlet-class>io.apiman.quickstarts.echo.EchoServlet</servlet-class>
+    </servlet>
+
+    <filter>
+        <display-name>FGSMS servlet filter</display-name>
+        <description>performance tracker</description>
+        <filter-name>fgsms</filter-name>
+        <filter-class>org.miloss.fgsms.agents.HttpServletAgent</filter-class>
+        <!-- useful if most of your stuff goes to a similar endpoint -->
+    </filter>  
+    
+    <filter-mapping>
+        <filter-name>fgsms</filter-name>
+        <servlet-name>NoFrameworkRestService</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>fgsms</filter-name>
+        <servlet-name>echo</servlet-name>
+    </filter-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>NoFrameworkRestService</servlet-name>
+        <url-pattern>/service/NoFrameworkRestService</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>echo</servlet-name>
+        <url-pattern>/service/echo</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list id="WelcomeFileList">
+        <welcome-file>index.jsp</welcome-file>
+
+    </welcome-file-list>
+
+</web-app>

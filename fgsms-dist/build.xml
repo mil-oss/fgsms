@@ -1,0 +1,414 @@
+<project name="fgsms-dist" default="package-distribution" basedir=".">
+    
+    <!-- 
+    
+    TODO include samples folder
+    
+    -->
+    <property file="package.properties"/>
+
+    <property name="output" value="${basedir}/target/dist"/>
+
+    <target name="package-distribution" depends="copy-resources">
+    </target>
+
+    <target name="create-dir-struction">
+        <mkdir dir="${output}/database"/>
+        <mkdir dir="${output}/documentation"/>
+        <mkdir dir="${output}/documentation/images"/>
+        <mkdir dir="${output}/documentation/xml"/>
+        <mkdir dir="${output}/documentation/samples"/>
+        <mkdir dir="${output}/agents"/>
+        <mkdir dir="${output}/agents/transactional"/>
+        <mkdir dir="${output}/agents/statistical"/>
+        <mkdir dir="${output}/agents/statistical/amqp"/>
+        <mkdir dir="${output}/agents/statistical/amqp/py"/>
+        <mkdir dir="${output}/agents/os"/>
+        
+        <mkdir dir="${output}/agents/java_persistent"/>
+		
+        <mkdir dir="${output}/utils"/>
+        <mkdir dir="${output}/server"/>
+		<mkdir dir="${output}/dotnet"/>
+
+        <copy toFile="${output}/LICENSE" file="${basedir}/../LICENSE" />
+    </target>
+
+
+    <target name="tomcat.check">
+        <condition property="dir.exists">
+            <available file="${basedir}/../fgsms-server/fgsms-tomcat/target" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="jboss.check">
+        <condition property="dir.exists">
+            <available file="${basedir}/../fgsms-server/fgsms.Jboss/target" type="dir"/>
+        </condition>
+    </target>
+
+
+    <target name="jboss-exists">
+        <condition property="dir.exists">
+            <available file="${basedir}/../fgsms-server/fgsms.Jboss/target" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="do-jboss" depends="jboss-exists" if="dir.exists">
+
+        <copy todir="${output}/server">
+            <fileset dir="${basedir}/../fgsms.Jboss/target"
+                                 includes="fgsms*.zip"			  />
+        </copy>
+    </target>
+
+
+
+    <target name="dotnet-exists">
+        <condition property="dir.exists">
+            <available file="${basedir}/../fgsms-netagent/FGSMS.NETAgent/bin/debug/FGSMS.NETAgent.dll" type="file"/>
+        </condition>
+    </target>
+    <target name="tomcat-exists">
+        <condition property="dir.exists">
+            <available file="${basedir}/../fgsms-server/fgsms-tomcat/target" type="dir"/>
+        </condition>
+    </target>
+
+    <target name="do-tomcat" depends="tomcat-exists" if="dir.exists">
+
+        <copy todir="${output}/server">
+            <fileset dir="${basedir}/../fgsms-server/fgsms-tomcat/target"
+                                 includes="fgsms*.zip"
+                                 />
+        </copy>
+    </target>
+
+
+    <target name="copy-resources" depends="create-dir-struction">
+        <antcall target="do-jboss" />
+        <antcall target="do-tomcat" />
+        <antcall target="do-utils" />
+        <antcall target="do-agents" />
+        <antcall target="do-dotnet" />
+        <copy todir="${output}/documentation">
+            <fileset dir="${basedir}/../docs"
+                                 includes="**/*"
+            />
+        </copy>
+        <copy todir="${output}/documentation">
+            <fileset dir="${basedir}/../src/site/markdown"
+                                 includes="**/*"
+            />
+        </copy>
+        <copy todir="${output}/documentation/images/">
+            <fileset dir="${basedir}/../src/site/resources/images"
+                                 includes="**/*"
+            />
+        </copy>
+
+        <copy todir="${output}/database">
+            <fileset dir="${basedir}/../database"
+                                 includes="**/*"
+            />
+        </copy>
+
+    </target>
+
+    <target name="do-utils">
+        <!-- fgsms-common-7.0-SNAPSHOT-jar-with-dependencies.jar -->
+        <copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-common/target"
+                                 includes="fgsms-common-*-with-dependencies.jar"
+            />
+        </copy>
+        <copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-server/fgsms-recryptor/target"
+                                 includes="*.bat, *.sh, *.cmd, fgsms-*-with-dependencies.jar"
+            />
+		</copy>
+		<copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-cli/target"
+                                 includes="*fgsms-*-with-dependencies.jar"
+            />
+        </copy>
+		
+        <copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-server/fgsms-server-crash-alerter/target"
+                                 includes="*.bat, *.sh, *.cmd, fgsms-*-with-dependencies.jar"
+            />
+        </copy>
+		
+		  <copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-server/fgsms-database-export/target"
+                                 includes="*.bat, *.sh, *.cmd, fgsms-*-with-dependencies.jar"
+            />
+        </copy>
+		
+        <copy todir="${output}/utils">
+            <fileset dir="${basedir}/../fgsms-server/fgsms-server-crash-alerter"
+                                 includes="*.bat, *.sh, *.cmd, fgsms.*-with-dependencies.jar"
+            />
+             <fileset dir="${basedir}/../fgsms-server/fgsms-server-crash-alerter/target"
+                                 includes="*.exe"
+            />
+              <fileset dir="${basedir}/../fgsms-server/fgsms-server-crash-alerter/"
+                                 includes="*.properties"
+            />
+        </copy>
+
+
+    </target>
+	
+	
+    <target name="do-dotnet" depends="dotnet-exists" if="dir.exists">
+        <!-- fgsms-common-7.0-SNAPSHOT-jar-with-dependencies.jar 
+		
+		all we need is 
+		the dll
+		the web part
+		persistent storage agent
+		the readme (maybe)
+		sample config
+		installer (eventually
+		encryption utility
+		tray icon
+		-->
+        <copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.NETAgent/bin/Debug/" >
+                <include name="FGSMS.NETAgent.dll"/>
+				
+            </fileset>
+        </copy>
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.WebParts/FGSMS.WebParts/" >
+                <include name="org.miloss.fgsms.webparts.wsp"/>
+				
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.NETInstaller/" >
+                <include name="current.config"/>
+				
+            </fileset>
+        </copy>
+				
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.PersistentStorageAgent/bin/Debug/" >
+                <include name="FGSMS.PersistentStorageAgent.dll"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Tools.AgentConfig/bin/Debug/" >
+                <include name="FGSMS.Tools.AgentConfig.exe"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Tools.AgentConfig/bin/Debug/" >
+                <include name="FGSMS.Tools.AgentConfig.exe.config"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Tools.AgentConfig/bin/Debug/" >
+                <include name="help.html"/>
+            </fileset>
+        </copy>
+				
+				
+				
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Util/bin/Debug/" >
+                <include name="FGSMS.Util.exe"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Util/bin/Debug/" >
+                <include name="FGSMS.Util.exe.config"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/FGSMS.Util/bin/Debug/" >
+                <include name="FGSMS.Util.exe.config"/>
+            </fileset>
+        </copy>
+				
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/MessageDecryptor/bin/Debug/" >
+                <include name="MessageDecryptor.exe.config"/>
+            </fileset>
+        </copy>
+				
+		<copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/../fgsms-netagent/MessageDecryptor/bin/Debug/" >
+                <include name="MessageDecryptor.exe"/>
+            </fileset>
+        </copy>
+				
+				
+		
+    </target>
+
+
+    <target name="do-agents">
+        <!-- only embeddable agents are here, everything else lives on the fgsms server -->
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-apache-cxf-agent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+
+		<copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-apache-cxf-agent-osgi/target"
+                                 includes="fgsms-*.jar" />
+        </copy>
+
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-axis1xagent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-jaxws-agent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-jboss-esb-agent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/src/main/resources/org/miloss/fgsms/agentcore/"
+                                 includes="fgsms-agent.properties" />
+        </copy>
+        <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-servlet-filter-agent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+		<copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-jbossws-jaxws-agent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+		
+		
+		
+		
+		
+        <copy todir="${output}/agents/java_persistent">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/src/main/resources/org/miloss/fgsms/agentcore/" includes="fgsms-agent.properties" />
+        </copy>
+        <copy todir="${output}/agents/java_persistent">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/target" includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+        <copy todir="${output}/agents/java_persistent">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/" includes="*.cmd" />
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/target" includes="*.exe" />
+        </copy>
+		
+		
+
+
+
+        <copy todir="${output}/agents/statistical/amqp/py">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-qpid-pyagent/target"
+                                 includes="fgsms-*-with-dependencies.jar" />
+        </copy>
+		
+        <copy todir="${output}/agents/statistical/amqp/py">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/src/main/resources/org/miloss/fgsms/agentcore/"
+                                 includes="fgsms-agent.properties" />
+        </copy>
+		
+        <copy toFile="${output}/agents/statistical/amqp/py/qpid-stat2" file="${basedir}/../fgsms-agents/fgsms-qpid-pyagent/src/main/resources/qpid-stat2" />
+        
+        
+	<copy todir="${output}/">
+            <fileset dir="${basedir}/src/docs/"
+                                 includes="**.md" />
+        </copy>	
+        
+        <copy todir="${output}/">
+            <fileset dir="${basedir}/src/docs/"
+                                 includes="*.md" />
+        </copy>	
+        
+        <copy todir="${output}/agents">
+            <fileset dir="${basedir}/src/docs/agents"
+                                 includes="*.md" />
+        </copy>	
+        
+        <copy todir="${output}/agents/java_persistent">
+            <fileset dir="${basedir}/src/docs/agents/java_persistent"
+                                 includes="*.md" />
+        </copy>	
+        
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/src/docs/agents/os"
+                                 includes="*.md" />
+        </copy>	
+        
+         <copy todir="${output}/agents/statistical/amqp/py">
+            <fileset dir="${basedir}/src/docs/agents/statistical/amqp/py"
+                                 includes="*.md" />
+        </copy>	
+         <copy todir="${output}/agents/transactional">
+            <fileset dir="${basedir}/src/docs/agents/transactional"
+                                 includes="*.md" />
+        </copy>	
+        <copy todir="${output}/utils">
+            <fileset dir="${basedir}/src/docs/utils"
+                                 includes="*.md" />
+        </copy>	
+        
+        <copy todir="${output}/dotnet">
+            <fileset dir="${basedir}/src/docs/dotnet"
+                                 includes="**.md" />
+        </copy>	
+        
+        <copy todir="${output}/">
+            <fileset dir="${basedir}/src/docs/"
+                                 includes="**.md" />
+        </copy>	
+        
+    
+		
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-osagent/"
+                                 includes="*.cmd" />
+        </copy>
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-osagent/src/main/resources/"
+                                 includes="*.properties" />
+        </copy>
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-osagent/target"
+                                 includes="fgsms.OSAgent.jar" />
+        </copy>
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-osagent/target/test-resources/hyperic-sigar-1.6.5/sigar-bin/lib"
+                                 includes="*.*" />
+        </copy>
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-osagent/target/"
+                                 includes="*.exe" />
+        </copy>
+		
+        <copy todir="${output}/agents/os">
+            <fileset dir="${basedir}/../fgsms-agents/fgsms-agentcore/src/main/resources/org/miloss/fgsms/agentcore/"
+                                 includes="fgsms-agent.properties" />
+        </copy>
+
+		
+    </target>
+
+    <target name="package-tomcat" depends="copy-resources">
+        <chmod perm="ugo+x">
+            <fileset dir="${output}/tomcat/apache-tomcat-${apache.tomcat.version}/bin">
+                <include name="*.sh"/>
+            </fileset>
+        </chmod>
+    </target>
+
+</project>

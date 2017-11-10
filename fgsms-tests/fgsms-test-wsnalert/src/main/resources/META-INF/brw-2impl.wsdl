@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+OASIS takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this document or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any effort to identify any such rights. Information on OASIS's procedures with respect to rights in OASIS specifications can be found at the OASIS website. Copies of claims of rights made available for publication and any assurances of licenses to be made available, or the result of an attempt made to obtain a general license or permission for the use of such proprietary rights by implementors or users of this specification, can be obtained from the OASIS Executive Director.
+
+OASIS invites any interested party to bring to its attention any copyrights, patents or patent applications, or other proprietary rights which may cover technology that may be required to implement this specification. Please address the information to the OASIS Executive Director.
+
+Copyright (C) OASIS Open (2004-2006). All Rights Reserved.
+
+This document and translations of it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not be modified in any way, such as by removing the copyright notice or references to OASIS, except as needed for the purpose of developing OASIS specifications, in which case the procedures for copyrights defined in the OASIS Intellectual Property Rights document must be followed, or as required to translate it into languages other than English. 
+
+The limited permissions granted above are perpetual and will not be revoked by OASIS or its successors or assigns. 
+
+This document and the information contained herein is provided on an "AS IS" basis and OASIS DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+-->
+<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsn-br="http://docs.oasis-open.org/wsn/br-2" xmlns:wsn-brw="http://docs.oasis-open.org/wsn/brw-2" xmlns:wsn-b="http://docs.oasis-open.org/wsn/b-2" xmlns:wsn-bw="http://docs.oasis-open.org/wsn/bw-2" xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2" xmlns:wsrf-rw="http://docs.oasis-open.org/wsrf/rw-2" name="WS-BrokeredNotification" targetNamespace="http://docs.oasis-open.org/wsn/brw-2">
+	<wsdl:import namespace="http://docs.oasis-open.org/wsn/brw-2" location="brw-2.wsdl"/>
+	<wsdl:import namespace="http://docs.oasis-open.org/wsn/bw-2" location="bw-2.wsdl"/>
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://docs.oasis-open.org/wsn/br-2" schemaLocation="br-2.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<binding name="PullPointBinding" type="wsn-bw:PullPoint">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetMessages">
+			<soap:operation soapAction="GetMessages" style="document"/>
+			<wsdl:input name="GetMessagesRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetMessagesResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnableToGetMessagesFault">
+				<soap:fault name="UnableToGetMessagesFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DestroyPullPoint">
+			<soap:operation soapAction="DestroyPullPoint" style="document"/>
+			<wsdl:input name="DestroyPullPointRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DestroyPullPointResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnableToDestroyPullPointFault">
+				<soap:fault name="UnableToDestroyPullPointFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Notify">
+			<soap:operation soapAction="Notify" style="document"/>
+			<wsdl:input message="wsntw:Notify">
+				<soap:body use="literal"/>
+			</wsdl:input>
+		</wsdl:operation>
+	</binding>
+	<binding name="CreatePullPointBinding" type="wsn-bw:CreatePullPoint">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="CreatePullPoint">
+			<soap:operation soapAction="CreatePullPoint" style="document"/>
+			<wsdl:input name="CreatePullPointRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreatePullPointResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="UnableToCreatePullPointFault">
+				<soap:fault name="UnableToCreatePullPointFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</binding>
+	<binding name="PublisherRegistrationManagerBinding" type="wsn-brw:PublisherRegistrationManager">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!--===DestroyRegistration:ImmediateResourceTermination==========-->
+		<wsdl:operation name="DestroyRegistration">
+			<soap:operation soapAction="DestroyRegistration" style="document"/>
+			<wsdl:input name="DestroyRegistrationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DestroyRegistrationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ResourceNotDestroyedFault">
+				<soap:fault name="ResourceNotDestroyedFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</binding>
+	<binding name="PausableSubscriptionManagerBinding" type="wsn-bw:PausableSubscriptionManager">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- ============== Extends: SubscriptionManager ============ -->
+		<wsdl:operation name="Renew">
+			<soap:operation soapAction="Renew" style="document"/>
+			<wsdl:input name="RenewRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RenewResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnacceptableTerminationTimeFault">
+				<soap:fault name="UnacceptableTerminationTimeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Unsubscribe">
+			<soap:operation soapAction="Unsubscribe" style="document"/>
+			<wsdl:input name="UnsubscribeRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UnsubscribeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnableToDestroySubscriptionFault">
+				<soap:fault name="UnableToDestroySubscriptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<!-- === PausableSubscriptionManager specific operations === -->
+		<wsdl:operation name="PauseSubscription">
+			<soap:operation soapAction="PauseSubscription" style="document"/>
+			<wsdl:input name="PauseSubscriptionRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="PauseSubscriptionResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PauseFailedFault">
+				<soap:fault name="PauseFailedFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeSubscription">
+			<soap:operation soapAction="ResumeSubscription" style="document"/>
+			<wsdl:input name="ResumeSubscriptionRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ResumeSubscriptionResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ResumeFailedFault">
+				<soap:fault name="ResumeFailedFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</binding>
+	<binding name="NotificationBrokerBinding" type="wsn-brw:NotificationBroker">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="RegisterPublisher">
+			<soap:operation soapAction="RegisterPublisher" style="document"/>
+			<wsdl:input name="RegisterPublisherRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RegisterPublisherResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTopicExpressionFault">
+				<soap:fault name="InvalidTopicExpressionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TopicNotSupportedFault">
+				<soap:fault name="TopicNotSupportedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PublisherRegistrationRejectedFault">
+				<soap:fault name="PublisherRegistrationRejectedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="PublisherRegistrationFailedFault">
+				<soap:fault name="PublisherRegistrationFailedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnacceptableInitialTerminationTimeFault">
+				<soap:fault name="UnacceptableInitialTerminationTimeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Notify">
+			<soap:operation soapAction="Notify" style="document"/>
+			<wsdl:input name="Notify">
+				<soap:body use="literal"/>
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="Subscribe">
+			<soap:operation soapAction="Subscribe" style="document"/>
+			<wsdl:input name="SubscribeRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SubscribeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidFilterFault">
+				<soap:fault name="InvalidFilterFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TopicExpressionDialectUnknownFault">
+				<soap:fault name="TopicExpressionDialectUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTopicExpressionFault">
+				<soap:fault name="InvalidTopicExpressionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TopicNotSupportedFault">
+				<soap:fault name="TopicNotSupportedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidProducerPropertiesExpressionFault">
+				<soap:fault name="InvalidProducerPropertiesExpressionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidMessageContentExpressionFault">
+				<soap:fault name="InvalidMessageContentExpressionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnacceptableInitialTerminationTimeFault">
+				<soap:fault name="UnacceptableInitialTerminationTimeFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnrecognizedPolicyRequestFault">
+				<soap:fault name="UnrecognizedPolicyRequestFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="UnsupportedPolicyRequestFault">
+				<soap:fault name="UnsupportedPolicyRequestFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="NotifyMessageNotSupportedFault">
+				<soap:fault name="NotifyMessageNotSupportedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="SubscribeCreationFailedFault">
+				<soap:fault name="SubscribeCreationFailedFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCurrentMessage">
+			<soap:operation soapAction="GetCurrentMessage" style="document"/>
+			<wsdl:input name="GetCurrentMessageRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCurrentMessageResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ResourceUnknownFault">
+				<soap:fault name="ResourceUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TopicExpressionDialectUnknownFault">
+				<soap:fault name="TopicExpressionDialectUnknownFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTopicExpressionFault">
+				<soap:fault name="InvalidTopicExpressionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TopicNotSupportedFault">
+				<soap:fault name="TopicNotSupportedFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="NoCurrentMessageOnTopicFault">
+				<soap:fault name="NoCurrentMessageOnTopicFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="MultipleTopicsSpecifiedFault">
+				<soap:fault name="MultipleTopicsSpecifiedFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</binding>
+	<service name="NotificationService">
+		<port name="NotificationPort" binding="wsn-brw:NotificationBrokerBinding">
+			<soap:address location="http://localhost:8192/Broker"/>
+		</port>
+	</service>
+	<service name="PausableSubscriptionManagerService">
+		<port name="PausableSubscriptionManagerPort" binding="wsn-brw:PausableSubscriptionManagerBinding">
+			<soap:address location="http://localhost:8192/Broker"/>
+		</port>
+	</service>
+	<service name="PublisherRegistrationManagerService">
+		<port name="PublisherRegistrationManagerPort" binding="wsn-brw:PublisherRegistrationManagerBinding">
+			<soap:address location="http://localhost:8192/Broker"/>
+		</port>
+	</service>
+	<service name="CreatePullPointService">
+		<port name="CreatePullPointBindingPort" binding="wsn-brw:CreatePullPointBinding">
+			<soap:address location="http://localhost:8192/Broker"/>
+		</port>
+	</service>
+	<service name="PullPointService">
+		<port name="PullPointBindingPort" binding="wsn-brw:PullPointBinding">
+			<soap:address location="http://localhost:8192/Broker"/>
+		</port>
+	</service>
+	<!-- ========================== Imports =========================== -->
+	<!-- ===================== Types Definitions ====================== -->
+</wsdl:definitions>

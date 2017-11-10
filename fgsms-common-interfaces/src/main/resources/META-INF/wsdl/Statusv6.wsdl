@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:status" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:opstat="urn:org:miloss:fgsms:services:interfaces:opstatus" name="StatusService" targetNamespace="urn:org:miloss:fgsms:services:interfaces:status">
+	<wsdl:documentation>fgsms Status Service. Provides getters and setters for monitored service status UNCLASSIFIED
+	
+	</wsdl:documentation>
+	<wsdl:import namespace="urn:org:miloss:fgsms:services:interfaces:opstatus" location="operatingstatusA.wsdl"/>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:faults">
+			<xs:import schemaLocation="faults.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:faults"/>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:status">
+			<xs:import schemaLocation="Statusv6.xsd" namespace="urn:org:miloss:fgsms:services:interfaces:status"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="statusService_RemoveStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:RemoveStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_RemoveStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:RemoveStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetMoreStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetMoreStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetMoreStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetMoreStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetExtendedStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:SetExtendedStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_SetExtendedStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SetStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_GetStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_GetStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_GetAllStatus_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllStatus"/>
+	</wsdl:message>
+	<wsdl:message name="statusService_GetAllStatus_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetAllStatusResponse"/>
+	</wsdl:message>
+	<wsdl:message name="AccessDeniedException">
+		<wsdl:part name="parameters" element="faults:AccessDeniedException"/>
+	</wsdl:message>
+	<wsdl:message name="ServiceUnavailableException">
+		<wsdl:part name="parameters" element="faults:ServiceUnavailableException"/>
+	</wsdl:message>
+	<wsdl:portType name="statusService">
+		<wsdl:documentation>Status Port Type</wsdl:documentation>
+		<wsdl:operation name="SetExtendedStatus">
+			<wsdl:documentation>Set the Extended Status on a single item. If a policy does not exist for this item, it will be automatically created</wsdl:documentation>
+			<wsdl:input message="tns:statusService_SetExtendedStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_SetExtendedStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetExtendedStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetExtendedStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetStatus">
+			<wsdl:documentation>Set the Status on a single item. If a policy does not exist for this item, it will be automatically created</wsdl:documentation>
+			<wsdl:input message="tns:statusService_SetStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_SetStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetMoreStatus">
+			<wsdl:documentation>Set the status on more than one item. If a policy does not exist for this item, it will be automatically created</wsdl:documentation>
+			<wsdl:input message="tns:statusService_SetMoreStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_SetMoreStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetMoreStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetMoreStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetStatus">
+			<wsdl:documentation>Get the status on a single item</wsdl:documentation>
+			<wsdl:input message="tns:statusService_GetStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_GetStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/SetStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveStatus">
+			<wsdl:documentation>
+			Removes an entry from the status listing, all associated history, SLAs, and alerting subscriptions, requires global admin rights
+			</wsdl:documentation>
+			<wsdl:input message="tns:statusService_RemoveStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_RemoveStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/RemoveStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/RemoveStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllStatus">
+			<wsdl:documentation>Gets the status of all items that the requestor has access to</wsdl:documentation>
+			<wsdl:input message="tns:statusService_GetAllStatus_InputMessage"/>
+			<wsdl:output message="tns:statusService_GetAllStatus_OutputMessage"/>
+			<wsdl:fault name="AccessDeniedExceptionFault" message="tns:AccessDeniedException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/GetStatusAccessDeniedExceptionFault"/>
+			<wsdl:fault name="ServiceUnavailableExceptionFault" message="tns:ServiceUnavailableException" wsaw:Action="urn:org:miloss:fgsms:services:interfaces:status/statusService/GetStatusServiceUnavailableExceptionFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="statusServiceBinding" type="tns:statusService">
+		<wsdl:documentation>Status Binding</wsdl:documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SetMoreStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/SetMoreStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetExtendedStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/SetExtendedStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/SetStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/GetStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/GetAllStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RemoveStatus">
+			<soap:operation soapAction="urn:org:miloss:fgsms:services:interfaces:statusService/RemoveStatus" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AccessDeniedExceptionFault">
+				<soap:fault name="AccessDeniedExceptionFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ServiceUnavailableExceptionFault">
+				<soap:fault name="ServiceUnavailableExceptionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="StatusServiceService">
+		<wsdl:documentation>Status Service</wsdl:documentation>
+		<wsdl:port name="statusServicePort" binding="tns:statusServiceBinding">
+			<wsdl:documentation>Status Port</wsdl:documentation>
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+		<wsdl:port name="opStatusServiceBinding" binding="opstat:opStatusServiceBinding">
+			<soap:address location="http://localhost:8080/fgsmsServices/SS"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- *********************************************************************** -->
+	<!--                                UNCLASSIFIED                             -->
+	<!--                                Created by AO, *                             -->
+	<!--                                https://github.com/mil-oss/fgsms                             -->
+	<!-- *********************************************************************** -->
+</wsdl:definitions>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quartz-status xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Projects\FGSMS\FGSMS.AuxServices\web\admin\quartz-status.xsd">
+	<scheduler-name>Quartz</scheduler-name>
+	<scheduler-instance-id>quartz</scheduler-instance-id>
+	<version>1.8.6</version>
+	<jobs-executed>1231231</jobs-executed>
+	<runningsince>2001-12-17T09:30:47Z</runningsince>
+	<group-names>
+		<group name="FGSMS"/>
+		<group name="FGSMS2"/>
+	</group-names>
+	<jobs>
+		<job name="jobname" group="mygroup">
+			<durable>true</durable>
+			<stateful>false</stateful>
+			<volatile>true</volatile>
+		</job>
+		<job name="jobname2" group="mygroup2">
+			<durable>true</durable>
+			<stateful>false</stateful>
+			<volatile>true</volatile>
+		</job>
+	</jobs>
+	<triggers>
+		<triggerGroup name="trigger1group">
+			<trigger name="trigger1"/>
+			<trigger name="trigger2"/>
+		</triggerGroup>
+	</triggers>
+</quartz-status>

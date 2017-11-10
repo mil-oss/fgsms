@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <!-- BEGIN use this for CAC/PKI authentication only. comment out if using username/password
+    <filter>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <filter-class>org.miloss.fgsms.auth.CACPKI_LoginFilter</filter-class>
+        <init-param>
+            <description>pipe symbole delimited, spacing is not critical </description>
+            <param-name>AuthorizedDelegates</param-name>
+            <param-value>CN=fgsms, OU=USA, OU=PKI, OU=DOD, O=U.S. Government, C=US</param-value>
+        </init-param>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+        <filter-mapping>
+        <filter-name>FGSMS Authentication Filter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping> -->
+    <!-- END use this for CAC/PKI authentication only. comment out if using username/password -->
+	
+	<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>WEB-INF/beans.xml</param-value>
+  </context-param>
+
+
+
+    <context-param>
+         <param-name>quartz:config-file</param-name>
+         <!-- default on tomcat is tomcat/bin folder -->
+         <param-value>..\webapps\FGSMSServices\WEB-INF\quartz-tomcat.properties</param-value>
+     </context-param>
+     <context-param>
+         <param-name>quartz:shutdown-on-unload</param-name>
+         <param-value>true</param-value>
+     </context-param>
+     <context-param>
+         <param-name>quartz:start-on-load</param-name>
+         <param-value>true</param-value>
+     </context-param>
+     
+     <listener>
+         <listener-class>
+             org.quartz.ee.servlet.QuartzInitializerListener
+         </listener-class>
+     </listener>
+     
+     
+        <listener>
+         <listener-class>
+             org.miloss.fgsms.auxsrv.JobController
+         </listener-class>
+     </listener>
+        
+        
+   <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>       
+  <servlet>
+    <servlet-name>CXFServlet</servlet-name>
+    <servlet-class>
+      org.apache.cxf.transport.servlet.CXFServlet
+		</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+    <servlet>
+        <servlet-name>ReportFetch</servlet-name>
+        <servlet-class>org.miloss.fgsms.services.reporting.ReportFetch</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReportFetch</servlet-name>
+        <url-pattern>/ReportFetch</url-pattern>
+    </servlet-mapping>
+	
+	<servlet-mapping>
+    <servlet-name>CXFServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  
+  
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All resources</web-resource-name>
+            <url-pattern>/services</url-pattern>
+        
+            <url-pattern>/ReportFetch</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>everyone</role-name>
+        </auth-constraint>
+        <!-- require SSL
+          <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint> -->
+    </security-constraint>
+    <!-- This is for CAC/PKI Mode   
+ When changing, be sure to modify jboss-web.xml to change the security domain
+ 
+         <login-config>
+            <auth-method>CLIENT-CERT</auth-method>
+            <realm-name>FGSMS Services</realm-name>
+        </login-config>
+    -->
+    <!--This is for Username/Password mode BASIC
+    When changing, be sure to modify jboss-web.xml to change the security domain    -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>FGSMS Services</realm-name>
+    </login-config>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorpage.jsp</location>
+    </error-page>
+    <security-role>
+        <description/>
+        <role-name>everyone</role-name>
+    </security-role>
+  
+</web-app>

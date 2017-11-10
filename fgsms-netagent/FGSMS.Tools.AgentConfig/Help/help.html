@@ -1,0 +1,36 @@
+<html>
+These are the available settings for .NET agents. This applies to ASP.NET and WCF web services agents and the persistent storage agent.
+<table border=1>
+<tr><td>Key</th><th>Example Value</th><th>Description</th></tr>
+<tr><td>FGSMS.DCS.URL</td><td>http://localhost:8888/fgsmsServices/services/DCS</td><td>A pipe "|" symbol delimited list of FGSMS Data Collector service URLs. All URLs must use the same authentication mode.</td></tr>
+<tr><td>org.miloss.fgsms.PCS.URL</td><td>http://localhost:8180/fgsmsServices/services/PCS</td><td>A pipe "|" symbol delimited list of FGSMS Policy Configuration service URLs. All URLs must use the same authentication mode.</td></tr>
+<tr><td>org.miloss.fgsms.SS.URL</td><td>http://localhost:8180/fgsmsServices/services/SS</td><td>A pipe "|" symbol delimited list of FGSMS Status service URLs. All URLs must use the same authentication mode.</td></tr>
+<tr><td>org.miloss.fgsms.IgnoreList</td><td>http://localhost/service</td><td>A pipe "|" symbol delimited list of URLs to explicitly NOT montior. Comotion repository is a good example.</td></tr>
+<tr><td>org.miloss.fgsms.agent.Operatingmode</td><td>ONLINE</td><td>ONLINE or OFFLINE, case sensitive. Online = normal operation, Offline=store all data to the persistent storage location.</td></tr>
+<tr><td>org.miloss.fgsms.message.processor.dead.message.queue.duration</td><td>60000</td><td>Time in milliseconds from which the agent will declare a message as expired.</td></tr>
+<tr><td>org.miloss.fgsms.AgentAuthMode</td><td>usernamePassword</td><td>usernamePassword or PKI, case sensitive. The authentication mode that your FGSMS server is set to.</td></tr>
+<tr><td>org.miloss.fgsms.AgentAuthModePKIInfo</td><td>0414</td><td>If using PKI, this represents the certificate serial number of the certificate this agent will use to authenticate itself with the FGSMS server. It must also be granted the "agent" role in FGSMS.</td></tr>
+<tr><td>org.miloss.fgsms.AgentAuthModeUsername</td><td><tr><td>fgsmsagent</td><td>If using usernamePassword, this represents the username this agent will use to authenticate itself with the FGSMS server. It must also be granted the "agent" role in FGSMS.</td></tr>
+<tr><td>org.miloss.fgsms.AgentAuthModePassword</td><td>bZPq3oiQev2VZmzeE5W3aA==</td><td>If using usernamePassword, this is the password used. It must be encrypted using the utility FGSMS.Util.exe or via Tools, Password Encryptor. This is AES 256 bit</td></tr>
+<tr><td>org.miloss.fgsms.agent.dependencyinjection.enabled</td><td>true</td><td>true/false, enables or disables HTTP header injection for web services</td></tr>
+<tr><td>org.miloss.fgsms.agent.unavailablebehavior</td><td>HOLDPERSIST</td><td>In the event all of the FGSMS web services are down, this setting defines how the agent should behave. PERSIST, keep transaction records in memory until the endpoints are back up and running. PURGE, throw it away, HOLDPERSIST, store it to disk (requires the .NET Persistent agent to be installed and running.</td></tr>
+<tr><td>org.miloss.fgsms.agent.persistlocation</td><td>c:\temp\fgsms</td><td>the path to store transactional data.</td></tr>
+<tr><td>org.miloss.fgsms.policyconfigurationservice.algorithm</td><td>FAILOVER</td><td>FAILOVER or ROUNDROBIN, algorithm to use for load balancing on URLs</td></tr>
+<tr><td>org.miloss.fgsms.policyconfigurationservice.retry</td><td>1</td><td>number of times to retry a given FGSMS service url</td></tr>
+<tr><td>org.miloss.fgsms.datacollectorservice.algorithm</td><td>FAILOVER</td><td>FAILOVER or ROUNDROBIN, algorithm to use for load balancing on URLs</td></tr>
+<tr><td>org.miloss.fgsms.datacollectorservice.retry</td><td>1</td><td>number of times to retry a given FGSMS service url</td></tr>
+<tr><td>org.miloss.fgsms.discovery.interval</td><td>60000</td><td>the period of time from which to search for new FGSMS urls</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.enabled</td><td>false</td><td>true/false to enable UDDI Discovery which will search for FGSMS's PCS and DCS urls</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.inquiry.url</td><td>http://localhost:8080/juddiv3/services/inquiry</td><td>URL of the inquiry service</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.inquiry.authrequired</td><td>false</td><td>Is authentication required to access the inquiry service?</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.security.url</td><td>http://localhost:8080/juddiv3/services/security</td><td>URL of the security service</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.security.username</td><td>readonly</td><td>description</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.security.password</td><td>BxM/31xapyWiYvr1RxR0bA==</td><td>Encrypt using the tool</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.lookup.findType</td><td>EndpointKeyWord</td><td> EndpointBindingKey, loads from a BindingTemplate Key, this must be the unique identifier for the binding template containing 0 or more endpoints
+    EndpointKeyWord, attempts to find services by name, aka the display name
+    ServiceEntityKey loads from a BusinessService key, this must be the unique identifier for the business service containing 0 or more binding templates with 0 or more endpoints
+	</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.lookup.dcs</td><td>uddi:juddi.apache.org:6843d553-b512-4a6b-9632-9075392b95a2</td><td>the DCS lookup key</td></tr>
+<tr><td>org.miloss.fgsms.discovery.uddi.lookup.pcs</td><td><tr><td>FGSMS.PCS</td><td>the PCS lookup key</td></tr>
+</table>
+</html>

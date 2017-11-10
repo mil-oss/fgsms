@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:class="urn:us:gov:ic:ism:v2" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:common" xmlns="urn:org:miloss:fgsms:services:interfaces:common" xmlns:sla="urn:org:miloss:fgsms:services:interfaces:sla" xmlns:muws-p1-xs="http://docs.oasis-open.org/wsdm/muws1-2.xsd" targetNamespace="urn:org:miloss:fgsms:services:interfaces:common" elementFormDefault="qualified" attributeFormDefault="unqualified"
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+  jaxb:extensionBindingPrefixes="xjc"
+  jaxb:version="1.0"  
+  >
+
+  
+	<xs:import namespace="urn:us:gov:ic:ism:v2" schemaLocation="IC-ISM-v2.xsd"/>
+	<xs:complexType name="SecurityWrapper">
+		<xs:annotation>
+			<xs:documentation>
+				provides a simple wrapper that adds caveat information to classification levels
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="class:ClassificationType" default="U">
+				<xs:annotation>
+					<xs:documentation>
+						IC-ISM Classification level
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="caveats" type="xs:string" default="">
+				<xs:annotation>
+					<xs:documentation>
+						Default caveat is empty string
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="policyType">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the type of policy for a specific fgsms service policy. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Transactional"/>
+			<xs:enumeration value="Statistical"/>
+			<xs:enumeration value="Status"/>
+			<xs:enumeration value="Machine"/>
+			<xs:enumeration value="Process"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="header">
+		<xs:annotation>
+			<xs:documentation>message headers, such as http headers</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AlertMessage" type="tns:AlertMessageDefinition">
+		<xs:annotation>
+			<xs:documentation>This represents some type of alert that was identified by fgsms. This is used for sending alert messages</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AlertMessageDefinition">
+		<xs:sequence>
+			<xs:element name="classification" type="tns:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uri" type="xs:string"/>
+			<xs:element name="message" type="xs:string"/>
+			<xs:element name="timestamp" type="xs:dateTime"/>
+			<xs:element name="PolicyType" type="tns:policyType" default="Transactional">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>Defines what type of policy this is. The real implication is that service SLAs need to be validated against this</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetworkAdapterInfo">
+		<xs:sequence>
+			<xs:element name="adapterName" type="xs:string"/>
+			<xs:element name="adapterDescription" type="xs:string"/>
+			<xs:element name="mtu" type="xs:long"/>
+			<xs:element name="mac" type="xs:string"/>
+			<xs:element name="ip" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="dns" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SubnetMask" type="xs:string"/>
+			<xs:element name="defaultGateway" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="driveInformation">
+		<xs:annotation>
+			<xs:documentation>information about a specific drive or partition</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operational" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true, the drive is online and operational, false it's either offline or not mounted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the mounted drive letter or partition string for unix or linux</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemid" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the file system identifier. on windows, it's typically the same as the partition name, on linux it's typically /dev/hda1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="xs:string"  nillable="true">
+				<xs:annotation>
+					<xs:documentation>a unique identifier, used internally only, no need to set this value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalspace" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the size of the partition in megabytes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="freespace" type="xs:long"  nillable="true">
+				<xs:annotation>
+					<xs:documentation>the size of the partition in megabytes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>description information or the type of device this drive resides on</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timestamp" type="xs:dateTime" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the timestamp when these values were observed. Used only for accessing recorded data. Agents need not set this field, it will be set at the server</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kilobytespersecondDiskRead" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>KB/sec disk</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kilobytespersecondDiskWrite" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>KB/sec disk</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operationalstatus" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>current operating status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetworkAdapterPerformanceData">
+		<xs:sequence>
+			<xs:element name="kilobytespersecondNetworkReceive" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>KB/sec network</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kilobytespersecondNetworkTransmit" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>KB/sec network</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adapterName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the device name, such as eth0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MachinePerformanceData">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>leave this field empty, it is used internally</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uri" type="xs:string" nillable="false">
+				<xs:annotation>
+					<xs:documentation>urn:hostname:system or urn:hostname:item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operationalstatus" type="xs:boolean" nillable="false">
+				<xs:annotation>
+					<xs:documentation>current operating status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusmessage" type="xs:string" nillable="false">
+				<xs:annotation>
+					<xs:documentation>current operating status message</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetworkAdapterPerformanceData" type="tns:NetworkAdapterPerformanceData" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>network adapter statistics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="driveInformation" type="tns:driveInformation" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>disk statistics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bytesusedMemory" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>bytes memory in use</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="percentusedCPU" type="xs:double" nillable="true">
+				<xs:annotation>
+					<xs:documentation>% cpu in use</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberofActiveThreads" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>number of running threads</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timestamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>the timestamp when these values were observed. Used only for accessing recorded data. Agents need not set this field, it will be set at the server</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startedAt" type="xs:dateTime" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the approximate timestamp when this item was started. If the timestamp is not available, assume that it was started with the operating sytstem.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProcessPerformanceData">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>leave this field empty, it is used internally</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uri" type="xs:string" nillable="false">
+				<xs:annotation>
+					<xs:documentation>urn:hostname:system or urn:hostname:item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operationalstatus" type="xs:boolean" nillable="false">
+				<xs:annotation>
+					<xs:documentation>current operating status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusmessage" type="xs:string" nillable="false">
+				<xs:annotation>
+					<xs:documentation>current operating status message</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bytesusedMemory" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>bytes memory in use</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="percentusedCPU" type="xs:double" nillable="true">
+				<xs:annotation>
+					<xs:documentation>% cpu in use</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberofActiveThreads" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>number of running threads</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timestamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>the timestamp when these values were observed. Used only for accessing recorded data. Agents need not set this field, it will be set at the server</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startedAt" type="xs:dateTime" nillable="false">
+				<xs:annotation>
+					<xs:documentation>the approximate timestamp when this item was started. If the timestamp is not available, assume that it was started with the operating sytstem.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="openFileHandles" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>The number of open file handles</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetOperatingStatusRequestMessage">
+		<xs:annotation>
+			<xs:documentation>
+				since RC7
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="tns:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>
+						IC-ISM Classification level
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetOperatingStatusResponseMessage">
+		<xs:annotation>
+			<xs:documentation>
+			since RC7
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="tns:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>
+						IC-ISM Classification level
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="xs:boolean"/>
+			<xs:element name="StatusMessage" type="xs:string"/>
+			<xs:element name="StartedAt" type="xs:dateTime"/>
+			<xs:element name="DataSentSuccessfully" type="xs:long"/>
+			<xs:element name="DataNotSentSuccessfully" type="xs:long"/>
+			<xs:sequence>
+				<xs:element name="VersionInfo">
+					<xs:complexType>
+						<xs:attribute name="VersionSource" type="xs:string"/>
+						<xs:attribute name="VersionData" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetOperatingStatus">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetOperatingStatusRequestMessage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetOperatingStatusResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetOperatingStatusResponseMessage"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="NameValuePairSet">
+		<xs:annotation>
+			<xs:documentation>All fields must be limited to 128 chars or less</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="Items" type="tns:NameValuePair"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameValuePair">
+		<xs:annotation>
+			<xs:documentation>All fields must be limited to 128 chars or less</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="Value" type="xs:string"  nillable="true"/>
+			<xs:element name="Encrypted" type="xs:boolean" nillable="true"/>
+			<xs:element name="EncryptOnSave" type="xs:boolean" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AgentAction">
+		<xs:sequence>
+			<xs:element name="uri" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The URI of the machine where this action is to be performed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>A unique identifier for this action</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="created" type="xs:dateTime" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Timestamp that this was created at </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="createdby" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>username of the person that created the action</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="updated" type="xs:dateTime" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Timestamp that this action was last updated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="working_dir" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>This is the directory that the command will execute from</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="command" type="xs:string" >
+				<xs:annotation>
+					<xs:documentation>The command to be executed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="output" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The output of the command, if any</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="executiontime" type="xs:long" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Time in milliseconds that it look to execute the command</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="tns:AgentActionStatus" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Status of the Agent Action</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AgentActionStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="New"/>
+			<xs:enumeration value="Received"/>
+			<xs:enumeration value="Processing"/>
+			<xs:enumeration value="Complete"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TimeRange">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;summary&gt;
+             TimeRange
+             &lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="end" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>&lt;summary&gt;
+             end
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="start" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>&lt;summary&gt;
+             start
+             &lt;/summary&gt;</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TimeRange" type="tns:TimeRange" nillable="true">
+		<xs:annotation>
+			<xs:documentation>time range</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

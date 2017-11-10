@@ -1,0 +1,20 @@
+;
+.Set CabinetNameTemplate=org.miloss.fgsms.webparts.wsp
+.set DiskDirectoryTemplate=CD-ROM; All cabinets go in a single directory
+.Set CompressionType=LZX;** All files are compressed in cabinet files
+.Set UniqueFiles='ON'
+.Set Cabinet=on
+.Set DiskDirectory1=.
+
+
+".\bin\debug\FGSMS.WebParts.dll" FGSMS.WebParts.dll
+".\bin\debug\FGSMS.NETAgent.dll" FGSMS.NETAgent.dll
+
+".\solution\org.miloss.fgsms\Feature.xml"	"org.miloss.fgsms\Feature.xml"
+".\solution\org.miloss.fgsms\elementManifest.xml"	"org.miloss.fgsms\elementManifest.xml"
+".\solution\manifest.xml"	"manifest.xml"
+
+".\solution\org.miloss.fgsms\org.miloss.fgsms.CurrentStatusWebPart.webpart"		"org.miloss.fgsms\org.miloss.fgsms.CurrentStatusWebPart.webpart"
+
+
+;*** <the end>

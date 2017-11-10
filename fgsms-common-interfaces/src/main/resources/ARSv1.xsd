@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:class="urn:us:gov:ic:ism:v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:automatedReportingService" xmlns:pcs="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:rs="urn:org:miloss:fgsms:services:interfaces:reportingService" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="urn:org:miloss:fgsms:services:interfaces:automatedReportingService" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:reportingService" schemaLocation="RSv6.xsd"/>
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" schemaLocation="PCS8.xsd"/>
+	<xs:complexType name="ExistingReportDefitions">
+		<xs:sequence>
+			<xs:element name="job" type="tns:ReportDefinition"/>
+			<xs:element name="reports" type="tns:CompletedJobs" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompletedJobs">
+		<xs:sequence>
+			<xs:element name="reportId" type="xs:string"/>
+			<xs:element name="timestamp" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="abstractSchedule" abstract="true">
+		<xs:sequence>
+			<xs:element name="startingAt" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+        <xs:complexType name="immediateSchedule" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:abstractSchedule">
+				<xs:sequence>
+					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+        <xs:complexType name="oneTimeSchedule" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:abstractSchedule">
+				<xs:sequence>
+					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="dailySchedule" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:abstractSchedule">
+				<xs:sequence>
+					<xs:element name="reoccurs" type="xs:integer" default="1">
+						<xs:annotation>
+							<xs:documentation>reoccurs every x days, default 1</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="weeklySchedule" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:abstractSchedule">
+				<xs:sequence>
+					<xs:element name="reoccurs" type="xs:integer" default="1">
+						<xs:annotation>
+							<xs:documentation>reoccurs every x weeks, default 1</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DayOfTheWeekIs" type="tns:daynames" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="monthlySchedule" mixed="false">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:abstractSchedule">
+				<xs:sequence>
+					<xs:element name="MonthNameIs" type="tns:monthnames" maxOccurs="12"/>
+					<xs:element name="DayOfTheMonthIs" type="xs:int" maxOccurs="31"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReportDefinition">
+		<xs:sequence>
+			<xs:element name="friendlyName" type="xs:string" nillable="true"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+			<xs:element name="jobId" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>A UUID defining the report generation job definition. When creating a new one, list can be left blank. When updating it must be specified</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="owner" type="xs:string" nillable="true"/>
+			<xs:element name="lastRanAt" type="xs:dateTime" nillable="true"/>
+			<xs:element name="schedule" type="tns:scheduleDefinition"/>
+			<xs:element name="notifications" type="pcs:SLAAction" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional mechanisms to alert users that a report was generated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- report critera-->
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>Either a CSV or an HTML report must be selected, but not both</xs:documentation>
+				</xs:annotation>
+				<xs:element ref="tns:ExportCSVDataRequestMsg"/>
+				<xs:element ref="tns:ExportDataRequestMsg"/>
+			</xs:choice>
+			<xs:element name="additionalReaders" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A list of usernames of people that can also read the job and reports generated by this job</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+			<xs:simpleType name="joiner">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="AND"/>
+					<xs:enumeration value="OR"/>
+				</xs:restriction>
+			</xs:simpleType>
+			-->
+	<xs:simpleType name="monthnames">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Janurary"/>
+			<xs:enumeration value="Feburary"/>
+			<xs:enumeration value="March"/>
+			<xs:enumeration value="April"/>
+			<xs:enumeration value="May"/>
+			<xs:enumeration value="June"/>
+			<xs:enumeration value="July"/>
+			<xs:enumeration value="August"/>
+			<xs:enumeration value="September"/>
+			<xs:enumeration value="October"/>
+			<xs:enumeration value="November"/>
+			<xs:enumeration value="December"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="daynames">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Sunday"/>
+			<xs:enumeration value="Monday"/>
+			<xs:enumeration value="Tuesday"/>
+			<xs:enumeration value="Wednesday"/>
+			<xs:enumeration value="Thursday"/>
+			<xs:enumeration value="Friday"/>
+			<xs:enumeration value="Saturday"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--<xs:simpleType name="reportingFrequency">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Once"/>
+					<xs:enumeration value="Reoccurring"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="reportingTrigger">
+				<xs:sequence>
+					<xs:element type="tns:reportingFrequency" name="frequency"/>
+					<xs:element name="DayOfTheMonthIs" type="xs:int" maxOccurs="unbounded"/>
+					<xs:element name="DayOfTheWeekIs" type="tns:daynames" maxOccurs="unbounded"/>
+					<xs:element name="HourOfTheDayIs" type="xs:int" maxOccurs="unbounded"/>
+					<xs:element name="Joiner" type="tns:joiner"/>
+				</xs:sequence>
+			</xs:complexType>-->
+	<xs:complexType name="scheduleDefinition">
+		<xs:sequence>
+			<xs:element name="triggers" type="tns:abstractSchedule" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExportDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReportTypes" type="rs:ArrayOfReportTypeContainer" nillable="true">
+				<xs:annotation>
+					<xs:documentation>required, a list reports to generate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URLs" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>URL list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" type="tns:TimeRangeDiff" nillable="true">
+				<xs:annotation>
+					<xs:documentation>time range</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ExportCSVDataRequestMsg" type="tns:ExportCSVDataRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExportDataRequestMsg" type="tns:ExportDataRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TimeRangeDiff">
+		<xs:annotation>
+			<xs:documentation>time range</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="end" type="xs:duration">
+				<xs:annotation>
+					<xs:documentation>now - end = the end of this time period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="start" type="xs:duration">
+				<xs:annotation>
+					<xs:documentation>now minus duration = start at this time period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TimeRangeDiff" type="tns:TimeRangeDiff" nillable="true">
+		<xs:annotation>
+			<xs:documentation>time range</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ExportCSVDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URLs" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of urls to process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" type="tns:TimeRangeDiff" nillable="true">
+				<xs:annotation>
+					<xs:documentation>time rnage</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExportType" type="rs:ExportRecordsEnum">
+				<xs:annotation>
+					<xs:documentation>type of records to export</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- WSDL in/out definitions -->
+	<xs:element name="GetMyScheduledReports">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetMyScheduledReportsRequestMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMyScheduledReportsRequestMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recordlimit" type="xs:int" default="100"/>
+			<xs:element name="offset" type="xs:int" default="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMyScheduledReportsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetMyScheduledReportsResponseMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMyScheduledReportsResponseMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompletedJobs" type="tns:ExistingReportDefitions" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddOrUpdateScheduledReport">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:AddOrUpdateScheduledReportRequestMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddOrUpdateScheduledReportRequestMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobs" type="tns:ReportDefinition" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddOrUpdateScheduledReportResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:AddOrUpdateScheduledReportResponseMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddOrUpdateScheduledReportResponseMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobs" type="tns:ReportDefinition" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>report generation jobs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string"/>
+			<xs:element name="success" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteScheduledReport">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:DeleteScheduledReportRequestMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteScheduledReportRequestMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobId" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteScheduledReportResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:DeleteScheduledReportResponseMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteScheduledReportResponseMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string"/>
+			<xs:element name="success" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetReport">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetReportRequestMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetReportRequestMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportId" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetReportResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetReportResponseMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetReportResponseMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportId" type="xs:string"/>
+			<xs:element name="zippedReport" type="xs:base64Binary"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteReport">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:DeleteReportRequestMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteReportRequestMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reportId" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteReportResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:DeleteReportResponseMsg"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteReportResponseMsg">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="message" type="xs:string"/>
+			<xs:element name="success" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

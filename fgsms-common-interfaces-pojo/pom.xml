@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.mil-oss</groupId>
+        <artifactId>fgsms-parent</artifactId>
+        <version>7.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>fgsms-common-interfaces-pojo</artifactId>
+    <packaging>jar</packaging>
+    <name>fgsms Interfaces WS Stubs and Schema Bindings Generated from WSDL without JAXB</name>
+    <description>fgsms data models without JAXB annotations, for future use with mobile systems</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.mil-oss</groupId>
+            <artifactId>fgsms-common-interfaces</artifactId>
+            <scope>provided</scope>
+            <version>${project.parent.version}</version>
+        </dependency>
+            
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <tasks>
+                                <property name="dependency.fgsms.core" value="${maven.dependency.org.miloss.fgsms-common-interfaces.jar.path}" />
+                                <property name="fgsms.core.dir" value="${basedir}/../fgsms-common-interfaces" />
+                                <echo>Copy from fgsms interfaces dir =${fgsms.core.dir}</echo>
+                                <ant antfile="${basedir}/build.xml">
+                                    <target name="copy-from-core" />
+                                    <target name="commentOutXmlAnnotations" />
+                                </ant>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

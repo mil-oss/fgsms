@@ -1,0 +1,18 @@
+﻿<Solution SolutionId="A50BC5F0-210E-4CE9-80EF-D541595DD0BA" xmlns="http://schemas.microsoft.com/sharepoint/" >
+  <Assemblies>
+    <Assembly Location="FGSMS.NETAgent.dll" DeploymentTarget="GlobalAssemblyCache" >
+    </Assembly>
+    <Assembly Location="FGSMS.WebParts.dll" DeploymentTarget="GlobalAssemblyCache" >
+      <SafeControls>
+        <SafeControl Assembly="FGSMS.WebParts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=eb2f31c22dc30917" Namespace="FGSMS.WebParts" TypeName="*" Safe="True" />
+      </SafeControls>
+    </Assembly>
+   
+  </Assemblies>
+
+  <FeatureManifests>
+    <FeatureManifest Location="org.miloss.fgsms\feature.xml" />
+  </FeatureManifests>
+ 
+  
+</Solution>

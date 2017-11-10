@@ -1,0 +1,10 @@
+<service-decorations xmlns="http://cxf.apache.org/xmlns/service-decoration/1.0.0">
+    <!-- doesn't work-->
+    <service-decoration>
+        <match interface="com.systematic.sitaware.tactical.comms.(*)">
+            <add-property name="org.apache.cxf.ws.in.interceptors" value="org.miloss.fgsms.agents.CXFInterceptorInService"/>
+            <add-property name="org.apache.cxf.ws.out.interceptors" value="org.miloss.fgsms.agents.CXFInterceptorOutService"/>
+        
+            </match>
+    </service-decoration>
+</service-decorations>

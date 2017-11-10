@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+
+ 
+
+ 
+ U.S. Government, Department of the Army
+ Army Materiel Command
+ Research Development Engineering Command
+ Communications Electronics Research Development and Engineering Center
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+     <parent>
+	  <groupId>org.mil-oss</groupId>
+	  <artifactId>fgsms-parent</artifactId>
+	  <version>7.0.0</version>
+     </parent>
+     <artifactId>fgsms-netagent</artifactId>
+     <packaging>pom</packaging>
+     <name>fgsms.Net Components</name>
+     <description>Yup, we're building .NET projects from Maven. Hu-wah</description>
+     <properties>
+	  <msbuild.exe>c:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe</msbuild.exe>
+	  <msbuild.config>Debug</msbuild.config>
+	  <msbuild.vstools>C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v14.0\</msbuild.vstools>
+	  <!--netsh.path>${env.SYSTEMROOT}\system32\netsh.exe</netsh.path>
+	  <msdeploy.path>C:\Program Files\IIS\Microsoft Web Deploy V3\</msdeploy.path>-->
+	     
+     </properties>
+	
+        
+     <profiles>
+	  <profile>
+	       <id>dotnet-compile</id>
+	       <activation>
+		    <os>
+			 <family>windows</family>
+		    </os>
+	       </activation>
+	       
+	       <build>
+	
+		    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>templating-maven-plugin</artifactId>
+                            <version>1.0.0</version>
+                            <executions>
+                                <execution>
+                                    <id>filter-src</id>
+                                    <goals>
+                                        <goal>filter-sources</goal>
+                                    </goals>
+                                     <configuration>      
+                                         <skipPoms>false</skipPoms>        
+                                    <sourceDirectory>${basedir}/FGSMS.NETAgent/Properties/filtered</sourceDirectory>
+                                    <outputDirectory>${basedir}/FGSMS.NETAgent/Properties</outputDirectory>
+                                  </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        
+			 <plugin>
+			      <groupId>org.codehaus.mojo</groupId>
+			      <artifactId>exec-maven-plugin</artifactId>
+			      <version>1.2.1</version>
+			      <configuration>
+				   
+			      </configuration>
+			      <executions>
+                                  <execution>
+					<id>clean-msbuild</id>
+					<phase>clean</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>${msbuild.exe}</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <environmentVariables>
+						  <VSToolsPath>${msbuild.vstools}</VSToolsPath>
+					     </environmentVariables>
+					     <arguments>
+						  <argument>/t:clean</argument>
+						  <argument>/p:Configuration=${msbuild.config}</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+                                   
+				   <execution>
+					<id>nuget</id>
+					<phase>validate</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>nuget.exe</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <environmentVariables>
+						  <VSToolsPath>${msbuild.vstools}</VSToolsPath>
+					     </environmentVariables>
+					     <arguments>
+						  <argument>restore</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+				   <!--<execution>
+					<id>remove-acl</id>
+					<phase>post-integration-test</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>${netsh.path}</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <arguments>
+						  <argument>http</argument>
+						  <argument>delete</argument>
+						  <argument>urlacl</argument>
+						  <argument>url=http://+:12345/JenkinsService</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+				   <execution>
+					<id>remove-acl6</id>
+					<phase>post-integration-test</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>${netsh.path}</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <arguments>
+						  <argument>http</argument>
+						  <argument>delete</argument>
+						  <argument>urlacl</argument>
+						  <argument>url=http://+:12346/JenkinsService</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+				   <execution>
+					<id>remove-acl7</id>
+					<phase>post-integration-test</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>${netsh.path}</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <arguments>
+						  <argument>http</argument>
+						  <argument>delete</argument>
+						  <argument>urlacl</argument>
+						  <argument>url=http://+:12347/JenkinsService</argument>
+					     </arguments>
+					</configuration>
+				   </execution>-->
+				   
+				   <execution>
+					<id>package-msbuild</id>
+					<phase>package</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>${msbuild.exe}</executable>
+					     <workingDirectory>${basedir}</workingDirectory>
+					     <environmentVariables>
+						  <VSToolsPath>${msbuild.vstools}</VSToolsPath>
+					     </environmentVariables>
+					     <arguments>
+                                                 <!-- target -->
+						  <argument>/t:build</argument>
+                                                  <!-- debug build-->
+						  <argument>/p:Configuration=${msbuild.config}</argument>
+						  <!-- creates zip + deploy scripts for test web services -->
+						  <argument>/p:DeployOnBuild=true</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+                                   
+                                   <execution>
+					<id>package-webpart</id>
+					<phase>package</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>makecab</executable>
+					     <workingDirectory>${basedir}/FGSMS.WebParts/FGSMS.WebParts/</workingDirectory>
+					     <environmentVariables>
+						  <VSToolsPath>${msbuild.vstools}</VSToolsPath>
+					     </environmentVariables>
+					     <arguments>
+                                                 <!-- target -->
+						  <argument>/f</argument>
+                                                  <!-- debug build-->
+						  <argument>cab.ddf</argument>
+					     </arguments>
+					</configuration>
+				   </execution>
+				   
+				   <!--
+				   <execution>
+					<id>deploy-helloworld</id>
+					<phase>package</phase>
+					<goals>
+					     <goal>exec</goal>
+					</goals>
+					<configuration>
+					     <executable>cmd.exe</executable>
+					     <workingDirectory>${basedir}/Tests/services/HelloWorldASPNET/obj/Debug/Package</workingDirectory>
+					     <arguments>
+						  <argument>/C</argument>
+						  <argument>HelloWorldASPNET.deploy.cmd</argument>
+						  <argument>/Y</argument>
+						  <argument>-disableRule:ApplicationExistsRule</argument>
+					     </arguments>
+					</configuration>
+				   </execution>-->
+			   
+			      <!-- TODO 
+			      additional checks for nunit install, iis install, etc
+			      
+				   deploy agent dll to gac
+				   apply machine.config changes
+				   deploy hello world service to IIS
+				   
+				   run tests
+				   
+                            remove hello world service from IIS
+                            remove from machine config
+                            remove dll from GAC
+                           
+                            <execution>
+                                <id>set-acl</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${netsh.path}</executable>
+                                    <workingDirectory>${basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>http</argument>
+                                        <argument>add</argument>
+                                        <argument>urlacl</argument>
+                                        <argument>url=http://+:12345/JenkinsService</argument>
+                                        <argument>user=everyone</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+			      
+				   
+                            <execution>
+                                <id>set-acl2</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${netsh.path}</executable>
+                                    <workingDirectory>${basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>http</argument>
+                                        <argument>add</argument>
+                                        <argument>urlacl</argument>
+                                        <argument>url=http://+:12346/JenkinsService</argument>
+                                        <argument>user=everyone</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+			      
+				   
+                            <execution>
+                                <id>set-acl3</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${netsh.path}</executable>
+                                    <workingDirectory>${basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>http</argument>
+                                        <argument>add</argument>
+                                        <argument>urlacl</argument>
+                                        <argument>url=http://+:12347/TC00165/svcBasic</argument>
+                                        <argument>user=everyone</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+			      
+				   
+                            <execution>
+                                <id>test-nunit</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${nunit.home}\bin\nunit-console-x86.exe</executable>
+                                    <workingDirectory>${basedir}</workingDirectory>
+                                    <arguments>
+                                        <argument>${basedir}\Tests\FGSMS.TestSuite\bin\Debug\FGSMS.NETTestSuite.dll</argument>
+                                        <argument>${basedir}\Tests\FGSMS.TestSuite2\bin\Debug\FGSMS.NETTestSuite2.dll</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution> -->   
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

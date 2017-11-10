@@ -1,0 +1,4898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by army (USACERDEC) -->
+<xs:schema xmlns:sla="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:class="urn:us:gov:ic:ism:v2" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:q42="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:q89="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:globalBindings generateIsSetMethod="true">
+				<xjc:serializable uid="1"/>
+			</jaxb:globalBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:element name="GetPluginHtmlFormattedDisplay">
+		<xs:annotation>
+			<xs:documentation>
+                    gets formatted html for a given plugin
+                </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetPluginHtmlFormattedDisplayRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+                                request message
+                            </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginHtmlFormattedDisplayRequestMsg">
+		<xs:sequence>
+			<xs:element name="GetPluginHtmlFormattedDisplayRequestMsgWrapper" type="tns:GetPluginHtmlFormattedDisplayRequestMsgWrapper" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPluginHtmlFormattedDisplayRequestMsgWrapper">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                    get formatted html
+                </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugintype" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Optional, used to filter result set. Options are FEDERATION_PUBLISH,SLA_RULE,SLA_ACTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="classname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The classname of the plugin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parameters" type="common:NameValuePair" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginHtmlFormattedDisplayRequestMsg" type="tns:GetPluginHtmlFormattedDisplayRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetPluginHtmlFormattedDisplayResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetPluginHtmlFormattedDisplayResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginHtmlFormattedDisplayResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            formatted html plugin info
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="htmlFormatedDisplay" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>plugin information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginHtmlFormattedDisplayResponseMsg" type="tns:GetPluginHtmlFormattedDisplayResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPluginInformation">
+		<xs:annotation>
+			<xs:documentation>
+			gets plugin details
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetPluginInformationRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginInformationRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+        gets the plugin list
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GetPluginInformationRequestWrapper" type="tns:GetPluginInformationRequestWrapper"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPluginInformationRequestWrapper">
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugin" type="tns:plugin"/>
+			<!--<xs:element name="optionalPolicyTypeFilter" nillable="true" type="common:policyType"></xs:element>-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginInformationRequestMsg" type="tns:GetPluginInformationRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPluginInformationResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetPluginInformationResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginInformationResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            plugin info
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="help" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>help information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="displayName" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>help information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requiredParameter" type="common:NameValuePair" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>help information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="optionalParameter" type="common:NameValuePair" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>help information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginInformationResponseMsg" type="tns:GetPluginInformationResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPluginList">
+		<xs:annotation>
+			<xs:documentation>
+			gets the plugin list
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetPluginListRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginListRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+        gets the plugin list
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugintype" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>Optional, used to filter result set. Options are FEDERATION_PUBLISH,SLA_ALERT,SLA_ACTION,REPORTING</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="optionalPolicyTypeFilter" type="common:policyType" nillable="true"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginListRequestMsg" type="tns:GetPluginListRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPluginListResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetPluginListResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetPluginListResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of plugins
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugins" type="tns:plugin" nillable="true" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>plugin information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getPluginListResponseMsg" type="tns:GetPluginListResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="unregisterPlugin">
+		<xs:annotation>
+			<xs:documentation>
+			unregisters a  plugin
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:UnregisterPluginRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UnregisterPluginRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         unregisters a plugin
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugin" type="tns:plugin" nillable="true"  maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="unregisterPluginRequestMsg" type="tns:UnregisterPluginRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="unregisterPluginResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:UnregisterPluginResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UnregisterPluginResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="unregisterPluginResponseMsg" type="tns:UnregisterPluginResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="registerPlugin">
+		<xs:annotation>
+			<xs:documentation>
+			registers a new plugin
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:RegisterPluginRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RegisterPluginRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         registers a new plugin
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugin" type="tns:plugin" nillable="true" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="registerPluginRequestMsg" type="tns:RegisterPluginRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="registerPluginResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:RegisterPluginResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RegisterPluginResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of processes
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RegisterPluginResponseMsg" type="tns:RegisterPluginResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="plugin">
+		<xs:sequence>
+			<xs:element name="classname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>class name for the plugin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="displayname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>display name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="plugintype" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>The type of plugin. Options are FEDERATION_PUBLISH,SLA_ALERT,SLA_ACTION,REPORTING</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policyTypes" type="common:policyType" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>this plugin can be used for the following policy types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAgentActionsByMachine">
+		<xs:annotation>
+			<xs:documentation>
+			returns a list of administer issued tasks
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetAgentActionsByMachineRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAgentActionsByMachineRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns a list of administrator defined tasks, at least one request parameter must be specified
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine hostname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uri" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine policy uri</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAgentActionsByMachineRequestMsg" type="tns:GetAgentActionsByMachineRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAgentActionsByMachineResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetAgentActionsByMachineResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAgentActionsByMachineResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of processes
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentActions" type="common:AgentAction" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>actions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAgentActionsByMachineResponseMsg" type="tns:GetAgentActionsByMachineResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UpdateAgentAction">
+		<xs:annotation>
+			<xs:documentation>
+updates an action, requires agent rights
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:UpdateAgentActionRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UpdateAgentActionRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+        updates an action, requires agent rights
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentAction" type="common:AgentAction">
+				<xs:annotation>
+					<xs:documentation>payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UpdateAgentActionRequestMsg" type="tns:UpdateAgentActionRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UpdateAgentActionResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:UpdateAgentActionResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UpdateAgentActionResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of processes
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UpdateAgentActionResponseMsg" type="tns:UpdateAgentActionResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeleteAgentActions">
+		<xs:annotation>
+			<xs:documentation>
+			deletes a list of administer issued tasks, all tasks must be in the complete status before deleting
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:DeleteAgentActionsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteAgentActionsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+       	deletes a list of administer issued tasks, all tasks must be in the complete status before deleting
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ActionIDs" type="xs:string" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Agent Action IDs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteAgentActionsRequestMsg" type="tns:DeleteAgentActionsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeleteAgentActionsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:DeleteAgentActionsResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteAgentActionsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteAgentActionsResponseMsg" type="tns:DeleteAgentActionsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CreateAgentAction">
+		<xs:annotation>
+			<xs:documentation>
+			creates a new administer issued tasks, leave ID blank, it will be created for you
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:CreateAgentActionRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CreateAgentActionRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+       creates a new administer issued tasks, leave ID blank, it will be created for you
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentAction" type="common:AgentAction" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Agent Actions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CreateAgentActionRequestMsg" type="tns:CreateAgentActionRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CreateAgentActionResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:CreateAgentActionResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CreateAgentActionResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentAction" type="common:AgentAction" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Agent Actions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CreateAgentActionResponseMsg" type="tns:CreateAgentActionResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMonitoredItemsByMachine">
+		<xs:annotation>
+			<xs:documentation>
+			returns a list of monitored services by hostname 
+			requires agent rights
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetMonitoredItemsByMachineRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMonitoredItemsByMachineRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns a list of processes being monitored
+			requires global privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine hostname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMonitoredItemsByMachineRequestMsg" type="tns:GetMonitoredItemsByMachineRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMonitoredItemsByMachineResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetMonitoredItemsByMachineResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMonitoredItemsByMachineResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of processes
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachinePolicy" type="tns:MachinePolicy">
+				<xs:annotation>
+					<xs:documentation>policy for the machine as a whole</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProcessPolicy" type="tns:ProcessPolicy" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of processes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMonitoredItemsByMachineResponseMsg" type="tns:GetMonitoredItemsByMachineResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetProcessListByMachine">
+		<xs:annotation>
+			<xs:documentation>
+			a
+			requires agent privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetProcessListByMachineRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PropertyPair">
+		<xs:sequence>
+			<xs:element name="propertyname" type="xs:string"/>
+			<xs:element name="propertyvalue" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MachineInformation">
+		<xs:annotation>
+			<xs:documentation>container for machine specific information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine hostname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uri" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>the service policy uri representing this machine if one exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addresses" type="common:NetworkAdapterInfo" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>IP Address v4 and v6</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domain" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>domain</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operatingsystem" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>operating system family and version number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cpucorecount" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>number of cpu cores</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="memoryinstalled" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>memory installed in bytes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="driveInformation" type="common:driveInformation" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>drive information, only specific total space, free space is not necessary here, nor is the field id (internal use only)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PropertyPair" type="tns:PropertyPair" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>a generic container for a collection of properties that do not fit into any of the defined fields.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SetProcessListByMachineRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         sets a list of processes that have been observed
+			requires agent
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agentType" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>the classname of the agent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachineInformation" type="tns:MachineInformation">
+				<xs:annotation>
+					<xs:documentation>Information about this machine</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="services" type="xs:string" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>a list of services running on this machine. follows standard uri practicies for fgsms
+								must include urn:lowercasehostname:type:identifying name 
+								whereas the agent is responsible for tying this string to a tangable service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetProcessListByMachineRequestMsg" type="tns:SetProcessListByMachineRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetProcessListByMachineResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:SetProcessListByMachineResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetProcessListByMachineResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            contains the current list of 
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReportingFrequency" type="xs:duration">
+				<xs:annotation>
+					<xs:documentation>period of time from which to send back performance data
+									i.e. send data back every 5 mins</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachinePolicy" type="tns:MachinePolicy">
+				<xs:annotation>
+					<xs:documentation>policy for the machine as a whole</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProcessPolicy" type="tns:ProcessPolicy" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of processes the agent needs to monitor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetProcessListByMachineResponseMsg" type="tns:SetProcessListByMachineResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetProcessesListByMachine">
+		<xs:annotation>
+			<xs:documentation>
+			returns a list of machine hostnames that have been observed in a given domain
+			requires global privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetProcessesListByMachineRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetProcessesListByMachineRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns a list of processes that have been observed
+			requires global privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hostname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine hostname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domainname" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine domain name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetProcessesListByMachineRequestMsg" type="tns:GetProcessesListByMachineRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetProcessesListByMachineResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetProcessesListByMachineResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetProcessesListByMachineResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of processes
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProcessName" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of processes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachineInformation" type="tns:MachineInformation" nillable="true">
+				<xs:annotation>
+					<xs:documentation>machine hostname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastupdateat" type="xs:dateTime" nillable="true">
+				<xs:annotation>
+					<xs:documentation>information last refreshed at</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetProcessesListByMachineResponseMsg" type="tns:GetProcessesListByMachineResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMachinesByDomain">
+		<xs:annotation>
+			<xs:documentation>
+			returns a list of machine hostnames that have been observed in a given domain
+			requires global privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetMachinesByDomainRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMachinesByDomainRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns a list of machines that have been observed
+			requires global privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domain" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>domain name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMachinesByDomainRequestMsg" type="tns:GetMachinesByDomainRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMachinesByDomainResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetMachinesByDomainResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMachinesByDomainResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of machine hostnnames
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hostname" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of names</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMachinesByDomainResponseMsg" type="tns:GetMachinesByDomainResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetDomainList">
+		<xs:annotation>
+			<xs:documentation>
+			returns a list of domains that have been observed
+			requires global privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetDomainListRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetDomainListRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns a list of domains that have been observed
+			requires global privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetDomainListRequestMsg" type="tns:GetDomainListRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetDomainListResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:GetDomainListResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetDomainListResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            list of domain names
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Domains" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>list of domain names</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetDomanListResponseMsg" type="tns:GetDomainListResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ClearCredentials">
+		<xs:annotation>
+			<xs:documentation>
+			removes the credentials set for accessing a specific service for status information
+			requires write access
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:ClearCredentialsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ClearCredentialsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         removes the credentials from an item, requires write access
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            the service url that this credential set applies to. This credential should have the minimum rights necessary to determine if something is operational or not
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ClearCredentialsRequestMsg" type="tns:ClearCredentialsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ClearCredentialsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:ClearCredentialsResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ClearCredentialsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ClearCredentialsResponseMsg" type="tns:SetCredentialsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetCredentials">
+		<xs:annotation>
+			<xs:documentation>
+			request message, sets or replaces the credentials set for accessing a specific service for status information requires write access
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetCredentialsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetCredentialsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         request message, sets or replaces the specific parameters, items not specified will not be affected  requires write access
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            the service url that this credential set applies to. This credential should have the minimum rights necessary to determine if something is operational or not
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="style" type="tns:TransportAuthenticationStyle" default="NA"/>
+			<!-- possibly add authenticaiton style to this -->
+			<xs:element name="username" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            username and optionally domain information
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="password" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            password
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="passwordEncrypted" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            set to true if the password is already encrypted using fgsms's encryption keys in Java
+            when set to false, it will be encrypted before storage
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TransportAuthenticationStyle">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HTTP_BASIC"/>
+			<xs:enumeration value="HTTP_NTLM"/>
+			<xs:enumeration value="HTTP_DIGEST"/>
+			<xs:enumeration value="OTHER"/>
+			<xs:enumeration value="NA">
+				<xs:annotation>
+					<xs:documentation>default value</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SetCredentialsRequestMsg" type="tns:SetCredentialsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetCredentialsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:SetCredentialsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetCredentialsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetCredentialsResponseMsg" type="tns:SetCredentialsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RemoveGeneralSettings">
+		<xs:annotation>
+			<xs:documentation>
+			request message, removes a specific parameters, items not specified will not be affected  requires global admin privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:RemoveGeneralSettingsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RemoveGeneralSettingsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+       	request message, removes a specific parameters, items not specified will not be affected  requires global admin privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="keyNameValue" type="tns:keyNameValue" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            values are not required, only key and name
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="RemoveGeneralSettingsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:RemoveGeneralSettingsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RemoveGeneralSettingsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RemoveGeneralSettingsResponseMsg" type="tns:RemoveGeneralSettingsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetGeneralSettings">
+		<xs:annotation>
+			<xs:documentation>
+			request message, sets or replaces specific parameters, items not specified will not be affected  requires global admin privledges
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetGeneralSettingsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetGeneralSettingsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         request message, sets or replaces specific parameters, items not specified will not be affected  requires global admin privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="keyNameValueEnc" type="tns:keyNameValueEnc" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            properties list
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetGeneralSettingsRequestMsg" type="tns:SetGeneralSettingsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetGeneralSettingsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:SetGeneralSettingsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetGeneralSettingsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetGeneralSettingsResponseMsg" type="tns:SetGeneralSettingsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetGeneralSettings">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetGeneralSettingsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetGeneralSettingsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         optional parameter, key, filters property names by key
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="keyvalue" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>optional, the key to filter settings on.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetGeneralSettingsRequestMsg" type="tns:GetGeneralSettingsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetGeneralSettingsResponse">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetGeneralSettingsResult" type="tns:GetGeneralSettingsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetGeneralSettingsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            returns a list of properties that are used for SLA email notifications
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="keyNameValue" type="tns:keyNameValue" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            the properties list
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetGeneralSettingsResponseMsg" type="tns:GetGeneralSettingsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="keyNameValueEnc">
+		<xs:annotation>
+			<xs:documentation>provides a wrapper to include a shouldEncrypt field</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="keyNameValue" type="tns:keyNameValue">
+				<xs:annotation>
+					<xs:documentation>standard key name value property set</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shouldEncrypt" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>if true, the value will be encrypted before writting to disk</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="keyNameValue">
+		<xs:annotation>
+			<xs:documentation>
+			properties list, name value pairs
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="propertyKey" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>property key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertyName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>property name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertyValue" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>property value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMailSettings">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetMailSettingsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMailSettingsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty request message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMailSettingsRequestMsg" type="tns:GetMailSettingsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMailSettingsResponse">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetMailSettingsResult" type="tns:GetMailSettingsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMailSettingsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            returns a list of properties that are used for SLA email notifications
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertiesList" type="tns:propertiesList" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            the properties list
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMailSettingsResponseMsg" type="tns:GetMailSettingsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="propertiesList">
+		<xs:annotation>
+			<xs:documentation>
+			properties list, name value pairs
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="propertyName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>property name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertyValue" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>property value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetMailSettings">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetMailSettingsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetMailSettingsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            sets a list of properties for sending email alerts, requires global admin privledges
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="propertiesList" type="tns:propertiesList" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            user list
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetMailSettingsRequestMsg" type="tns:SetMailSettingsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetMailSettingsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:SetMailSettingsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetMailSettingsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetMailSettingsResponseMsg" type="tns:SetMailSettingsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAgentPrinicples">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetAgentPrinicplesRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAgentPrinicplesRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty request message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAgentPrinicplesRequestMsg" type="tns:GetAgentPrinicplesRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAgentPrinicplesResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetAgentPrinicplesResult" type="tns:GetAgentPrinicplesResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAgentPrinicplesResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            returns a list of users that have the agent rights
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserList" type="tns:ArrayOfUserInfo" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						the user list
+					   </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAgentPrinicples">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetAgentPrinicplesRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAgentPrinicplesRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            sets a list of users to have the agent role
+            removes all previous entries
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserList" type="tns:ArrayOfUserInfo" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            user list
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAgentPrinicplesResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="tns:SetAgentPrinicplesResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+			request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAgentPrinicplesResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            empty response message
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAgentPrinicplesResponseMsg" type="tns:SetAgentPrinicplesResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAvailableAlertRegistrations">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetAvailableAlertRegistrationsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAvailableAlertRegistrationsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns the SLAs that have email actions setup and that the current user has at least read access to
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAvailableAlertRegistrationsRequestMsg" type="tns:GetAvailableAlertRegistrationsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+			request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAvailableAlertRegistrationsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetAvailableAlertRegistrationsResponseMsg" type="tns:GetAvailableAlertRegistrationsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAvailableAlertRegistrationsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServicePolicy" type="tns:ServicePolicy" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>the policy element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMyEmailAddress">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetMyEmailAddressRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMyEmailAddressRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns the email address of the current user
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetMyEmailAddressRequestMsg" type="tns:GetMyEmailAddressRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetMyEmailAddressResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetMyEmailAddressResponseMsg" type="tns:GetMyEmailAddressResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetMyEmailAddressResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email" type="xs:string" maxOccurs="4">
+				<xs:annotation>
+					<xs:documentation>
+email address
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetMyEmailAddress">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetMyEmailAddressRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetMyEmailAddressRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns the email address of the current user
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email" type="xs:string" maxOccurs="4">
+				<xs:annotation>
+					<xs:documentation>
+email address
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetMyEmailAddressRequestMsg" type="tns:SetMyEmailAddressRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetMyEmailAddressResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetMyEmailAddressResponseMsg" type="tns:SetMyEmailAddressResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetMyEmailAddressResponseMsg">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAlertRegistrations">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetAlertRegistrationsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAlertRegistrationsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         returns the list of SLA alerts that the current user is registered to be alerted of
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAlertRegistrationsRequestMsg" type="tns:GetAlertRegistrationsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAlertRegistrationsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetAlertRegistrationsResponseMsg" type="tns:GetAlertRegistrationsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAlertRegistrationsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="items" type="tns:SLAregistration" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>collection of sla registrations</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAlertRegistrations">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetAlertRegistrationsRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAlertRegistrationsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+         sets the list of SLA alerts that the current user is registered to be alerted of
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="items" type="tns:SLAregistration" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+request message
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAlertRegistrationsRequestMsg" type="tns:SetAlertRegistrationsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetAlertRegistrationsResponse">
+		<xs:annotation>
+			<xs:documentation>
+response message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetAlertRegistrationsResponseMsg" type="tns:SetAlertRegistrationsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+response message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAlertRegistrationsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SLAregistration">
+		<xs:annotation>
+			<xs:documentation>
+sla registration object
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SLA_ID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+the uuid of the sla id as defined within a service policy
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="service_uri" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+the uri of the service with the given sla policy
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ElevateSecurityLevel">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:ElevateSecurityLevelRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>
+request message
+			</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ElevateSecurityLevelRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            the target security classification level
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ElevateSecurityLevelRequestMsg" type="tns:ElevateSecurityLevelRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+request message
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ElevateSecurityLevelResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ElevateSecurityLevelResponseMsg" type="tns:ElevateSecurityLevelResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ElevateSecurityLevelResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>&lt;/summary&gt;</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfSLA">
+		<xs:annotation>
+			<xs:documentation>
+sla container
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SLA" type="sla:SLA" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+sla info
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfSLAElement" type="sla:ArrayOfSLA" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+wrapper element
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SLA">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            Service Level Aggrements
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="guid" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>a unique identifier to identify this sla record</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Action" type="sla:ArrayOfSLAActionBaseType" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             listing of actions that will be taken when this SLA is violated
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rule" type="sla:RuleBaseType" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             a tree structure containing rules that will trigger SLA actions
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SLA" type="sla:SLA" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+sla wrapper
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfSLAActionBaseType">
+		<xs:annotation>
+			<xs:documentation>
+array of SLA actions to be performed
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SLAAction" type="sla:SLAAction" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+SLA actions
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RuleBaseType" type="sla:RuleBaseType" abstract="true" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+SLA trigger rules
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RuleBaseType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+             Abstract class describing RulesBaseType
+            </xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfXMLNamespacePrefixies">
+		<xs:annotation>
+			<xs:documentation>
+XML namespace prefix collection, applies to transactional services
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="XMLNamespacePrefixies" type="sla:XMLNamespacePrefixies" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+XML namespace prefix collection
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfXMLNamespacePrefixies" type="sla:ArrayOfXMLNamespacePrefixies" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+XML namespace prefix collection
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="XMLNamespacePrefixies">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+             XMLNamespacePrefixies for XPathExpressionType for user identification
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Namespace" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             the namepsace
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Prefix" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Usually a short string presenting an xmlns prefix
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="XMLNamespacePrefixies" type="sla:XMLNamespacePrefixies" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+XML namespace prefix collection
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfXPathExpressionType">
+		<xs:annotation>
+			<xs:documentation>
+xpath 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="XPathExpressionType" type="sla:XPathExpressionType" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+xpath 
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfXPathExpressionType" type="sla:ArrayOfXPathExpressionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+xpath 
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="XPathExpressionType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+             XPathExpressionType for user identification
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IsCertificate" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             special case, if the xpath returns a byte array that represents a certificate, this will parse the subject identity of the cert
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XPath" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             The XPath value
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="XPathExpressionType" type="sla:XPathExpressionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+xpath 
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="JoiningType">
+		<xs:annotation>
+			<xs:documentation>
+jointing types, applies to all services
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="And">
+				<xs:annotation>
+					<xs:documentation>
+join with AND logic, applies to all services
+			</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Or">
+				<xs:annotation>
+					<xs:documentation>
+join with OR logic
+			</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Not">
+				<xs:annotation>
+					<xs:documentation>
+negate the response
+			</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageChoice">
+		<xs:annotation>
+			<xs:documentation>
+used for xpath expressions
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Request">
+				<xs:annotation>
+					<xs:documentation>
+process on the xml request
+			</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Response">
+				<xs:annotation>
+					<xs:documentation>
+process on the xml response
+			</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AndOrNot" mixed="false">
+		<xs:annotation>
+			<xs:documentation>
+joining expressions together, applies to all services
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="sla:RuleBaseType">
+				<xs:annotation>
+					<xs:documentation>SLA Rule base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="flag" type="sla:JoiningType">
+						<xs:annotation>
+							<xs:documentation>
+joining type
+			</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LHS" type="sla:RuleBaseType">
+						<xs:annotation>
+							<xs:documentation>
+another rule
+			</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RHS" type="sla:RuleBaseType">
+						<xs:annotation>
+							<xs:documentation>
+another rule or null for NOT expressions
+			</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SLARuleGeneric" mixed="false">
+		<xs:annotation>
+			<xs:documentation>
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="sla:RuleBaseType">
+				<xs:annotation>
+					<xs:documentation>SLA Rule base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="ProcessAt" type="tns:RunAtLocation" nillable="true">
+						<xs:annotation>
+							<xs:documentation>
+								Applies to All agent types, except for Transactional Web Services
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ClassName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								This is the Java class name of the implementation class
+								
+								
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="parameter_name_value" type="common:NameValuePair" minOccurs="0"  maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ********************************************************************************************************************************************-->
+	<!-- ********************************************************************************************************************************************-->
+	<!-- ********************************************************************************************************************************************-->
+	<!-- SLA Actions-->
+	<!-- ********************************************************************************************************************************************-->
+	<!-- ********************************************************************************************************************************************-->
+	<!-- ********************************************************************************************************************************************-->
+	<xs:element name="ArrayOfSLAActionBaseType" type="sla:ArrayOfSLAActionBaseType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+sla action collections
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SLAAction">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+             Abstract class SLA Action Base Type
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parameter_name_value" type="common:NameValuePair" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+								
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="implementing_class_name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+								
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SLAAction" type="sla:SLAAction" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+action base type
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:simpleType name="RunAtLocation">
+		<xs:annotation>
+			<xs:documentation>Defines where a script should be ran</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="fgsmsServer">
+				<xs:annotation>
+					<xs:documentation>Runs at the fgsms server from the context of the SLA Processor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fgsmsAgent">
+				<xs:annotation>
+					<xs:documentation>Runs at the location of the fgsms agent </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--
+///////////////////////////////////////////////// END SLA SECTION ///////////////////////////////////////////////
+
+-->
+	<xs:element name="GetServicePolicy">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:ServicePolicyRequestMsg">
+					<xs:annotation>
+						<xs:documentation>request message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ServicePolicyRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            ServicePolicyRequestMsg
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            A URI representing the service this policy applies to
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policytype" type="common:policyType" default="Transactional" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+         Optional, for agents, a policy will be created using this type, default is Transactional,
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="machine" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+         Required for agents, all others, optional.
+         For agents, a policy will be created and associated with this machine hostname
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domain" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+         optional, only used when a policy does not already exists, a policy will be created and associated with this domain
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServicePolicyRequestMsg" type="tns:ServicePolicyRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetServicePolicyResponse">
+		<xs:annotation>
+			<xs:documentation>response message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetServicePolicyResult" type="tns:ServicePolicyResponseMsg"  >
+					<xs:annotation>
+						<xs:documentation>request message</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ServicePolicyResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+            ServicePolicyResponseMsg
+           </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policy" type="tns:ServicePolicy" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+            ServicePolicy
+           </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServicePolicyResponseMsg" type="tns:ServicePolicyResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GeoTag">
+		<xs:annotation>
+			<xs:documentation>Geo Tagging of services</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="latitude" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>lat in decimals</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="longitude" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>lon in decimals</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FederationPolicyCollection" type="tns:FederationPolicyCollection">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FederationPolicy" type="tns:FederationPolicy">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="FederationPolicyCollection">
+		<xs:annotation>
+			<xs:documentation>Defines a policy for sharing data via federated partners and components, such as UDDI</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FederationPolicy" type="tns:FederationPolicy" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Defines a policy for sharing data via federated partners and components, such as UDDI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FederationPolicy">
+		<xs:annotation>
+			<xs:documentation>Defines a policy for sharing data via federated partners and components, such as UDDI</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="parameter_name_value" type="common:NameValuePair" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+								
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="implementing_class_name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+								
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element name="FederationTarget" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+           the targeted federation plugin
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bindingKey" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             A unique identifier that will be used for data publishing
+             Not required for JESM provides
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishAverageResponseTime" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Publish average response time to the provider
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishFailureCount" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Publish failure count 
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishMaximums" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish maxium response time, request size and response size
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishSuccessCount" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish performance metrics success count 
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishSLAFaults" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish performance metrics SLA fault count 
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishUpTimePercent" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish last known status of an item
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishTimeSinceLastStatusChange" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish last known status of an item
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishLastKnownStatus" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             Flag to publish last known status of an item
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PublishTimeRange" type="xs:duration" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+             A time spam representing the period of time for which to based published data to the provider
+            </xs:documentation>
+				</xs:annotation>
+			</xs:element>-->
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ***********************************************************************************************
+						- ***********************************************************************************************
+						- ***********************************************************************************************
+- ***********************************************************************************************
+The service policy is one of the most important elements in fgsms, it defines how agents react to observed traffic keyed on URLs
+**************************************************************************************************
+						- ***********************************************************************************************
+						- ***********************************************************************************************
+- ***********************************************************************************************
+
+    -->
+	<xs:complexType name="ProcessPolicy">
+		<xs:annotation>
+			<xs:documentation>This represents a policy for a specifc process running on a machine</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:ServicePolicy">
+				<xs:annotation>
+					<xs:documentation>Extends the service policy base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="AlsoKnownAs" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Some services start up and swap multiple processes. Use this setting to specify additional processes to clump together for monitoring purposes
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordCPUusage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current cpu usage over time
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordMemoryUsage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current memory usage over time
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordOpenFileHandles" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current number of open files over time
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<!--
+             							<xs:element name="RecordNetworkUsage" type="xs:boolean">
+                                                    								<xs:annotation>
+                                                                                           									<xs:appinfo/>
+                                                                                           									<xs:documentation>
+Record the current network usage over time
+</xs:documentation>
+                                                    								</xs:annotation>
+             							</xs:element>
+             							<xs:element name="RecordDiskUsage" type="xs:boolean">
+                                                    								<xs:annotation>
+                                                                                           									<xs:appinfo/>
+                                                                                           									<xs:documentation>
+Record the current disk usage over time
+</xs:documentation>
+                                                    								</xs:annotation>
+             							</xs:element>-->
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MachinePolicy">
+		<xs:annotation>
+			<xs:documentation>This represents a policy for a specifc machine</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:ServicePolicy">
+				<xs:annotation>
+					<xs:documentation>Extends the service policy base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="RecordCPUusage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current cpu usage over time
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordMemoryUsage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current memory usage over time
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordNetworkUsage" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current network rx and tx rates for the following network interfaces. Use GetMachineInformation to identify the names
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordDiskUsagePartitionNames" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current read/write rates for the following disk partitions interfaces. Use GetMachineInformation to identify the names
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordDiskSpace" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the current free disk space of the following partitions/drives
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionalWebServicePolicy">
+		<xs:complexContent>
+			<xs:extension base="tns:ServicePolicy">
+				<xs:annotation>
+					<xs:documentation>Extends the service policy base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="RecordFaultsOnly" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Record the request and response for fault messages only Applies to all transactional policy types
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordRequestMessage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                RecordRequestMessage Applies to all transactional policy types
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordResponseMessage" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                RecordResponseMessage Applies to all transactional policy types
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordedMessageCap" type="xs:int">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                The maximum size for a request or response message.
+                                Used only wiehn RecordResponseMessage or RecordRequestMessage or RecordFaultsOnly is set to true.
+                                This Int64 represents the truncation point of recorded message.
+                                I.E. only record the first 4000 bytes of the message
+                                Special Note: there is a hard coded stop point of 1MB
+                                the global policy, overridden on a per service basis.
+                                Applies to all transactional policy types
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RecordHeaders" type="xs:boolean" default="true">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>Enable or disable the recording of header information, default value is true. Applies to all transactional policy types</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BuellerEnabled" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>Enable or disable the fgsms Status Bueller from pinging this service on a regular interval. This setting is useful for services outside of your domain. Applies to all transactional policy types</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HealthStatusEnabled" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>Indicates that this service implements the DCSG-E Health Status interface. This setting Enables or disables the fgsms Status Bueller from pinging this service on a regular interval via the Health Status interface. This setting is useful for services outside of your domain. Applies to all transactional policy types</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UserIdentification" type="tns:ArrayOfUserIdentity" nillable="true">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+                                Describes how an agent will obtain one or more user identities from an xml message. Applies to all transactional policy types
+                            </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StatisticalServicePolicy">
+		<xs:complexContent>
+			<xs:extension base="tns:ServicePolicy">
+				<xs:annotation>
+					<xs:documentation>Extends the service policy base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StatusServicePolicy">
+		<xs:complexContent>
+			<xs:extension base="tns:ServicePolicy">
+				<xs:annotation>
+					<xs:documentation>Extends the service policy base type</xs:documentation>
+				</xs:annotation>
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ServicePolicy" >
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                ServicePolicy - The service policy is one of the most important elements in fgsms, it defines how agents react to observed traffic keyed on URLs
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BucketCategory" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the bucket or category
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the desciption of the service
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="POC" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the POC of the service
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExternalURL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        This is an external url that can be used to link to other websites for additional information. Optional. Used by the web interface to rendered
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MachineName" type="xs:string" default="UNSPECIFIED" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the hostname of the machine hosting this process
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DomainName" type="xs:string" default="UNSPECIFIED" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the domain name of the domain the server hosting this process is joined to
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ParentObject" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        contains the policy URI of the parent object for this policy, used for grouping or clustering items together
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DataTTL" type="xs:duration" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A time spam representing the duration of time for which data will be retained with this service
+                        Applies to all policy types
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PolicyRefreshRate" type="xs:duration" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A time span representing the frequency in which agents need to check for an updated policy
+                        Note, this is a global policy, not a service specific policy, Applies to Transactional policy types
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FederationPolicyCollection" type="tns:FederationPolicyCollection" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        set of data federation policies for this item, only one instance is allowed per target
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PolicyType" type="common:policyType" default="Transactional">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>Defines what type of policy this is. The real implication is that service SLAs need to be validated against this</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AgentsEnabled" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>From Global Policy Setting to globally enable or disable fgsms agents. Applies to all transactional policy types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Location" type="tns:GeoTag" nillable="true">
+				<xs:annotation>
+					<xs:documentation>optional lat/lon. Applies to all policy types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceLevelAggrements" type="sla:ArrayOfSLA" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        Listing of service level aggrements that apply to this service. Applies to all transactional policy types
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The service URL this policy refers to. Applies to all policy types
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="displayName" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A display name which is used primarily for rending information on the user interface. Applies to all policy types
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="settings" type="common:NameValuePairSet" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A generic container for storing information. Can be used for any purpose
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServicePolicy" type="tns:ServicePolicy" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfUserIdentity">
+		<xs:annotation>
+			<xs:documentation>
+                collection of user identities
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UserIdentity" type="tns:UserIdentity" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+                        collection of user identities
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfUserIdentity" type="tns:ArrayOfUserIdentity" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+                collection of user identities
+            </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UserIdentity">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Class that defines how a user identity is obtained from an XML web service message
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="HttpHeaderName" type="xs:string" nillable="true" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the name of the http header container a user identity
+                        only used when UseHttpHeader is true
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Namespaces" type="tns:ArrayOfXMLNamespacePrefixies" nillable="true" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A list of namepsaces that apply to all xpath expressions for this identity
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UseHttpCredential" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        Obtain a username from the container's http credentials
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UseHttpHeader" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        obtain the username from an http header, presumably set by some kind of proxy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XPaths" type="tns:ArrayOfXPathExpressionType" nillable="true" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A list of XPaths that will be used to return user identity
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UserIdentity" type="tns:UserIdentity" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+                user identity
+            </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetUDDIDataPublishServicePolicies">
+		<xs:annotation>
+			<xs:documentation>
+                collection of service policies containing at least the binding key
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetUDDIDataPublishServicePoliciesRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>
+                            collection of service policies containing at least the binding key, note, a complete policy may not be returned, only the relevant uddi data will be returned
+                        </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetUDDIDataPublishServicePoliciesRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Emptpy request
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetUDDIDataPublishServicePoliciesRequestMsg" type="tns:GetUDDIDataPublishServicePoliciesRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+                collection of service policies containing at least the binding key, note, a complete policy may not be returned, only the relevant uddi data will be returned
+            </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetUDDIDataPublishServicePoliciesResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetUDDIDataPublishServicePoliciesResult" type="tns:GetUDDIDataPublishServicePoliciesResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetUDDIDataPublishServicePoliciesResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                returns a list of service policies that are configured for uddi data publication
+                Note: Only information pretaining to uddi publication is returned,
+                other data such as SLA or UserIdentification policies are not returned.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policies" type="tns:ArrayOfServicePolicy" nillable="true" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the service policies
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetUDDIDataPublishServicePoliciesResponseMsg" type="tns:GetUDDIDataPublishServicePoliciesResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfServicePolicy">
+		<xs:annotation>
+			<xs:documentation>collection of service policies</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ServicePolicy" type="tns:ServicePolicy" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>collection</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfServicePolicy" type="tns:ArrayOfServicePolicy" nillable="true">
+		<xs:annotation>
+			<xs:documentation>collection</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetServicePolicy">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetServicePolicyRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetServicePolicyRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Set Service Policy Request Msg
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The URI that identifies this service's policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policy" type="q42:ServicePolicy" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The policy for the specified service
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetServicePolicyRequestMsg" type="tns:SetServicePolicyRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetServicePolicyResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetServicePolicyResult" type="tns:SetServicePolicyResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetServicePolicyResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Set Service Policy Response Msg
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        If present, the error message associated with the failure.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        Success or failure when saving the service policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetServicePolicyResponseMsg" type="tns:SetServicePolicyResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetGlobalPolicy">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetGlobalPolicyRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetGlobalPolicyRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                gets the global policy
+                requires global admin role
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policy" type="tns:GlobalPolicy" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetGlobalPolicyRequestMsg" type="tns:SetGlobalPolicyRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GlobalPolicy">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Represents all available global policies for this realm
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The current classification level of fgsms. Default is unclassified. 
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- SAMI data? -->
+			<xs:element name="PolicyRefreshRate" type="xs:duration">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        A time span representing the frequency in which agents need to check for an updated policy
+                        Note, this is a global policy, not a service specific policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RecordedMessageCap" type="xs:int">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The maximum size for a request or response message.
+                        Used only wiehn RecordResponseMessage or RecordRequestMessage or RecordFaultsOnly is set to true.
+                        This Int64 represents the truncation point of recorded message.
+                        I.E. only record the first 4000 bytes of the message
+                        Default value: 4048, or the global policy, can be overridden on a per service basis.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UDDIPublishRate" type="xs:duration" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The UDDI Publishing Rate, the rate for which the UDDI Publisher will attempt to publish
+                        data
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- new as of RC4 -->
+			<xs:element name="AgentsEnabled" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>Global setting to enable/disable fgsms Agents. Used as a debugging/troubleshooting option or for performance testing with and without fgsms on. As of RC4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GlobalPolicy" type="tns:GlobalPolicy" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetGlobalPolicyResponse">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetGlobalPolicyResult" type="tns:SetGlobalPolicyResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetGlobalPolicyResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                returns an empty message, signifying that the policy was set
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetGlobalPolicyResponseMsg" type="tns:SetGlobalPolicyResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetGlobalPolicy">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetGlobalPolicyRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetGlobalPolicyRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                gets the global policy
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetGlobalPolicyRequestMsg" type="tns:GetGlobalPolicyRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetGlobalPolicyResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetGlobalPolicyResult" type="tns:GetGlobalPolicyResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetGlobalPolicyResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                returns the global policy
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="policy" type="tns:GlobalPolicy" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetGlobalPolicyResponseMsg" type="tns:GetGlobalPolicyResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeleteServicePolicy">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:DeleteServicePolicyRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteServicePolicyRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Delete Service Policy Request Msg
+                Delete all policies for this service
+                Note if the agent is still configured to send performance statistics, a new policy will be
+                created automatically.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        The URL of the service that the policy will be changed for
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deletePerformanceData" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        Delete all performance and availability data as well as the policy
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteServicePolicyRequestMsg" type="tns:DeleteServicePolicyRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeleteServicePolicyResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DeleteServicePolicyResult" type="tns:DeleteServicePolicyResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DeleteServicePolicyResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Delete Service Policy Response Msg
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Message" type="xs:string" nillable="true" >
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        An error message, if any, describing the problem if the change was not successful;
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Success" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        Was the deletion successful?
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DeleteServicePolicyResponseMsg" type="tns:DeleteServicePolicyResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetServicePermissions">
+		<xs:annotation>
+			<xs:documentation>request message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetServicePermissionsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetServicePermissionsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Sets the specific rights for a service object, replacing old permission set
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        url
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rights" type="tns:ArrayOfUserPermissionType" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the rights
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetServicePermissionsRequestMsg" type="tns:SetServicePermissionsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfUserPermissionType">
+		<xs:annotation>
+			<xs:documentation>collection of user permissions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UserPermissionType" type="tns:UserPermissionType" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>payload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfUserPermissionType" type="tns:ArrayOfUserPermissionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UserPermissionType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Contains the rights for a specific user in the context of a service
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="right" type="tns:RightEnum">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the right
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="user" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the username
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UserPermissionType" type="tns:UserPermissionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="RightEnum">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                this defines all available rights for a open esm instance
+            </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="administer">
+				<xs:annotation>
+					<xs:documentation>
+                        Change Permissions
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="audit">
+				<xs:annotation>
+					<xs:documentation>
+                        Read Request/Response messages, Read change logs
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="write">
+				<xs:annotation>
+					<xs:documentation>
+                        Change Policies
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="read">
+				<xs:annotation>
+					<xs:documentation>
+                        Read Performance Statistics
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="RightEnum" type="tns:RightEnum" nillable="true">
+		<xs:annotation>
+			<xs:documentation>right wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetServicePermissionsResponse">
+		<xs:annotation>
+			<xs:documentation>response message</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetServicePermissionsResult" type="tns:SetServicePermissionsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetServicePermissionsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                SetServicePermissionsResponseMsg
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetServicePermissionsResponseMsg" type="tns:SetServicePermissionsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetServicePermissions">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetServicePermissionsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetServicePermissionsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                Get the permission set for a specific service or user
+                One and only parameter is required
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        url of a service
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="user" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        user identity
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetServicePermissionsRequestMsg" type="tns:GetServicePermissionsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetServicePermissionsResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetServicePermissionsResult" type="tns:GetServicePermissionsResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetServicePermissionsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                GetServicePermissionsResponseMsg
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rights" type="tns:ArrayOfUserServicePermissionType" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        a list of user/service rights
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetServicePermissionsResponseMsg" type="tns:GetServicePermissionsResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfUserServicePermissionType">
+		<xs:annotation>
+			<xs:documentation>user service permissions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UserServicePermissionType" type="tns:UserServicePermissionType" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>wrapper</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfUserServicePermissionType" type="tns:ArrayOfUserServicePermissionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>collection of</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UserServicePermissionType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                User/service permission type
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="URL" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        on this service
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="right" type="tns:RightEnum">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the permission
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="user" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the user
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UserServicePermissionType" type="tns:UserServicePermissionType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>wrapper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAdministrators">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:GetAdministratorsRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAdministratorsRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                empty request message
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAdministratorsRequestMsg" type="tns:GetAdministratorsRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAdministratorsResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetAdministratorsResult" type="tns:GetAdministratorsResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetAdministratorsResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                returns a list of users that have the global admin rights
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserList" type="tns:ArrayOfUserInfo" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        the user list
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfUserInfo">
+		<xs:annotation>
+			<xs:documentation>collection of user information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UserInfo" type="tns:UserInfo" nillable="true"  maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>user info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                user information
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="displayName" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        display name
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email" type="xs:string" nillable="true"  maxOccurs="4">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        email
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="role" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        role
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="username" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        username
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UserInfo" type="tns:UserInfo" nillable="true">
+		<xs:annotation>
+			<xs:documentation>user info data</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SetAdministrator">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:SetAdministratorRequestMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAdministratorRequestMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                sets a list of users to have the global admin roles
+                removes all previous entries
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserList" type="tns:ArrayOfUserInfo" nillable="true">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+                        user list
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SetAdministratorResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SetAdministratorResult" type="tns:SetAdministratorResponseMsg" nillable="true">
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="SetAdministratorResponseMsg">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+                empty response message
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

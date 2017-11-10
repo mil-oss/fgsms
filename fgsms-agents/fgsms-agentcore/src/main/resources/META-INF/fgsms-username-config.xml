@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : fgsms-username-config.xml.xml
+    Created on : October 16, 2011, 3:34 PM
+    Author     : Administrator
+    Description:
+        Purpose of the document follows.
+-->
+
+<jboss-ws-security xmlns="http://www.jboss.com/ws-security/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.jboss.com/ws-security/config http://www.jboss.com/ws-security/schema/jboss-ws-security_1_0.xsd">
+    <config>
+       <usernname/>
+    </config>
+</jboss-ws-security>

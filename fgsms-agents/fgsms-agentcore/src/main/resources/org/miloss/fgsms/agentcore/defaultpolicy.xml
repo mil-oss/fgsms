@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+    Document   : defaultpolicy.xml
+    Created on : December 11, 2011, 11:17 AM
+    Author     : Administrator
+    Description:
+	Purpose of the document follows.
+	This is used when the FGSMS PCS is not available as a default policy
+-->
+
+
+
+<transactionalWebServicePolicy xmlns:ns2="urn:org:miloss:fgsms:services:interfaces:common" xmlns="urn:org:miloss:fgsms:services:interfaces:policyConfiguration" xmlns:ns3="urn:org:miloss:fgsms:services:interfaces:dataCollector">
+     <BucketCategory xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <Description xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <POC xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <ExternalURL xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <MachineName xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <DomainName xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <ParentObject xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <DataTTL>P30DT0H0M0.000S</DataTTL>
+     <PolicyRefreshRate>PT3M0.000S</PolicyRefreshRate>
+     <FederationPolicyCollection xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <PolicyType>Transactional</PolicyType>
+     <AgentsEnabled>true</AgentsEnabled>
+     <Location xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <ServiceLevelAggrements xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <URL></URL>
+     <displayName xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+     <RecordFaultsOnly>false</RecordFaultsOnly>
+     <RecordRequestMessage>false</RecordRequestMessage>
+     <RecordResponseMessage>false</RecordResponseMessage>
+     <RecordedMessageCap>1024000</RecordedMessageCap>
+     <RecordHeaders>false</RecordHeaders>
+     <BuellerEnabled>true</BuellerEnabled>
+     <HealthStatusEnabled>false</HealthStatusEnabled>
+     <UserIdentification xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+</transactionalWebServicePolicy>

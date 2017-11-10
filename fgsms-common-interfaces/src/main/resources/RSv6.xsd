@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:class="urn:us:gov:ic:ism:v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:org:miloss:fgsms:services:interfaces:reportingService" xmlns:faults="urn:org:miloss:fgsms:services:interfaces:faults" xmlns:common="urn:org:miloss:fgsms:services:interfaces:common" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="urn:org:miloss:fgsms:services:interfaces:reportingService" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+	<xs:import namespace="urn:org:miloss:fgsms:services:interfaces:common" schemaLocation="fgsmsCommon.xsd"/>
+	<xs:element name="ExportDataToHTML">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:ExportDataRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExportDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AllServices" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>if true, a URL list is generated from whatever the authenticate user has access to</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReportTypes" type="tns:ArrayOfReportTypeContainer" nillable="true">
+				<xs:annotation>
+					<xs:documentation>required, a list reports to generate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URLs" type="xs:string" nillable="true"  maxOccurs="unbounded" minOccurs="0" >
+				<xs:annotation>
+					<xs:documentation>URL list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" type="common:TimeRange" nillable="true">
+				<xs:annotation>
+					<xs:documentation>time range</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ExportDataRequestMsg" type="tns:ExportDataRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ArrayOfReportTypeContainer">
+		<xs:annotation>
+			<xs:documentation>collection of report types</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ReportTypeContainer" type="tns:ReportTypeContainer" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>reports</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfReportTypeContainer" type="tns:ArrayOfReportTypeContainer" nillable="true">
+		<xs:annotation>
+			<xs:documentation>container</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ReportTypeContainer">
+		<xs:annotation>
+			<xs:documentation>report container</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>report types, this must match a reporting plugin classname (see PCS.xsd plugin type) that is registered in the fgsms instances (configdb/plugins)
+                                        implementing class must implement ReportGeneratorPlugin interface
+                                        </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ReportTypeContainer" type="tns:ReportTypeContainer" nillable="true">
+		<xs:annotation>
+			<xs:documentation>container</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="TimeRange" type="common:TimeRange" nillable="true">
+		<xs:annotation>
+			<xs:documentation>time range</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExportDataToHTMLResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ExportDataToHTMLResult" type="tns:ExportDataToHTML_ResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExportDataToHTML_ResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ZipFile" type="xs:base64Binary" nillable="true">
+				<xs:annotation>
+					<xs:documentation>a zip file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ExportDataToHTML_ResponseMsg" type="tns:ExportDataToHTML_ResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExportDataToCSV">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request" type="tns:ExportCSVDataRequestMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>request</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExportCSVDataRequestMsg">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AllServices" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>if true, a url list is generated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URLs" type="xs:string" nillable="true"  maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>list of urls to process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" type="common:TimeRange" nillable="true">
+				<xs:annotation>
+					<xs:documentation>time rnage</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExportType" type="tns:ExportRecordsEnum">
+				<xs:annotation>
+					<xs:documentation>type of records to export</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ExportRecordsEnum">
+		<xs:annotation>
+			<xs:documentation>defines the type of records that can be exported</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Transactions"/>
+			<xs:enumeration value="Machine"/>
+			<xs:enumeration value="Process"/>
+			<xs:enumeration value="Availability"/>
+			<xs:enumeration value="Statistics"/>
+			<xs:enumeration value="AuditLogs"/>
+                        <xs:enumeration value="All"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ExportCSVDataRequestMsg" type="tns:ExportCSVDataRequestMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExportDataToCSVResponse">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ExportDataToCSVResult" type="tns:ExportDataToCSV_ResponseMsg" nillable="true" >
+					<xs:annotation>
+						<xs:documentation>response</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExportDataToCSV_ResponseMsg">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="classification" type="common:SecurityWrapper" nillable="true">
+				<xs:annotation>
+					<xs:documentation>classification and caveat info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ZipFile" type="xs:base64Binary" nillable="true">
+				<xs:annotation>
+					<xs:documentation>a zip file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ExportDataToCSV_ResponseMsg" type="tns:ExportDataToCSV_ResponseMsg" nillable="true">
+		<xs:annotation>
+			<xs:documentation>response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

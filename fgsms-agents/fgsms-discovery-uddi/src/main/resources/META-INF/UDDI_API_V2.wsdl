@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:uddi-org:api_v2" xmlns:publication_v2="urn:uddi-org:publication_v2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:inquiry_v2="urn:uddi-org:inquiry_v2" xmlns="http://schemas.xmlsoap.org/wsdl/" name="UDDI_API_V2" targetNamespace="urn:uddi-org:api_v2">
+	<documentation xmlns:inquiry_v2="urn:uddi-org:inquiry_v2" xmlns:publication_v2="urn:uddi-org:publication_v2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:uddi-org:api_v2">
+        Copyright 2001-2005 Systinet Corp. All rights reserved.
+        Use is subject to license terms.
+
+        WSDL SOAP/HTTP binding for UDDI V2 APIs.
+    </documentation>
+	<import namespace="urn:uddi-org:inquiry_v2" location="UDDI_Inquiry_API_V2.wsdl"/>
+	<import namespace="urn:uddi-org:publication_v2" location="UDDI_Publication_API_V2.wsdl"/>
+	<types/>
+	<service name="UDDIInquiryService">
+		<port name="Inquire" binding="inquiry_v2:InquireSoap">
+			<soap:address location="http://localhost:8080/uddi/inquiry"/>
+		</port>
+	</service>
+	<service name="UDDIPublishService">
+		<port name="Publish" binding="publication_v2:PublishSoap">
+			<soap:address location="urn:unknown-location-uri"/>
+		</port>
+	</service>
+</definitions>

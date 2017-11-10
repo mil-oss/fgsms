@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:managementEventType ReportTime="2012-04-30T13:34:13.560-04:00" xmlns:ns2="http://docs.oasis-open.org/wsdm/mows-2.xsd" xmlns="http://docs.oasis-open.org/wsdm/muws2-2.xsd" xmlns:ns4="http://docs.oasis-open.org/wsdm/muws1-2.xsd"  xmlns:ns5="urn:us:gov:ic:ism:v2" xmlns:ns6="http://www.w3.org/2005/08/addressing" xmlns:ns7="http://docs.oasis-open.org/wsrf/rp-2" xmlns:ns8="http://docs.oasis-open.org/wsrf/bf-2">
+    <!-- This ID correlates to either an SLA fault or an availability record -->
+    <ns4:EventId>urn:5353a6d6-3063-4c8c-89a0-67c437e5c5d9</ns4:EventId>
+    <ns4:SourceComponent>
+        <!-- This represents the URL of the service that this alert is associated with -->
+        <ns4:ResourceId>http://hostname:8080/JmsSmokeTest</ns4:ResourceId>
+    </ns4:SourceComponent>
+    <Situation>
+        <!--The Performance Report is used for most of the SLAs in fgsms, however a change in operating status uses a ChangeInAvailability message -->
+        <SituationCategory xsi:type="PerformanceReport" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+        <SituationTime>2012-04-30T13:34:13.560-04:00</SituationTime>
+        <Severity>4</Severity>
+        <!--This is the rule that triggered the Alert to be sent-->
+        <Message xml:lang="english">All Faults</Message>
+    </Situation>
+</ns4:managementEventType>

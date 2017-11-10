@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rti.com/wsdds/wsdds_types.xsd"
+    elementFormDefault="qualified"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdds="http://www.rti.com/wsdds/wsdds_types.xsd">
+
+    <xsd:simpleType name="second">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="nanosecond">
+        <xsd:restriction base="xsd:unsignedInt">
+            <xsd:maxExclusive value="1000000000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="sessionIdentifier">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="returnCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="OK"/>
+            <xsd:enumeration value="SERVER_ERROR"/>
+            <xsd:enumeration value="DDS_ERROR"/>
+            <xsd:enumeration value="INVALID_INPUT_ERROR"/>
+            <xsd:enumeration value="INVALID_USER_NAME_ERROR"/>
+            <xsd:enumeration value="INVALID_PASSWORD_ERROR"/>
+            <xsd:enumeration value="INVALID_SESSION_ID_ERROR"/>
+            <xsd:enumeration value="INVALID_IP_ADDRESS_ERROR"/>
+            <xsd:enumeration value="INVALID_SUBSCRIPTION_ID_ERROR"/>
+            <xsd:enumeration value="INVALID_PUBLICATION_ID_ERROR"/>
+            <xsd:enumeration value="INVALID_NOTIFICATION_ENDPOINT_ERROR"/>
+            <xsd:enumeration value="INVALID_NOTIFICATION_ENDPOINT_PORT_NUMBER_ERROR"/>
+            <xsd:enumeration value="INVALID_NOTIFICATION_ENDPOINT_ID_ERROR"/>
+            <xsd:enumeration value="BAD_TYPE_SCHEMA_ERROR"/>
+            <xsd:enumeration value="BAD_CONTENT_FILTER_EXPRESSION_ERROR"/>
+            <xsd:enumeration value="BAD_DATA_SAMPLE_ERROR"/>
+            <xsd:enumeration value="QOS_PROFILE_NOT_FOUND_ERROR"/>
+            <xsd:enumeration value="EXPIRED_SESSION_ERROR"/>
+            <xsd:enumeration value="NO_RIGHTS_JOINING_DOMAIN_ERROR"/>
+            <xsd:enumeration value="NO_RIGHTS_SUBSCRIBING_ERROR"/>
+            <xsd:enumeration value="NO_RIGHTS_PUBLISHING_ERROR"/>
+            <xsd:enumeration value="NO_RIGHTS_BEING_NOTIFIED_ERROR"/>
+            <xsd:enumeration value="MAX_SESSION_COUNT_REACHED_ERROR"/>
+            <xsd:enumeration value="INCOMPATIBLE_TOPIC_ERROR"/>
+            <xsd:enumeration value="TOPIC_CREATED_WITH_DIFFERENT_TYPE_SCHEMA_ERROR"/>
+            <xsd:enumeration value="TOPIC_DEFINED_WITH_DIFFERENT_TYPE_SCHEMA_ERROR"/>
+            <xsd:enumeration value="TOPIC_DISCOVERED_WITH_DIFFERENT_TYPE_SCHEMA_ERROR"/>
+            <xsd:enumeration value="AMBIGUOUS_TYPE_DEFINITION_FOUND_ON_DOMAIN_ERROR"/>
+            <xsd:enumeration value="SUBSCRIPTION_ON_INCOMPATIBLE_STATUS_ERROR"/>
+            <xsd:enumeration value="PUBLICATION_ON_INCOMPATIBLE_STATUS_ERROR"/>
+            <xsd:enumeration value="PUBLICATION_ON_PENDING_STATUS_ERROR"/>
+            <xsd:enumeration value="NO_RIGHTS_CREATING_TOPIC"/>
+            <xsd:enumeration value="NO_RIGHTS_CREATING_UNKNOWN_TOPIC"/>
+            <xsd:enumeration value="SUBSCRIPTION_ON_PENDING_STATUS_ERROR"/>
+            <xsd:enumeration value="INTERRUPTED_SUBSCRIPTION_ERROR"/>
+            <xsd:enumeration value="TOPIC_CREATED_WITH_DIFFERENT_TYPE_NAME_ERROR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="dataRepresentation">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="XML"/>
+            <xsd:enumeration value="JSON"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="notificationMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PUSH_NOTIFICATION_MODE"/>
+            <xsd:enumeration value="PULL_NOTIFICATION_MODE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="instanceState">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ALIVE_INSTANCE_STATE"/>
+            <xsd:enumeration value="NOT_ALIVE_DISPOSED_INSTANCE_STATE"/>
+            <xsd:enumeration value="NOT_ALIVE_NO_WRITERS_INSTANCE_STATE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="sampleState">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="READ_SAMPLE_STATE"/>
+            <xsd:enumeration value="NOT_READ_SAMPLE_STATE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="viewState">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NEW_VIEW_STATE"/>
+            <xsd:enumeration value="NOT_VIEW_STATE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="entityStatus">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ACTIVE_STATUS"/>
+            <xsd:enumeration value="PENDING_TOPIC_CREATED_WITH_DIFFERENT_TYPE_NAME_STATUS"/>
+            <xsd:enumeration value="PENDING_NO_RIGHTS_CREATING_TOPIC_STATUS"/>
+            <xsd:enumeration value="PENDING_NO_RIGHTS_CREATING_UNKNOWN_TOPIC_STATUS"/>
+            <xsd:enumeration value="PENDING_NO_TOPIC_DETAILS_SPECIFIED_STATUS"/>
+            <xsd:enumeration value="INVALID_BAD_CF_EXPRESSION_STATUS"/>
+            <xsd:enumeration value="REDUNDANT_STATUS"/>
+            <xsd:enumeration value="NOT_CREATED_STATUS"/>
+            <xsd:enumeration value="UNKNOWN_STATUS"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="url">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="subscriptionIdentifier">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="publicationIdentifier">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="notificationIdentifier">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="domainIdentifier">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="instanceHandle">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+
+    <xsd:complexType name="time">
+        <xsd:sequence>
+            <xsd:element name="sec" type="wsdds:second" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="nanosec" type="wsdds:nanosecond" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="embeddedXml">
+        <xsd:sequence>
+            <xsd:any minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="basicRequest">
+        <xsd:sequence>
+            <xsd:element name="sessionId" type="wsdds:sessionIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="basicResponse">
+        <xsd:sequence>
+            <xsd:element name="returnCode" type="wsdds:returnCode" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="returnString" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="subscriptionInfoSeq">
+        <xsd:sequence>
+            <xsd:element name="subscriptionInfo" type="wsdds:subscriptionInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="subscriptionInfo">
+        <xsd:sequence>
+            <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="topicName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="qosProfileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="contentFilterExpression" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="dataRepresentation" type="wsdds:dataRepresentation" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="entityStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="publicationInfo">
+        <xsd:sequence>
+            <xsd:element name="publicationId" type="wsdds:publicationIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="topicName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="qosProfileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="entityStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="publicationInfoSeq">
+        <xsd:sequence>
+            <xsd:element name="publicationInfo" type="wsdds:publicationInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="sampleInfo">
+        <xsd:sequence>
+            <xsd:element name="sourceTimestamp" type="wsdds:time" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="validData" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="instanceHandle" type="wsdds:instanceHandle" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="publicationHandle" type="wsdds:instanceHandle" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="disposedGenerationCount" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="noWritersGenerationCount" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="sampleRank" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="generationRank" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="absoluteGenerationRank" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="instanceState" type="wsdds:instanceState" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="sampleState" type="wsdds:sampleState" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="viewState" type="wsdds:viewState" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="sample">
+        <xsd:sequence>
+            <xsd:element name="sampleInfo" type="wsdds:sampleInfo" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="sampleData" type="wsdds:embeddedXml" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="sampleSeq">
+        <xsd:sequence>
+            <xsd:element name="sample" type="wsdds:sample" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="notificationEndpointInfo">
+        <xsd:sequence>
+            <xsd:element name="notificationId" type="wsdds:notificationIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="url" type="wsdds:url" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="portNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="notificationMode" type="wsdds:notificationMode" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="dataRepresentation" type="wsdds:dataRepresentation" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="status" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="notificationEndpointInfoSeq">
+        <xsd:sequence>
+            <xsd:element name="notificationEndpointInfo" type="wsdds:notificationEndpointInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="loginRequest">
+        <xsd:sequence>
+            <xsd:element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="credential" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="loginRequestParameter" type="wsdds:loginRequest"/>
+
+    <xsd:complexType name="loginResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="sessionId" type="wsdds:sessionIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="loginResponseParameter" type="wsdds:loginResponse"/>
+
+    <xsd:complexType name="logoutRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest"/>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="logoutRequestParameter" type="wsdds:logoutRequest"/>
+
+    <xsd:complexType name="logoutResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="logoutResponseParameter" type="wsdds:logoutResponse"/>
+
+    <xsd:complexType name="createSubscriptionRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="topicName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="typeName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="typeSchema" type="wsdds:embeddedXml" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="qosProfileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="contentFilterExpression" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="dataRepresentation" type="wsdds:dataRepresentation" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="createSubscriptionRequestParameter" type="wsdds:createSubscriptionRequest"/>
+
+    <xsd:complexType name="createSubscriptionResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="subscriptionStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="createSubscriptionResponseParameter" type="wsdds:createSubscriptionResponse"/>
+
+    <xsd:complexType name="createPublicationRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="topicName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="typeName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="typeSchema" type="wsdds:embeddedXml" minOccurs="0" maxOccurs="1"/>
+                    <xsd:element name="qosProfileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="createPublicationRequestParameter" type="wsdds:createPublicationRequest"/>
+
+    <xsd:complexType name="createPublicationResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="publicationId" type="wsdds:publicationIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="publicationStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="createPublicationResponseParameter" type="wsdds:createPublicationResponse"/>
+
+    <xsd:complexType name="removeSubscriptionRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="removeSubscriptionRequestParameter" type="wsdds:removeSubscriptionRequest"/>
+
+    <xsd:complexType name="removeSubscriptionResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="removeSubscriptionResponseParameter" type="wsdds:removeSubscriptionResponse"/>
+
+    <xsd:complexType name="getSubscriptionsRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="getSubscriptionsRequestParameter" type="wsdds:getSubscriptionsRequest"/>
+
+    <xsd:complexType name="getSubscriptionsResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionInfos" type="wsdds:subscriptionInfoSeq" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="getSubscriptionsResponseParameter" type="wsdds:getSubscriptionsResponse"/>
+
+    <xsd:complexType name="removePublicationRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="publicationId" type="wsdds:publicationIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="removePublicationRequestParameter" type="wsdds:removePublicationRequest"/>
+
+    <xsd:complexType name="removePublicationResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="removePublicationResponseParameter" type="wsdds:removePublicationResponse"/>
+
+    <xsd:complexType name="getPublicationsRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="getPublicationsRequestParameter" type="wsdds:getPublicationsRequest"/>
+
+    <xsd:complexType name="getPublicationsResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="publicationInfos" type="wsdds:publicationInfoSeq" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="getPublicationsResponseParameter" type="wsdds:getPublicationsResponse"/>
+
+    <xsd:complexType name="readRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="timeoutSec" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="readRequestParameter" type="wsdds:readRequest"/>
+
+    <xsd:complexType name="readResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="samples" type="wsdds:sampleSeq" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="readResponseParameter" type="wsdds:readResponse"/>
+
+    <xsd:complexType name="writeRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="publicationId" type="wsdds:publicationIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="sampleData" type="wsdds:embeddedXml" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="writeRequestParameter" type="wsdds:writeRequest"/>
+
+    <xsd:complexType name="writeResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="writeResponseParameter" type="wsdds:writeResponse"/>
+
+    <xsd:complexType name="addNotificationEndpointRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionId" type="wsdds:subscriptionIdentifier" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="url" type="wsdds:url" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="portNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="notificationMode" type="wsdds:notificationMode" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="dataRepresentation" type="wsdds:dataRepresentation" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="addNotificationEndpointRequestParameter" type="wsdds:addNotificationEndpointRequest"/>
+
+    <xsd:complexType name="addNotificationEndpointResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="subscriptionStatus" type="wsdds:entityStatus" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="notificationId" type="wsdds:notificationIdentifier" maxOccurs="1" minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="addNotificationEndpointResponseParameter" type="wsdds:addNotificationEndpointResponse"/>
+
+    <xsd:complexType name="removeNotificationEndpointRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="notificationId" type="wsdds:notificationIdentifier"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="removeNotificationEndpointRequestParameter" type="wsdds:removeNotificationEndpointRequest"/>
+
+    <xsd:complexType name="removeNotificationEndpointResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="removeNotificationEndpointResponseParameter" type="wsdds:removeNotificationEndpointResponse"/>
+
+    <xsd:complexType name="getNotificationEndpointsRequest">
+        <xsd:complexContent> 
+            <xsd:extension base="wsdds:basicRequest">
+                <xsd:sequence>
+                    <xsd:element name="domainId" type="wsdds:domainIdentifier" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent> 
+    </xsd:complexType>
+    <xsd:element name="getNotificationEndpointsRequestParameter" type="wsdds:getNotificationEndpointsRequest"/>
+
+    <xsd:complexType name="getNotificationEndpointsResponse">
+        <xsd:complexContent>
+            <xsd:extension base="wsdds:basicResponse">
+                <xsd:sequence>
+                    <xsd:element name="notificationEndpointInfos" type="wsdds:notificationEndpointInfoSeq" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="getNotificationEndpointsResponseParameter" type="wsdds:getNotificationEndpointsResponse"/>
+
+</xsd:schema>

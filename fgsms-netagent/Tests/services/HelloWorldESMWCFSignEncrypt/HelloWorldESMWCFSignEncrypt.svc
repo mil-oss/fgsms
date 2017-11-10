@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="HelloWorldESMWCFSignEncrypt.Service1" CodeBehind="HelloWorldESMWCFSignEncrypt.svc.cs" %>
