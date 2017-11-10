@@ -1,20 +1,15 @@
-# Fine Grain Service Monitoring System
+# Fine Grained Service Monitoring System
 A centralized performance and monitoring system for web services, message brokers, ESBs, and more!
 
 [![Build Status](https://travis-ci.org/mil-oss/fgsms.svg?branch=master)](https://travis-ci.org/mil-oss/fgsms)
-
-
-** NOTICE: ** You may run into build issues. Site generation currently fails on JDK8 due to javadocs.
-
-
 
 # What's the high level overview?
 
 ## What is it?
 
-It's an open source solution for monitoring the performance and availability of stuff.
-What stuff? Your stuff. IT stuff, software, process, operating systems, message brokers,
-and web services, especially web services. It tracks statistics and provides
+It's an open source solution for monitoring the performance and availability of other software
+including, processes, operating systems, message brokers, SOAP and REST and web services, Java 
+EARs, WARs, EJBs, .NET WCF services and more. It tracks statistics and provides
 alerting based on criteria you define and a mechanism that you define.
 
 ## What's the relationship with MIL-OSS
